@@ -223,7 +223,7 @@ if __name__ == "__main__":
     if args.do_test:
         test = cc_testconstruct(args.test_data)
         test = BertDataset(tokenizer, test)
-        test = DataLoader(test, batch_size=int(args.batch_size), shuffle=True)
+        test = DataLoader(test, batch_size=int(args.batch_size), shuffle=False)
 
     optimizer = Adam(model.parameters(), float(args.learning_rate))
     # optimizer = nn.DataParallel(optimizer, device_ids=device_ids)

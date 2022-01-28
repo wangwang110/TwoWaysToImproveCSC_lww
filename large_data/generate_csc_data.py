@@ -7,6 +7,27 @@ from optparse import OptionParser
 from tqdm import tqdm
 import pickle
 import numpy as np
+import re
+from strTools import stringQ2B
+import pickle
+
+
+def normalize(text):
+    """
+    # 非汉字全部半角化？
+    # 统一起来会比较好
+    :param text:
+    :return:
+    """
+    text = stringQ2B(text).lower()
+    text = re.sub("\s+", "", text)
+
+    table = {ord(f): ord(t) for f, t in zip(
+        u'“”‘’—', u'\"\"\'\'-')}
+    text = text.translate(table)
+    text = text.replace("…", "=")
+
+    return text
 
 
 def readAllConfusionSet(filepath):
@@ -21,6 +42,32 @@ class GenerateCSC:
         self.outfile = outfile
         self.corpus = []
         self.confusion_set = readAllConfusionSet('/data_local/TwoWaysToImproveCSC/BERT/save/confusion.file')
+        # 增加自己整理的候选集
+        path = "/data_local/TwoWaysToImproveCSC/BERT/易混淆词/condusion_collect.pkl"
+        confusion_dict = pickle.load(open(path, "rb"))
+        for key in confusion_dict:
+            if key in self.confusion_set:
+                self.confusion_set[key] = self.confusion_set[key] | confusion_dict[key]
+            else:
+                self.confusion_set[key] = confusion_dict[key]
+                print(key)
+                print(confusion_dict[key])
+
+        # # 增加spellgcn的候选集
+        # path = "/data_local/TwoWaysToImproveCSC/BERT/save/spellGraphs.txt"
+        # with open(path, "r", encoding="utf-8") as f:
+        #     for line in f.readlines():
+        #         s, t, r = line.strip().split("|")
+        #         if r not in ["同音同调", "同音异调", "形近"]:
+        #             continue
+        #         if s not in self.confusion_set:
+        #             self.confusion_set[s] = set()
+        #         self.confusion_set[s].add(t)
+        #
+        #         if t not in self.confusion_set:
+        #             self.confusion_set[t] = set()
+        #         self.confusion_set[t].add(s)
+
         print(type(self.confusion_set))
         self.vocab = [s for s in vocab]
         self.read(self.infile)
@@ -50,7 +97,9 @@ class GenerateCSC:
         num = len(line)
         tokens = list(line)
         index_li = [i for i in range(num)]
+        # 有可能是引入的错误个数太多了
         up_num = num // 4
+        # 有可能是引入的错误个数太多了
         np.random.shuffle(index_li)
         count = 0
         for i in index_li:
@@ -75,7 +124,11 @@ class GenerateCSC:
         file = open(path, encoding="UTF-8", mode="w")
         for item in list:
             line1, line2 = item
-            file.writelines(line1.strip() + " " + line2.strip() + "\n")
+            #
+            # line1 = normalize(line1)
+            # line2 = normalize(line2)
+            #
+            file.writelines(line2.strip() + " " + line1.strip() + "\n")
         file.close()
         print("writing finished")
 

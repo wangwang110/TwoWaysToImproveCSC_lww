@@ -17,7 +17,7 @@ from focalloss import FocalLoss
 
 
 class Trainer:
-    def __init__(self, bert, optimizer, tokenizer, device):
+    def __init__(self, bert, optimizer, tokenizer, device, add_spellgcn_set=True):
         self.model = bert
         self.optim = optimizer
         self.tokenizer = tokenizer
@@ -28,6 +28,20 @@ class Trainer:
         self.confusion_set = readAllConfusionSet('/data_local/TwoWaysToImproveCSC/BERT/save/confusion.file')
         # /data_local/TwoWaysToImproveCSC/BERT/save/confusion.file
         # ../save/confusion.file
+        if add_spellgcn_set:
+            path = "/data_local/TwoWaysToImproveCSC/BERT/save/spellGraphs.txt"
+            with open(path, "r", encoding="utf-8") as f:
+                for line in f.readlines():
+                    s, t, r = line.strip().split("|")
+                    if r not in ["同音同调", "同音异调", "形近"]:
+                        continue
+                    if s not in self.confusion_set:
+                        self.confusion_set[s] = set()
+                    self.confusion_set[s].add(t)
+
+                    if t not in self.confusion_set:
+                        self.confusion_set[t] = set()
+                    self.confusion_set[t].add(s)
 
     def train(self, train):
         self.model.train()

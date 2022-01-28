@@ -13,6 +13,7 @@ from torch.optim import Adam
 import operator
 from model import BertFineTune, construct, BertDataset, BFTLogitGen, readAllConfusionSet
 import os
+import copy
 
 """
 sighan15上的结果不一致
@@ -127,7 +128,8 @@ class Trainer:
             seq_loss = torch.sum(seq_loss) / torch.sum(input_attn_mask)
 
             # c_loss = ori_c_loss
-            c_loss = ori_c_loss + seq_loss
+            c_loss = torch.log(ori_c_loss) + torch.log(seq_loss)
+            # c_loss = ori_c_loss + seq_loss
 
             total_loss += c_loss.item()
         return total_loss
@@ -148,10 +150,16 @@ class Trainer:
         sen_mod = 0
         sen_mod_acc = 0
         sen_tar_mod = 0
+
         d_sen_acc = 0
         d_sen_mod = 0
         d_sen_mod_acc = 0
         d_sen_tar_mod = 0
+
+        d_sen_acc2 = 0
+        d_sen_mod2 = 0
+        d_sen_mod_acc2 = 0
+
         for batch in test:
             # inputs = self.tokenizer(batch['input'], padding=True, truncation=True, return_tensors="pt").to(self.device)
             # outputs = self.tokenizer(batch['output'], padding=True, truncation=True, return_tensors="pt").to(
@@ -165,8 +173,31 @@ class Trainer:
             output_ids, output_tyi, output_attn_mask = outputs['input_ids'][:, :max_len], \
                                                        outputs['token_type_ids'][:, :max_len], \
                                                        outputs['attention_mask'][:, :max_len]
-            out, _, _ = self.model(input_ids, input_tyi, input_attn_mask)
-            out = out.argmax(dim=-1)
+            out_prob, sent_prob, torken_prob = self.model(input_ids, input_tyi, input_attn_mask)
+
+            out = out_prob.argmax(dim=-1)
+
+            # # 原单词不再前10，才认为有错
+            # sorted, indices = torch.sort(out_prob, dim=-1, descending=True)
+            # indices = indices[:, :, :5]
+            # out_new = copy.deepcopy(input_ids)
+            # for i in range(len(out)):
+            #     for j in range(input_lens[i]):
+            #         if out[i][j] != input_ids[i][j] and input_ids[i][j] not in indices[i][j]:
+            #             out_new[i][j] = out[i][j]
+            # out = out_new
+
+            # 检测有错，并且修正了的才算真正的有错
+
+            # out_new = copy.deepcopy(input_ids)
+            # for i in range(len(out)):
+            #     for j in range(input_lens[i]):
+            #         if torken_prob[i][j] >= 0.5 and out[i][j] != input_ids[i][j]:
+            #             out_new[i][j] = out[i][j]
+            #
+            # out = out_new
+
+            #
             mod_sen = [not out[i][:input_lens[i]].equal(input_ids[i][:input_lens[i]]) for i in range(len(out))]
             # 预测有错的句子
             acc_sen = [out[i][:input_lens[i]].equal(output_ids[i][:input_lens[i]]) for i in range(len(out))]
@@ -183,29 +214,52 @@ class Trainer:
             # sen_acc += sum([out[i].equal(output_ids[i]) for i in range(len(out))])
             sen_acc += sum(acc_sen)
             # 预测对了句子，包括修正和不修正的
-
-            #
             setsum += output_ids.shape[0]
 
+            # 相等
+
+            prob_2 = [[0 if torken_prob[i][j] < 0.5 else 1 for j in range(input_lens[i])] for i in range(len(out))]
+
             prob_ = [[0 if out[i][j] == input_ids[i][j] else 1 for j in range(input_lens[i])] for i in range(len(out))]
+
             label = [[0 if input_ids[i][j] == output_ids[i][j] else 1 for j in
                       range(input_lens[i])] for i in range(len(input_ids))]
+
             d_acc_sen = [operator.eq(prob_[i], label[i]) for i in range(len(prob_))]
+            d_acc_sen2 = [operator.eq(prob_2[i], label[i]) for i in range(len(prob_2))]
+
             d_mod_sen = [0 if sum(prob_[i]) == 0 else 1 for i in range(len(prob_))]
+            d_mod_sen2 = [0 if sum(prob_2[i]) == 0 else 1 for i in range(len(prob_2))]
+
             d_tar_sen = [0 if sum(label[i]) == 0 else 1 for i in range(len(label))]
+
             d_sen_mod += sum(d_mod_sen)
+            d_sen_mod2 += sum(d_mod_sen2)
             # 预测有错的句子
             d_sen_mod_acc += sum(np.multiply(np.array(d_mod_sen), np.array(d_acc_sen)))
+            d_sen_mod_acc2 += sum(np.multiply(np.array(d_mod_sen2), np.array(d_acc_sen2)))
             # 预测有错的里面，位置预测正确的
             d_sen_tar_mod += sum(d_tar_sen)
             # 实际有错的句子
             d_sen_acc += sum(d_acc_sen)
+            d_sen_acc2 += sum(d_acc_sen2)
+        #
+        d_precision2 = d_sen_mod_acc2 / d_sen_mod2
+        d_recall2 = d_sen_mod_acc2 / d_sen_tar_mod
+        d_F12 = 2 * d_precision2 * d_recall2 / (d_precision2 + d_recall2)
+        #
+
+        print("new detection sentence accuracy:{0},precision:{1},recall:{2},F1:{3}".format(d_sen_acc2 / setsum,
+                                                                                           d_precision2,
+                                                                                           d_recall2, d_F12))
+
         d_precision = d_sen_mod_acc / d_sen_mod
         d_recall = d_sen_mod_acc / d_sen_tar_mod
         d_F1 = 2 * d_precision * d_recall / (d_precision + d_recall)
         c_precision = sen_mod_acc / sen_mod
         c_recall = sen_mod_acc / sen_tar_mod
         c_F1 = 2 * c_precision * c_recall / (c_precision + c_recall)
+
         print("detection sentence accuracy:{0},precision:{1},recall:{2},F1:{3}".format(d_sen_acc / setsum, d_precision,
                                                                                        d_recall, d_F1))
         print("correction sentence accuracy:{0},precision:{1},recall:{2},F1:{3}".format(sen_acc / setsum,

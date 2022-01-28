@@ -14,7 +14,6 @@ from torch.optim import Adam
 import operator
 from model import BertFineTune, construct, BertDataset, BFTLogitGen, readAllConfusionSet, cc_testconstruct, construct
 import os
-import copy
 
 vob = {}
 with open("/data_local/plm_models/chinese_L-12_H-768_A-12/vocab.txt", "r", encoding="utf-8") as f:
@@ -129,19 +128,8 @@ class Trainer:
             output_ids, output_tyi, output_attn_mask = outputs['input_ids'][:, :max_len], \
                                                        outputs['token_type_ids'][:, :max_len], \
                                                        outputs['attention_mask'][:, :max_len]
-
             out = self.model(input_ids, input_tyi, input_attn_mask)
             out = out.argmax(dim=-1)
-            # # 重置，双引号不改
-            # out_new = copy.deepcopy(input_ids)
-            # for i in range(len(out)):
-            #     for j in range(input_lens[i]):
-            #         if out[i][j] != input_ids[i][j] and input_ids[i][j] not in [107]:
-            #             out_new[i][j] = out[i][j]
-            # out = out_new
-            # 重置，双引号不改
-
-            # out = out.argmax(dim=-1)
             mod_sen = [not out[i][:input_lens[i]].equal(input_ids[i][:input_lens[i]]) for i in range(len(out))]
             # 修改过的句子
             acc_sen = [out[i][:input_lens[i]].equal(output_ids[i][:input_lens[i]]) for i in range(len(out))]

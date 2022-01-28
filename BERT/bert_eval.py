@@ -3,17 +3,16 @@
 import sys
 
 sys.path.append("..")
-import torch.nn as nn
+import time
 import torch
 import re
 import numpy as np
-import argparse
+from optparse import OptionParser
 from transformers import BertModel, BertConfig, BertTokenizer, BertForMaskedLM
 from torch.utils.data import DataLoader, Dataset
-from torch.optim import Adam
-import operator
 from model import li_testconstruct, BertDataset, BFTLogitGen, readAllConfusionSet, cc_testconstruct, construct
-import os
+import pickle
+from tqdm import tqdm
 
 vob = {}
 with open("/data_local/plm_models/chinese_L-12_H-768_A-12/vocab.txt", "r", encoding="utf-8") as f:
@@ -29,79 +28,140 @@ class BertMlm:
         :param bert_path:
         :param model_path:
         """
-
         bert = BertForMaskedLM.from_pretrained(bert_path, return_dict=True)
-
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.tokenizer = BertTokenizer.from_pretrained(bert_path)
         self.config = BertConfig.from_pretrained(bert_path)
-        self.batch_size = 16
+        self.batch_size = 25
         self.model = bert.to(self.device)
-        # self.confusion_set = readAllConfusionSet('/data_local/TwoWaysToImproveCSC/BERT/save/confusion.file')
-        # /data_local/TwoWaysToImproveCSC/BERT/save/confusion.file
-        # ../save/confusion.file
-
-    def test_without_trg(self, all_texts):
         self.model.eval()
+        tmp_dict = readAllConfusionSet('/data_local/TwoWaysToImproveCSC/BERT/save/confusion.file')
+
+        self.confusion_set = {}
+        # self.confusion_set_unk = {}
+        for key in tmp_dict:
+            self.confusion_set[key] = [s for s in tmp_dict[key]]
+            # 如果不b2v就会被认为是unk，修改unk位置是否被认为合理
+            # 修改unk位置应该非常常见
+            # unk 说明位置很有可能不对
+            # 改成unk是没有用的
+            # self.confusion_set_unk = [s for s in tmp_dict[key] if s not in b2v]
+        self.confusion_set_id = {}
+        for key in self.confusion_set:
+            item_li = []
+            for s in self.confusion_set[key]:
+                if s in b2v:
+                    item_li.append(b2v[s])
+                else:
+                    item_li.append(100)
+            self.confusion_set_id[key] = item_li
+
+    def test_without_trg(self, all_texts, vocab):
         test = li_testconstruct(all_texts)
         test = BertDataset(self.tokenizer, test)
         test = DataLoader(test, batch_size=int(self.batch_size), shuffle=False)
-        model_predict_ids = []
+
         for batch in test:
-            inputs = self.tokenizer(batch['input'], padding=True, truncation=True, return_tensors="pt").to(self.device)
+            inputs = self.tokenizer(batch['input'], padding=True, truncation=True, return_tensors="pt").to(
+                self.device)
             max_len = 180
             input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
                                                     inputs['token_type_ids'][:, :max_len], \
                                                     inputs['attention_mask'][:, :max_len]
-
-            # input_lens = torch.sum(input_attn_mask, 1)
             model_out = self.model(input_ids, input_tyi, input_attn_mask)
             out = model_out.logits
-            # batch * seq_len * vocab_size
-            # torch.gather
-
-            # out_id_sort = [p for p in torch.argsort(out, dim=2, descending=True)]
+            #
+            input_lens = torch.sum(input_attn_mask, 1).detach().cpu().numpy()
+            input_ids_li = [s for s in input_ids.detach().cpu().numpy()]
             out_logit = [s for s in out.detach().cpu().numpy()]
+            batch_size, _ = input_ids.size()
+            batch_res = []
+            for sent_id in range(batch_size):
+                num = input_lens[sent_id] - 2  # [cls],[sep]
+                tokens = [self.tokenizer.ids_to_tokens[t] for t in input_ids_li[sent_id][1:num + 1]]
+                # tokens = self.tokenizer.tokenize(batch['input'][sent_id])
+                # self.tokenizer.tokenize()
 
-            model_predict_ids.extend(out_logit)
+                index_li = [s for s in range(num)]
+                up_num = num // 4
+                np.random.shuffle(index_li)
+                count = 0
 
-            # # 返回修改后的句子
-            # out = out.argmax(dim=-1)
-            # # 修改过的句子
-            # res = []
-            # num_sample, _ = input_ids.size()
-            # for idx in range(num_sample):
-            #     sent_li = []
-            #     for t in range(1, input_lens[idx] - 1):
-            #         if vob[out[idx][t].item()] == "[UNK]":
-            #             sent_li.append(vob[input_ids[idx][t].item()])
-            #         else:
-            #             sent_li.append(vob[out[idx][t].item()])
-            #     res.append("".join(sent_li))
-            #     print(res)
-        return model_predict_ids
+                for i in index_li:
+                    if tokens[i] in self.confusion_set:
+                        count += 1
+                        if np.random.rand(1) > 0.9:
+                            # 随机替换为词表中的词
+                            idx = np.random.randint(0, len(vocab))
+                            tokens[i] = vocab[idx]
+                        else:
+                            # 替换为候选集中，最有可能出错的词，bert概率输出最大的，并且在候选集中的词
+                            token_conf = self.confusion_set[tokens[i]]
+                            token_conf_id = self.confusion_set_id[tokens[i]]
+                            id2prob = [out_logit[sent_id][i][j] for j in token_conf_id]
+                            idx = np.argmax(id2prob).item()
+                            tokens[i] = token_conf[idx]
+                        if count == up_num:
+                            break
+
+                batch_res.append("".join(tokens).replace("##", "") + " " + batch['input'][sent_id])
+            yield batch_res
+
+    def read_path(self, path):
+        print("reading now......")
+        all_texts = []
+        true_texts = []
+        with open(path, encoding="UTF-8") as f:
+            for line in f.readlines():
+                if 6 < len(line) < 160 and not line.startswith("）"):
+                    if len(set(line) & set(self.confusion_set.keys())) != 0:
+                        all_texts.append(line.strip().lower())
+                    else:
+                        true_texts.append(line.strip().lower())
+        return all_texts, true_texts
+
+
+def GenerateCSC(infile, outfile, vocab):
+    """
+    :param input_path:
+    :param output_path:
+    :param vocab_path:
+    :return:
+    """
+    bert_path = "/data_local/plm_models/chinese_L-12_H-768_A-12/"
+    obj = BertMlm(bert_path)
+    all_texts, true_texts = obj.read_path(infile)
+
+    sort_all_texts = sorted(all_texts, key=lambda s: len(s))
+    # 长度越短一个batch应该可以处理的越多
+
+    all_texts_li = obj.test_without_trg(sort_all_texts, vocab)
+
+    t0 = time.time()
+    with open(outfile, "w", encoding="utf-8") as fw:
+        for texts in tqdm(all_texts_li):
+            for text in texts:
+                fw.write(text + "\n")
+        for text in true_texts:
+            fw.write(text + " " + text + "\n")
+
+    print(time.time() - t0)
 
 
 if __name__ == "__main__":
-    # add arguments
-    parser = argparse.ArgumentParser(description="choose which model")
-    parser.add_argument('--task_name', type=str, default='bert_pretrain')
-    parser.add_argument('--load_path', type=str, default='./save/13_train_seed0_1.pkl')
+    parser = OptionParser()
+    parser.add_option("--path", dest="path", default="", help="path file")
+    parser.add_option("--input", dest="input", default="", help="input file")
+    parser.add_option("--output", dest="output", default="", help="output file")
+    (options, args) = parser.parse_args()
+    path = options.path
+    input = options.input
+    output = options.output
+    vocab = [s for s in pickle.load(open(path, "rb"))]
+    # vocab = [s for s in pickle.load(open(path, "rb"))][:5000]
 
-    # parser.add_argument('--batch_size', type=int, default=20)
-    # parser.add_argument('--epoch', type=int, default=1)
-    # parser.add_argument('--learning_rate', type=float, default=2e-5)
-    # parser.add_argument('--do_save', type=str2bool, nargs='?', const=False)
-    # parser.add_argument('--save_dir', type=str, default='../save')
-    # parser.add_argument('--seed', type=int, default=1)
-
-    args = parser.parse_args()
-    task_name = args.task_name
-    print("----Task: " + task_name + " begin !----")
-
-    # 初始化模型
-    bert_path = "/data_local/plm_models/chinese_L-12_H-768_A-12/"
-    # args.load_path = "/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/sighan13/epoch10.pkl"
-    obj = BertMlm(bert_path)
-    model_ouput = obj.test_without_trg(["遇到逆竟时，我们必须勇于面对，而且要愈挫愈勇，这样我们才能朝著成功之路前进。"])
-    print(model_ouput)
+    try:
+        GenerateCSC(infile=input, outfile=output, vocab=vocab)
+        print("All Finished.")
+    except Exception as err:
+        print(err)

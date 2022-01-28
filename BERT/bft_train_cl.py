@@ -55,7 +55,7 @@ class Trainer:
             # focal_loss = self.criterion_focal(out_logit, output_ids.view(-1))
 
             #
-            c_loss = self.criterion_c(out.transpose(1, 2), output_ids)  # B*S
+            c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
             # 实现课程学习的loss
             sqrt_loss = c_loss ** 2
             sqrt_loss = sqrt_loss * input_attn_mask
@@ -90,20 +90,18 @@ class Trainer:
                                                        outputs['attention_mask'][:, :max_len]
 
             out = self.model(input_ids, input_tyi, input_attn_mask)
-
             #
-            #
-            c_loss = self.criterion_c(out.transpose(1, 2), output_ids)  # B*S
+            c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
             # 实现课程学习的loss
             sqrt_loss = c_loss ** 2
             sqrt_loss = sqrt_loss * input_attn_mask
             weight = 1 + sqrt_loss / torch.sum(sqrt_loss, axis=1).unsqueeze(-1)
             # c_loss = weight * c_loss
             c_loss = torch.sum(weight * c_loss) / torch.sum(input_attn_mask)
+
             # c_loss = self.criterion_c(out.transpose(1, 2),
             #                           (1 - output_attn_mask) * self.criterion_c.ignore_index + output_ids)
             # padding的部分的loss不置为0吗？
-
             total_loss += c_loss.item()
         return total_loss
 

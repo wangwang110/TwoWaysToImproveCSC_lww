@@ -5,21 +5,15 @@ import sys
 sys.path.append("..")
 import torch.nn as nn
 import torch
-import re
 import numpy as np
 import argparse
 from transformers import BertModel, BertConfig, BertTokenizer
 from torch.utils.data import DataLoader, Dataset
 from torch.optim import Adam
 import operator
-from model import BertFineTune, construct, BertDataset, BFTLogitGen, readAllConfusionSet, cc_testconstruct, construct
+from model import BertFineTune, construct, BertDataset, BFTLogitGen, readAllConfusionSet
 import os
-import copy
-
-vob = {}
-with open("/data_local/plm_models/chinese_L-12_H-768_A-12/vocab.txt", "r", encoding="utf-8") as f:
-    for i, line in enumerate(f):
-        vob.setdefault(i, line.strip())
+from focalloss import FocalLoss
 
 
 class Trainer:
@@ -27,7 +21,8 @@ class Trainer:
         self.model = bert
         self.optim = optimizer
         self.tokenizer = tokenizer
-        self.criterion_c = nn.NLLLoss()
+        self.criterion_c = nn.NLLLoss(reduction="none")
+        self.criterion_focal = FocalLoss(gamma=2)
         # ignore_index=0
         self.device = device
         self.confusion_set = readAllConfusionSet('/data_local/TwoWaysToImproveCSC/BERT/save/confusion.file')
@@ -54,14 +49,23 @@ class Trainer:
 
             out = self.model(input_ids, input_tyi, input_attn_mask)  # out:[batch_size,seq_len,vocab_size]
 
+            # # 实现focal_loss
+            # batch, seq_len = input_ids.size()
+            # out_logit = out.view(batch * seq_len, -1)
+            # focal_loss = self.criterion_focal(out_logit, output_ids.view(-1))
+
+            #
             c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
             # c_loss = self.criterion_c(out.transpose(1, 2),
             #                           (1 - output_attn_mask) * self.criterion_c.ignore_index + output_ids)
             # padding的部分的loss不置为0吗？
+            c_loss = torch.sum(c_loss) / torch.sum(input_attn_mask)
+
             total_loss += c_loss.item()
             print(c_loss.item())
             self.optim.zero_grad()
             c_loss.backward()
+            # backward始终用的这一个
             self.optim.step()
         return total_loss
 
@@ -81,11 +85,12 @@ class Trainer:
                                                        outputs['attention_mask'][:, :max_len]
 
             out = self.model(input_ids, input_tyi, input_attn_mask)
+            #
             c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
             # c_loss = self.criterion_c(out.transpose(1, 2),
             #                           (1 - output_attn_mask) * self.criterion_c.ignore_index + output_ids)
             # padding的部分的loss不置为0吗？
-
+            c_loss = torch.sum(c_loss) / torch.sum(input_attn_mask)
             total_loss += c_loss.item()
         return total_loss
 
@@ -109,14 +114,6 @@ class Trainer:
         d_sen_mod = 0
         d_sen_mod_acc = 0
         d_sen_tar_mod = 0
-
-        test_name = re.search("[0-9]+", args.test_data).group()
-        model_name = args.load_path.split("/")[-3]
-        path = "./data_analysis/" + args.task_name + "_" + model_name + "_" + test_name + "_ori.txt"
-        path_cor = "./data_analysis/" + args.task_name + "_" + model_name + "_" + test_name + "_cor.txt"
-        f = open(path, "w", encoding="utf-8")
-        f_cor = open(path_cor, "w", encoding="utf-8")
-
         for batch in test:
             inputs = self.tokenizer(batch['input'], padding=True, truncation=True, return_tensors="pt").to(self.device)
             outputs = self.tokenizer(batch['output'], padding=True, truncation=True, return_tensors="pt").to(
@@ -129,41 +126,14 @@ class Trainer:
             output_ids, output_tyi, output_attn_mask = outputs['input_ids'][:, :max_len], \
                                                        outputs['token_type_ids'][:, :max_len], \
                                                        outputs['attention_mask'][:, :max_len]
-
             out = self.model(input_ids, input_tyi, input_attn_mask)
             out = out.argmax(dim=-1)
-            # # 重置，双引号不改
-            # out_new = copy.deepcopy(input_ids)
-            # for i in range(len(out)):
-            #     for j in range(input_lens[i]):
-            #         if out[i][j] != input_ids[i][j] and input_ids[i][j] not in [107]:
-            #             out_new[i][j] = out[i][j]
-            # out = out_new
-            # 重置，双引号不改
-
-            # out = out.argmax(dim=-1)
             mod_sen = [not out[i][:input_lens[i]].equal(input_ids[i][:input_lens[i]]) for i in range(len(out))]
             # 修改过的句子
             acc_sen = [out[i][:input_lens[i]].equal(output_ids[i][:input_lens[i]]) for i in range(len(out))]
             # 修改正确的句子
             tar_sen = [not output_ids[i].equal(input_ids[i]) for i in range(len(output_ids))]
             # 应该修改的句子
-
-            # 修改过的句子
-            idx = 0
-            for s in mod_sen:
-                # if s != 0:
-                for t in range(input_lens[idx]):
-                    f.write(vob[input_ids[idx][t].item()])
-                    if vob[out[idx][t].item()] == "[UNK]":
-                        f_cor.write(vob[input_ids[idx][t].item()])
-                    else:
-                        f_cor.write(vob[out[idx][t].item()])
-                f.write("\n")
-                f_cor.write("\n")
-
-                idx += 1
-
             sen_mod += sum(mod_sen)
             sen_mod_acc += sum(np.multiply(np.array(mod_sen), np.array(acc_sen)))
             sen_tar_mod += sum(tar_sen)
@@ -256,6 +226,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     task_name = args.task_name
     print("----Task: " + task_name + " begin !----")
+    print("----Model base: " + args.load_path + "----")
 
     setup_seed(int(args.seed))
     start = time.time()
@@ -288,7 +259,7 @@ if __name__ == "__main__":
     if args.do_test:
         test = construct(args.test_data)
         test = BertDataset(tokenizer, test)
-        test = DataLoader(test, batch_size=int(args.batch_size), shuffle=False)
+        test = DataLoader(test, batch_size=int(args.batch_size), shuffle=True)
 
     optimizer = Adam(model.parameters(), float(args.learning_rate))
     # optimizer = nn.DataParallel(optimizer, device_ids=device_ids)
