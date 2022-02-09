@@ -42,8 +42,10 @@ class GenerateCSC:
         self.outfile = outfile
         self.corpus = []
         self.confusion_set = readAllConfusionSet('/data_local/TwoWaysToImproveCSC/BERT/save/confusion.file')
+
         # 增加自己整理的候选集
-        path = "/data_local/TwoWaysToImproveCSC/BERT/易混淆词/condusion_collect.pkl"
+        path = "/data_local/TwoWaysToImproveCSC/BERT/易混淆词/condusion_collect_new.pkl"
+        # self.confusion_set = pickle.load(open(path, "rb"))
         confusion_dict = pickle.load(open(path, "rb"))
         for key in confusion_dict:
             if key in self.confusion_set:

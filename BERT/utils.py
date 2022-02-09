@@ -35,3 +35,6 @@ def cal_fuzzy(output):
 #    outfile.write(str(f))
 #    outfile.writelines('\n')
 # outfile.close()
+
+
+

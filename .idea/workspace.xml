@@ -11,6 +11,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$match_value.coverage" NAME="match_value Coverage Results" MODIFIED="1643339099833" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/data_analysis" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$new_bft_train3.coverage" NAME="new_bft_train3 Coverage Results" MODIFIED="1644308392249" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$bft_train_semi.coverage" NAME="bft_train_semi Coverage Results" MODIFIED="1643281290911" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$test_load_bert.coverage" NAME="test_load_bert Coverage Results" MODIFIED="1642557405790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$compare_file.coverage" NAME="compare_file Coverage Results" MODIFIED="1643081082746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/data" />
@@ -20,10 +21,11 @@
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$bert_eval.coverage" NAME="bert_eval Coverage Results" MODIFIED="1642667671847" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$strTools.coverage" NAME="strTools Coverage Results" MODIFIED="1643179508541" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/large_data" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$get_vocab.coverage" NAME="get_vocab Coverage Results" MODIFIED="1642754631933" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/large_data" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$process1.coverage" NAME="process1 Coverage Results" MODIFIED="1644312283001" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/易混淆词" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$parser_mita_res_13.coverage" NAME="parser_mita_res_13 Coverage Results" MODIFIED="1642577166759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/cc_data" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$new_bft_train2_ner.coverage" NAME="new_bft_train2_ner Coverage Results" MODIFIED="1642558908165" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$get_confusion.coverage" NAME="get_confusion Coverage Results" MODIFIED="1643274002930" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/save" />
-    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$bft_train.coverage" NAME="bft_train Coverage Results" MODIFIED="1643274558755" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$bft_train.coverage" NAME="bft_train Coverage Results" MODIFIED="1644305241425" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$utils.coverage" NAME="utils Coverage Results" MODIFIED="1643185411240" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$get_cc_tag.coverage" NAME="get_cc_tag Coverage Results" MODIFIED="1642815001496" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/data_analysis" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$parser_res.coverage" NAME="parser_res Coverage Results" MODIFIED="1643168783239" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/cc_data" />
@@ -35,8 +37,8 @@
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$sighan15_data_ner.coverage" NAME="sighan15_data_ner Coverage Results" MODIFIED="1642490919598" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/large_data" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$functional.coverage" NAME="functional Coverage Results" MODIFIED="1643093969290" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/.PyCharm2018.1/system/remote_sources/746897114/47249651/torch/nn" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$bft_train_loss_weight.coverage" NAME="bft_train_loss_weight Coverage Results" MODIFIED="1642579098952" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
-    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$new_bft_train2.coverage" NAME="new_bft_train2 Coverage Results" MODIFIED="1643097184114" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
-    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$process.coverage" NAME="process Coverage Results" MODIFIED="1643362253741" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/易混淆词" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$new_bft_train2.coverage" NAME="new_bft_train2 Coverage Results" MODIFIED="1644305097451" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$process.coverage" NAME="process Coverage Results" MODIFIED="1644310230981" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/易混淆词" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$bft_train_focal.coverage" NAME="bft_train_focal Coverage Results" MODIFIED="1642498662346" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$change_punct.coverage" NAME="change_punct Coverage Results" MODIFIED="1643080762595" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/data" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$character2pic.coverage" NAME="character2pic Coverage Results" MODIFIED="1642757414698" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/large_data" />
@@ -44,7 +46,94 @@
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$cc_data_fuzzy.coverage" NAME="cc_data_fuzzy Coverage Results" MODIFIED="1643193986082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/cc_data" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="process.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BERT/易混淆词/process.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1386">
+              <caret line="97" column="23" selection-end-line="154" />
+              <folding>
+                <element signature="e#17#54#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="process1.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BERT/易混淆词/process1.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="486">
+              <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+              <folding>
+                <element signature="e#17#54#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="generate_csc_data.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/large_data/generate_csc_data.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="537">
+              <caret line="55" column="42" lean-forward="true" selection-start-line="55" selection-start-column="42" selection-end-line="55" selection-end-column="42" />
+              <folding>
+                <element signature="e#25#35#0" expanded="true" />
+                <element signature="e#227#532#0" />
+                <element signature="e#574#659#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="condusion_collect.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BERT/易混淆词/condusion_collect.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2765">
+              <caret line="2705" column="1" lean-forward="true" selection-start-line="2705" selection-start-column="1" selection-end-line="2705" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="1.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BERT/易混淆词/1.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="353">
+              <caret line="300" column="20" lean-forward="true" selection-start-line="300" selection-start-column="20" selection-end-line="300" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="url.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BERT/易混淆词/url.txt">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="5.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BERT/易混淆词/5.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1009" />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="4.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BERT/易混淆词/4.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="44">
+              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BERT/易混淆词/2.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="159">
+              <caret line="102" column="6" lean-forward="true" selection-start-line="102" selection-start-column="6" selection-end-line="102" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -55,37 +144,40 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>paper_preTrain</find>
-      <find>test_preTrain</find>
-      <find>all_text_paper_model</find>
-      <find>name2</find>
-      <find>c_loss</find>
-      <find>test_wang2018_punct</find>
-      <find>string2List</find>
-      <find>self_wang2018_new</find>
-      <find>testSet</find>
-      <find>construct</find>
-      <find>cc_testconstruct</find>
-      <find>copy</find>
-      <find>caclulate fuzzy:</find>
-      <find>vob</find>
-      <find>caclulate fuzzy</find>
-      <find>train</find>
-      <find>在</find>
-      <find>在==</find>
-      <find>三</find>
-      <find>#</find>
-      <find>cal_fuzzy</find>
-      <find>break</find>
-      <find>normalize</find>
       <find>施</find>
       <find>cal_fuzzy_tensor</find>
       <find>然与燃</find>
       <find>out</find>
       <find>s</find>
       <find>\# coding\: utf\-8\n\nfrom __future__ import print_function\nfrom __future__ import division\nfrom __future__ import absolute_import\n\nfrom collections import defaultdict\nimport re\nfrom pypinyin import pinyin\, lazy_pinyin\, Style\n\nmap_dict \= defaultdict\(set\)\n\n\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\npath \= \&quot;\.\/1\.txt\&quot;\nwith open\(path\, \&quot;r\&quot;\, encoding\=\&quot;utf\-8\&quot;\) as f\:\n    for line in f\.readlines\(\)\:\n        if re\.match\(\&quot;\\d\+\\\.\&quot;\, line\) is not None\:\n            line \= re\.sub\(\&quot;\\d\+\\\.\&quot;\, \&quot;\&quot;\, line\.strip\(\)\)\n            item_li \= line\.strip\(\)\.split\(\&quot; \&quot;\)\n            num \= len\(item_li\)\n            for i in range\(num \- 1\)\:\n                for j in range\(i \+ 1\, num\)\:\n                    src \= item_li\[i\]\n                    trg \= item_li\[j\]\n                    for s\, t in zip\(list\(src\)\, list\(trg\)\)\:\n                        if s \!\= t\:\n                            map_dict\[s\]\.add\(t\)\n                            map_dict\[t\]\.add\(s\)\n\n\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\n\# 需要拼音和字形辅助\，字形还没做\npath \= \&quot;\.\/2\.txt\&quot;\nwith open\(path\, \&quot;r\&quot;\, encoding\=\&quot;utf\-8\&quot;\) as f\:\n    for line in f\.readlines\(\)\:\n        if re\.match\(\&quot;\\d\{3\}\．\&quot;\, line\) is not None\:\n            for text in line\.strip\(\)\.split\(\&quot; \&quot;\)\:\n                text \= re\.sub\(\&quot;\\d\{3\}\．\&quot;\, \&quot; \&quot;\, text\.strip\(\)\)\n                for item in text\.strip\(\)\.split\(\&quot; \&quot;\)\:\n                    words\, t \= re\.split\(\&quot;\\\(\|\（\&quot;\, item\)\n                    t \= t\.strip\(\&quot;\）\&quot;\)\.strip\(\&quot;\)\&quot;\)\n                    ch_pinyin_s \= lazy_pinyin\(words\)\n                    ch_pinyin_t \= lazy_pinyin\(t\)\n                    id \= 0\n                    tag \= 0\n                    for sitem in ch_pinyin_s\:\n                        if sitem in ch_pinyin_t\:\n                            tag \= 1\n                            map_dict\[t\]\.add\(words\[id\]\)\n                            map_dict\[words\[id\]\]\.add\(t\)\n                        id \+\= 1\n                    if tag \=\= 0\:\n                        print\(item\)\n\n\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\n\# path \= \&quot;\.\/3\.txt\&quot;\n\# with open\(path\, \&quot;r\&quot;\, encoding\=\&quot;utf\-8\&quot;\) as f\:\n\#     for line in f\.readlines\(\)\:\n\#         if \&quot;\—\—\&quot; in line\:\n\#             item_li \= list\(re\.sub\(\&quot;\—\—\&quot;\, \&quot;\&quot;\, line\.strip\(\)\)\)\n\#             num \= len\(item_li\)\n\#             for i in range\(0\, num\, 2\)\:\n\#                 map_dict\[item_li\[i\]\]\.add\(item_li\[i \+ 1\]\)\n\#                 map_dict\[item_li\[i \+ 1\]\]\.add\(item_li\[i\]\)\n\n\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\npath \= \&quot;\.\/4\.txt\&quot;\nwith open\(path\, \&quot;r\&quot;\, encoding\=\&quot;utf\-8\&quot;\) as f\:\n    lines \= \[\]\n    for line in f\.readlines\(\)\:\n        if line\.strip\(\) \=\= \&quot;\&quot; or \&quot;\、\&quot; in line\:\n            continue\n        lines\.append\(line\)\n    num \= len\(lines\)\n    for i in range\(0\, num\, 2\)\:\n        src \= re\.sub\(\&quot;\\\(\.\*\?\\\)\&quot;\, \&quot;\&quot;\, lines\[i\]\)\n        trg \= re\.sub\(\&quot;\\\(\.\*\?\\\)\&quot;\, \&quot;\&quot;\, lines\[i \+ 1\]\)\n        if len\(src\) \!\= len\(trg\)\:\n            continue\n        for s\, t in zip\(list\(src\)\, list\(trg\)\)\:\n            if s \!\= t\:\n                map_dict\[s\]\.add\(t\)\n                map_dict\[t\]\.add\(s\)\n\n\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\npath \= \&quot;\.\/5\.txt\&quot;\nwith open\(path\, \&quot;r\&quot;\, encoding\=\&quot;utf\-8\&quot;\) as f\:\n    lines \= \[\]\n    for line in f\.readlines\(\)\:\n        line \= line\.strip\(\)\.split\(\&quot;\：\“\&quot;\)\[0\]\n\n        try\:\n            src\, trg \= line\.split\(\&quot;\/\&quot;\)\n            for s\, t in zip\(list\(src\)\, list\(trg\)\)\:\n                if s \!\= t\:\n                    map_dict\[s\]\.add\(t\)\n                    map_dict\[t\]\.add\(s\)\n        except Exception as e\:\n            print\(line\)\n\n\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\npath \= \&quot;\.\/6\.txt\&quot;\nwith open\(path\, \&quot;r\&quot;\, encoding\=\&quot;utf\-8\&quot;\) as f\:\n    lines \= \[\]\n    for line in f\.readlines\(\)\:\n        line \= line\.strip\(\)\.split\(\&quot;\：\“\&quot;\)\[0\]\n        item_li \= re\.split\(\&quot;\\d\+\．\&quot;\, line\)\n        for item in item_li\:\n            if item \=\= \&quot;\&quot;\:\n                continue\n            item \= re\.sub\(\&quot;\\s\+\&quot;\, \&quot;\&quot;\, item\)\n            ss\, tt \= re\.split\(\&quot;\（\|\\\(\&quot;\, item\)\n            s \= ss\[\-1\]\n            t \= tt\[0\]\n            if s \!\= t\:\n                map_dict\[s\]\.add\(t\)\n                map_dict\[t\]\.add\(s\)\n\n\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\npath \= \&quot;\.\/7\.txt\&quot;\nwith open\(path\, \&quot;r\&quot;\, encoding\=\&quot;utf\-8\&quot;\) as f\:\n    lines \= \[\]\n    for line in f\.readlines\(\)\:\n        if line\.strip\(\) \=\= \&quot;\&quot;\:\n            continue\n        text \= re\.findall\(\&quot;\【\(\.\*\?\)\】\&quot;\, line\)\n        src\, trg \= text\[0\]\.split\(\&quot;与\&quot;\)\n        for s\, t in zip\(list\(src\)\, list\(trg\)\)\:\n            if s \!\= t\:\n                print\(s\, t\)\n                map_dict\[s\]\.add\(t\)\n                map_dict\[t\]\.add\(s\)\n\n\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\npath \= \&quot;\.\/8\.txt\&quot;\nwith open\(path\, \&quot;r\&quot;\, encoding\=\&quot;utf\-8\&quot;\) as f\:\n    lines \= \[\]\n    for line in f\.readlines\(\)\:\n        if line\.strip\(\) \=\= \&quot;\&quot;\:\n            continue\n        text \= re\.findall\(\&quot;\【\(\.\*\?\)\】\&quot;\, line\)\n        src\, trg \= text\[0\]\.split\(\&quot;与\&quot;\)\n        for s\, t in zip\(list\(src\)\, list\(trg\)\)\:\n            if s \!\= t\:\n                map_dict\[s\]\.add\(t\)\n                map_dict\[t\]\.add\(s\)\n\nimport pickle\npickle\.dump\(map_dict\,open\(\&quot;condusion_collect\.pkl\&quot;\,\&quot;wb\&quot;\)\,protocol\=0\)\nprint\(map_dict\)\n</find>
+      <find>志气</find>
+      <find>俩</find>
+      <find>两</find>
+      <find>怯</find>
+      <find>咄</find>
+      <find>经</find>
+      <find>诚</find>
+      <find>就</find>
+      <find>瞠</find>
+      <find>痛</find>
+      <find>恐</find>
+      <find>意</find>
+      <find>叶</find>
+      <find>什</find>
+      <find>实</find>
+      <find>定</find>
+      <find>磊</find>
+      <find>飞</find>
+      <find>杏</find>
+      <find>诸</find>
+      <find>断</find>
+      <find>颇</find>
       <find>print</find>
+      <find>渎</find>
     </findStrings>
+    <dirStrings>
+      <dir>E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT\易混淆词</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -93,35 +185,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/BERT/new_bft_train2_ner.py" />
-        <option value="$PROJECT_DIR$/BERT/data_analysis/A_test_wang2018test_wang2018_new_4.txt" />
-        <option value="$PROJECT_DIR$/BERT/data/compare_file.py" />
-        <option value="$PROJECT_DIR$/BERT/new_bft_train2_detect.py" />
-        <option value="$PROJECT_DIR$/large_data/get_similarchar.py" />
-        <option value="$PROJECT_DIR$/large_data/get_char_pinyin.py" />
-        <option value="$PROJECT_DIR$/BERT/data/change_punct.py" />
-        <option value="$USER_HOME$/AppData/Local/Temp/scp15736/data_local/TwoWaysToImproveCSC/BERT/data/change_punct.py" />
-        <option value="$PROJECT_DIR$/BERT/cc_data/parser_res.py" />
-        <option value="$PROJECT_DIR$/BERT/bft_eval.py" />
-        <option value="$PROJECT_DIR$/BERT/csc_eval.py" />
-        <option value="$PROJECT_DIR$/large_data/strTools.py" />
-        <option value="D:/211-project/domain_adversarial_neural_network-master/amazon_stop_fuzzy.py" />
-        <option value="$PROJECT_DIR$/BERT/bft_eval_no_trg.py" />
-        <option value="$PROJECT_DIR$/BERT/utils.py" />
-        <option value="$PROJECT_DIR$/BERT/cc_data/cc_data_fuzzy.py" />
-        <option value="$PROJECT_DIR$/BERT/save/confusion.txt" />
-        <option value="$PROJECT_DIR$/BERT/save/get_confusion.py" />
-        <option value="$PROJECT_DIR$/BERT/bft_train.py" />
-        <option value="$PROJECT_DIR$/BERT/bft_train_semi.py" />
-        <option value="$PROJECT_DIR$/BERT/data_analysis/match_value.py" />
         <option value="$PROJECT_DIR$/BERT/new_bft_train2.py" />
-        <option value="$PROJECT_DIR$/BERT/易混淆词/1.txt" />
-        <option value="$PROJECT_DIR$/BERT/易混淆词/3.txt" />
+        <option value="$PROJECT_DIR$/BERT/new_bft_train3.py" />
         <option value="$PROJECT_DIR$/BERT/易混淆词/4.txt" />
-        <option value="$PROJECT_DIR$/BERT/易混淆词/5.txt" />
-        <option value="$PROJECT_DIR$/BERT/易混淆词/url.txt" />
-        <option value="$PROJECT_DIR$/BERT/易混淆词/7.txt" />
         <option value="$PROJECT_DIR$/BERT/易混淆词/process.py" />
+        <option value="$PROJECT_DIR$/BERT/易混淆词/condusion_collect.txt" />
+        <option value="$PROJECT_DIR$/BERT/易混淆词/process1.py" />
         <option value="$PROJECT_DIR$/large_data/generate_csc_data.py" />
       </list>
     </option>
@@ -135,9 +204,9 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="482" />
-    <option name="y" value="21" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
     <option name="width" value="1382" />
     <option name="height" value="744" />
   </component>
@@ -147,6 +216,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -162,13 +232,18 @@
             <path>
               <item name="TwoWaysToImproveCSC_lww" type="b2602c69:ProjectViewProjectNode" />
               <item name="TwoWaysToImproveCSC_lww" type="462c0819:PsiDirectoryNode" />
+              <item name="BERT" type="462c0819:PsiDirectoryNode" />
+              <item name="易混淆词" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TwoWaysToImproveCSC_lww" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TwoWaysToImproveCSC_lww" type="462c0819:PsiDirectoryNode" />
               <item name="large_data" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -183,7 +258,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="D:/211-project/domain_adversarial_neural_network-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -192,18 +267,18 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.customizations" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT\model\BERT\baseline" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT\易混淆词" />
       <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT" />
+      <recent name="D:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT" />
       <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\large_data" />
       <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT\data_analysis" />
-      <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT\cc_data" />
-      <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT\model" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -218,32 +293,14 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.process">
-    <configuration name="AdGen" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="TwoWaysToImproveCSC_lww" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BERT/model" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BERT/model/AdGen.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
+  <component name="RunManager" selected="Python.process1">
     <configuration name="bft_train" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="TwoWaysToImproveCSC_lww" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="CUDA_VISIBLE_DEVICES" value="6,7" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BERT" />
@@ -252,18 +309,17 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BERT/bft_train.py" />
-      <option name="PARAMETERS" value="" />
+      <option name="PARAMETERS" value="--task_name=sighan13 --gpu_num=2 --load_model=False --do_train=True --train_data=./data/13train.txt --do_valid=True --valid_data=./data/13test.txt --epoch=10 --batch_size=20 --learning_rate=2e-5 --do_save=True --save_dir=./save/test/ --seed=10" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="bft_train_semi" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="new_bft_train2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="TwoWaysToImproveCSC_lww" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
-        <env name="CUDA_VISIBLE_DEVICES" value="0,1" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BERT" />
@@ -271,27 +327,28 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BERT/bft_train_semi.py" />
-      <option name="PARAMETERS" value="--task_name=sighan13 --gpu_num=2 --load_model=True --load_path=/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/initial/wang2018/model.pkl --do_train=True --train_data=./data/13train.txt --do_valid=True --valid_data=./data/13test.txt --domain_data=./cc_data/xiaoxue_sent_with_error.txt --epoch=10 --batch_size=20 --learning_rate=2e-5 --do_save=True --save_dir=/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/initial/semi_sighan13/ --seed=10" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BERT/new_bft_train2.py" />
+      <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="match_value" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="new_bft_train3" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="TwoWaysToImproveCSC_lww" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="CUDA_VISIBLE_DEVICES" value="6,7" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BERT/data_analysis" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BERT" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BERT/data_analysis/match_value.py" />
-      <option name="PARAMETERS" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BERT/new_bft_train3.py" />
+      <option name="PARAMETERS" value="--task_name=sighan13 --gpu_num=2 --load_model=False --do_train=True --train_data=./data/13train.txt --do_valid=True --valid_data=./data/13test.txt --epoch=10 --batch_size=20 --learning_rate=2e-5 --do_save=True --save_dir=./save/test/ --seed=10" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -315,20 +372,39 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="process1" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="TwoWaysToImproveCSC_lww" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BERT/易混淆词" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BERT/易混淆词/process1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <list>
-      <item itemvalue="Python.bft_train_semi" />
-      <item itemvalue="Python.AdGen" />
+      <item itemvalue="Python.new_bft_train3" />
+      <item itemvalue="Python.new_bft_train2" />
       <item itemvalue="Python.bft_train" />
-      <item itemvalue="Python.match_value" />
       <item itemvalue="Python.process" />
+      <item itemvalue="Python.process1" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.process1" />
         <item itemvalue="Python.process" />
-        <item itemvalue="Python.match_value" />
-        <item itemvalue="Python.bft_train_semi" />
+        <item itemvalue="Python.new_bft_train3" />
         <item itemvalue="Python.bft_train" />
-        <item itemvalue="Python.AdGen" />
+        <item itemvalue="Python.new_bft_train2" />
       </list>
     </recent_temporary>
   </component>
@@ -345,33 +421,35 @@
       <workItem from="1642602635812" duration="3771000" />
       <workItem from="1642778098884" duration="132000" />
       <workItem from="1642839100874" duration="687000" />
+      <workItem from="1644218146809" duration="9799000" />
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info anchor="bottom" id="File Transfer" weight="0.105324075" />
+      <window_info anchor="bottom" id="File Transfer" weight="0.083333336" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.12847222" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.4826389" />
       <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="right" id="Remote Host" weight="0.19098713" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21030043" />
+      <window_info anchor="right" id="Remote Host" weight="0.3299356" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23444206" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="right" id="Database" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="SciView" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39467594" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.2962963" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
     </layout>
@@ -383,33 +461,43 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="764" y="245" key="#com.intellij.ide.ui.customization.CustomizableActionsPanel.FindAvailableActionsDialog" timestamp="1642603594039">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="890" y="-835" key="#com.intellij.ide.ui.customization.CustomizableActionsPanel.FindAvailableActionsDialog" timestamp="1644219031709">
+      <screen x="126" y="-1080" width="1920" height="1040" />
     </state>
     <state x="764" y="245" key="#com.intellij.ide.ui.customization.CustomizableActionsPanel.FindAvailableActionsDialog/-126.1080.1440.933/0.0.1920.1040@0.0.1920.1040" timestamp="1642603594039" />
-    <state x="679" y="277" key="FileChooserDialogImpl" timestamp="1642606067958">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="890" y="-835" key="#com.intellij.ide.ui.customization.CustomizableActionsPanel.FindAvailableActionsDialog/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644219031709" />
+    <state x="218" y="-988" width="1736" height="856" key="DiffContextDialog" timestamp="1644228924520">
+      <screen x="126" y="-1080" width="1920" height="1040" />
+    </state>
+    <state x="218" y="-988" width="1736" height="856" key="DiffContextDialog/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644228924520" />
+    <state x="1331" y="-919" width="540" height="504" key="FileChooserDialogImpl" timestamp="1644228932345">
+      <screen x="126" y="-1080" width="1920" height="1040" />
     </state>
     <state x="679" y="277" key="FileChooserDialogImpl/-126.1080.1440.933/0.0.1920.1040@0.0.1920.1040" timestamp="1642606067958" />
-    <state width="1387" height="235" key="GridCell.Tab.0.bottom" timestamp="1642839795538">
-      <screen x="0" y="0" width="1440" height="920" />
+    <state x="1331" y="-919" width="540" height="504" key="FileChooserDialogImpl/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644228932345" />
+    <state width="1867" height="124" key="GridCell.Tab.0.bottom" timestamp="1644245110415">
+      <screen x="126" y="-1080" width="1920" height="1040" />
     </state>
     <state width="1867" height="184" key="GridCell.Tab.0.bottom/-126.1080.1440.933/0.0.1920.1040@0.0.1920.1040" timestamp="1642638189832" />
+    <state width="1867" height="124" key="GridCell.Tab.0.bottom/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644245110415" />
     <state width="1387" height="235" key="GridCell.Tab.0.bottom/0.0.1440.920@0.0.1440.920" timestamp="1642839795538" />
-    <state width="1387" height="235" key="GridCell.Tab.0.center" timestamp="1642839795538">
-      <screen x="0" y="0" width="1440" height="920" />
+    <state width="1867" height="124" key="GridCell.Tab.0.center" timestamp="1644245110415">
+      <screen x="126" y="-1080" width="1920" height="1040" />
     </state>
     <state width="1867" height="184" key="GridCell.Tab.0.center/-126.1080.1440.933/0.0.1920.1040@0.0.1920.1040" timestamp="1642638189832" />
+    <state width="1867" height="124" key="GridCell.Tab.0.center/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644245110415" />
     <state width="1387" height="235" key="GridCell.Tab.0.center/0.0.1440.920@0.0.1440.920" timestamp="1642839795538" />
-    <state width="1387" height="235" key="GridCell.Tab.0.left" timestamp="1642839795538">
-      <screen x="0" y="0" width="1440" height="920" />
+    <state width="1867" height="124" key="GridCell.Tab.0.left" timestamp="1644245110415">
+      <screen x="126" y="-1080" width="1920" height="1040" />
     </state>
     <state width="1867" height="184" key="GridCell.Tab.0.left/-126.1080.1440.933/0.0.1920.1040@0.0.1920.1040" timestamp="1642638189832" />
+    <state width="1867" height="124" key="GridCell.Tab.0.left/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644245110415" />
     <state width="1387" height="235" key="GridCell.Tab.0.left/0.0.1440.920@0.0.1440.920" timestamp="1642839795538" />
-    <state width="1387" height="235" key="GridCell.Tab.0.right" timestamp="1642839795538">
-      <screen x="0" y="0" width="1440" height="920" />
+    <state width="1867" height="124" key="GridCell.Tab.0.right" timestamp="1644245110415">
+      <screen x="126" y="-1080" width="1920" height="1040" />
     </state>
     <state width="1867" height="184" key="GridCell.Tab.0.right/-126.1080.1440.933/0.0.1920.1040@0.0.1920.1040" timestamp="1642638189832" />
+    <state width="1867" height="124" key="GridCell.Tab.0.right/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644245110415" />
     <state width="1387" height="235" key="GridCell.Tab.0.right/0.0.1440.920@0.0.1440.920" timestamp="1642839795538" />
     <state width="1387" height="235" key="GridCell.Tab.1.bottom" timestamp="1642839795539">
       <screen x="0" y="0" width="1440" height="920" />
@@ -427,10 +515,15 @@
       <screen x="0" y="0" width="1440" height="920" />
     </state>
     <state width="1387" height="235" key="GridCell.Tab.1.right/0.0.1440.920@0.0.1440.920" timestamp="1642839795539" />
-    <state x="334" y="154" key="SettingsEditor" timestamp="1642603597917">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="460" y="-926" key="SettingsEditor" timestamp="1644219124013">
+      <screen x="126" y="-1080" width="1920" height="1040" />
     </state>
     <state x="334" y="154" key="SettingsEditor/-126.1080.1440.933/0.0.1920.1040@0.0.1920.1040" timestamp="1642603597917" />
+    <state x="460" y="-926" key="SettingsEditor/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644219124013" />
+    <state x="953" y="-555" key="com.intellij.ide.ui.customization.CustomizableActionsPanel$EditIconDialog" timestamp="1644219122044">
+      <screen x="126" y="-1080" width="1920" height="1040" />
+    </state>
+    <state x="953" y="-555" key="com.intellij.ide.ui.customization.CustomizableActionsPanel$EditIconDialog/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644219122044" />
     <state x="719" y="418" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1642603530319">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -525,7 +618,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/BERT/csc_eval.py</url>
-          <line>119</line>
+          <line>139</line>
           <option name="timeStamp" value="45" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -585,7 +678,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/large_data/get_similarchar.py</url>
-          <line>61</line>
+          <line>62</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -594,23 +687,18 @@
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/BERT/new_bft_train2.py</url>
-          <line>505</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$USER_HOME$/AppData/Local/Temp/scp30290/data_local/see/transformers/models/bert/modeling_bert.py</url>
           <line>88</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/BERT/new_bft_train2.py</url>
-          <line>180</line>
+          <line>214</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/BERT/new_bft_train2.py</url>
-          <line>186</line>
+          <line>221</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -648,13 +736,35 @@
           <line>28</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$USER_HOME$/AppData/Local/Temp/scp43468/data_local/TwoWaysToImproveCSC/BERT/kb_srab.py</url>
+          <line>18</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/new_bft_train3.py</url>
+          <line>49</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/new_bft_train3.py</url>
+          <line>67</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/易混淆词/process1.py</url>
+          <line>11</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="51" />
+      <option name="time" value="5" />
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$get_char_pinyin.coverage" NAME="get_char_pinyin Coverage Results" MODIFIED="1644225603304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/large_data" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$new_bft_train2_ner.coverage" NAME="new_bft_train2_ner Coverage Results" MODIFIED="1642603076863" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$test_api.coverage" NAME="test_api Coverage Results" MODIFIED="1642839524204" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$kb_srab.coverage" NAME="kb_srab Coverage Results" MODIFIED="1644243893904" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/AppData/Local/Temp/scp43468/data_local/TwoWaysToImproveCSC/BERT" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
@@ -685,6 +795,41 @@ print(map_dict)</expression-string>
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
+        <expression-string>src, trg</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>c_loss.item()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>c_loss</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>ori_c_loss_stop</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>ori_c_loss</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>ori_c_loss.detach()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>ori_c_loss.detach(</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>line</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
@@ -694,451 +839,109 @@ print(map_dict)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>re.findall(&quot;【\.*?】&quot;, line)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>item_li</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>item</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>map_dict</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>t</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>s</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>ine.strip().split(&quot; &quot;)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/chinese_spell.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/chinese_spell_4.txt">
+    <entry file="file://$PROJECT_DIR$/BERT/new_bft_train2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/scp30290/data_local/see/transformers/models/bert/modeling_bert.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="745" column="15" selection-start-line="745" selection-start-column="6" selection-end-line="745" selection-end-column="15" />
-          <folding>
-            <element signature="e#1876#2815#0" />
-            <element signature="e#2886#5831#0" />
-            <element signature="e#5871#7956#0" />
-            <element signature="e#7999#13219#0" />
-            <element signature="e#13259#13784#0" />
-            <element signature="e#13823#15516#0" />
-            <element signature="e#15558#16054#0" />
-            <element signature="e#16090#16621#0" />
-            <element signature="e#16656#19067#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/large_data/get_similarchar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/large_data/character2pic.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/A_paper_preTrainself_pretrain_13.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-18711">
-          <caret line="6" column="14" selection-start-line="6" selection-end-line="6" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/A_test_pretraintest_initial_14.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-810">
-          <caret line="753" column="14" lean-forward="true" selection-start-line="753" selection-start-column="14" selection-end-line="753" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/A_paper_preTrainself_pretrain_4.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="615" column="14" selection-start-line="615" selection-end-line="615" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/A_test_wang2018test_wang2018_new_13.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="593">
-          <caret line="1732" column="17" lean-forward="true" selection-start-line="1732" selection-start-column="17" selection-end-line="1732" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/A_test_preTraintest_initial_13.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="1766" column="17" selection-start-line="1766" selection-start-column="17" selection-end-line="1766" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/A_test_preTraintest_initial_4.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-783">
-          <caret line="229" column="17" lean-forward="true" selection-start-line="229" selection-start-column="17" selection-end-line="229" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/scp15736/data_local/TwoWaysToImproveCSC/BERT/data/change_punct.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="34" selection-end-line="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/new_bft_train2_detect.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="394" column="37" selection-start-line="394" selection-start-column="37" selection-end-line="394" selection-end-column="37" />
-          <folding>
-            <element signature="e#17874#18377#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/data/compare_file.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="47" selection-start-line="47" selection-end-line="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/cc_data/parser_res.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="96" column="58" lean-forward="true" selection-start-line="96" selection-start-column="58" selection-end-line="96" selection-end-column="58" />
-          <folding>
-            <element signature="e#180#520#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/A_self_wang2018_newtest_wang2018_punct_4.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="566">
-          <caret line="6005" column="6" lean-forward="true" selection-start-line="6005" selection-start-column="6" selection-end-line="6005" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/large_data/strTools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1214">
-          <caret line="96" column="35" lean-forward="true" selection-start-line="96" selection-start-column="35" selection-end-line="96" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/A_self_wang2018_newself_initial_4.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13230">
-          <caret line="490" column="12" selection-start-line="490" selection-end-line="490" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/211-project/domain_adversarial_neural_network-master/amazon_stop_fuzzy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="81" column="51" selection-end-line="251" />
-          <folding>
-            <element signature="e#25#43#0" expanded="true" />
-            <element signature="e#1014#1825#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/csc_eval.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1350">
-          <caret line="138" column="4" selection-start-line="138" selection-start-column="4" selection-end-line="139" />
-          <folding>
-            <element signature="e#2262#2272#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/bft_eval.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="18" column="8" lean-forward="true" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/data/change_punct.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="25" column="33" selection-start-line="22" selection-start-column="4" selection-end-line="25" selection-end-column="33" />
-          <folding>
-            <element signature="e#62#99#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/bft_eval_no_trg.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2403">
-          <caret line="17" selection-start-line="17" selection-end-line="20" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/model/BertFineTune.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="48" column="23" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/model/dataset.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="24" column="25" selection-start-line="18" selection-start-column="2" selection-end-line="24" selection-end-column="25" />
-          <folding>
-            <element signature="e#673#1138#0" />
-            <element signature="e#1176#1477#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/remote_sources/746897114/47249651/torch/nn/modules/module.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="202" selection-start-line="202" selection-end-line="202" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/bert_eval.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="12" selection-start-line="12" selection-end-line="12" selection-end-column="110" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/save/spellGraphs_confusion.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="571">
-          <caret line="14259" lean-forward="true" selection-start-line="14259" selection-end-line="14259" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/save/confusion.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="14756" lean-forward="true" selection-start-line="14756" selection-end-line="14756" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/save/get_confusion.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="19" column="29" selection-end-line="44" />
-          <folding>
-            <element signature="e#62#99#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/scp07296/data_local/csc/SpellGCN-master/data/gcn_graph.ty_xj/analyze.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="19" column="14" lean-forward="true" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/remote_sources/746897114/47249651/torch/_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="389" column="78" lean-forward="true" selection-start-line="389" selection-start-column="78" selection-end-line="389" selection-end-column="78" />
+        <state relative-caret-position="-4">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BERT/bft_train.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
-          <caret line="39" column="48" lean-forward="true" selection-start-line="39" selection-start-column="48" selection-end-line="39" selection-end-column="48" />
-          <folding>
-            <element signature="e#975#2841#0" />
-            <element signature="e#2877#4196#0" />
-          </folding>
+          <caret line="5" column="21" lean-forward="true" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/model/AdGen.py">
+    <entry file="file://$PROJECT_DIR$/BERT/new_bft_train3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="318" lean-forward="true" selection-start-line="318" selection-end-line="318" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#116#696#0" />
-            <element signature="e#773#1649#0" />
-            <element signature="e#1819#2212#0" />
-            <element signature="e#2241#2336#0" />
-            <element signature="e#2399#2709#0" />
-            <element signature="e#2822#8064#0" />
-            <element signature="e#8180#13364#0" />
-          </folding>
+        <state relative-caret-position="191">
+          <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="e#83#101#0" expanded="true" />
-            <element signature="e#585#690#0" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/BERT/易混淆词/6.txt">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/cc_data/cc_data_fuzzy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-          <folding>
-            <element signature="e#62#99#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/BERT/易混淆词/7.txt">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/bft_train_semi.py">
+    <entry file="file://$PROJECT_DIR$/BERT/易混淆词/3.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="349" column="46" lean-forward="true" selection-end-line="386" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/match_value.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="74" column="10" lean-forward="true" selection-start-line="74" selection-start-column="10" selection-end-line="74" selection-end-column="10" />
-          <folding>
-            <element signature="e#62#99#0" expanded="true" />
-            <element signature="e#196#675#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/large_data/get_char_pinyin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="31" column="69" lean-forward="true" selection-start-line="31" selection-start-column="3" selection-end-line="31" selection-end-column="69" />
-          <folding>
-            <element signature="e#47#65#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/new_bft_train2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="171" column="46" lean-forward="true" selection-start-line="171" selection-start-column="46" selection-end-line="171" selection-end-column="46" />
-        </state>
+        <state relative-caret-position="-766" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BERT/易混淆词/4.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="65" column="5" selection-end-line="73" />
+        <state relative-caret-position="44">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BERT/易混淆词/5.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1210">
-          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="5" />
-        </state>
+        <state relative-caret-position="-1009" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/易混淆词/6.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="1" column="20" lean-forward="true" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/易混淆词/8.txt">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/BERT/易混淆词/url.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/BERT/易混淆词/2.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/易混淆词/7.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="61" lean-forward="true" selection-end-line="131" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/易混淆词/3.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="22" column="15" selection-end-line="62" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/large_data/generate_csc_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="154" lean-forward="true" selection-start-line="154" selection-end-line="154" />
-          <folding>
-            <element signature="e#25#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/易混淆词/process.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="143" column="34" lean-forward="true" selection-start-line="143" selection-start-column="34" selection-end-line="143" selection-end-column="34" />
+        <state relative-caret-position="159">
+          <caret line="102" column="6" lean-forward="true" selection-start-line="102" selection-start-column="6" selection-end-line="102" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BERT/易混淆词/1.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="11" column="7" lean-forward="true" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+        <state relative-caret-position="353">
+          <caret line="300" column="20" lean-forward="true" selection-start-line="300" selection-start-column="20" selection-end-line="300" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/易混淆词/process.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1386">
+          <caret line="97" column="23" selection-end-line="154" />
+          <folding>
+            <element signature="e#17#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/易混淆词/condusion_collect.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2765">
+          <caret line="2705" column="1" lean-forward="true" selection-start-line="2705" selection-start-column="1" selection-end-line="2705" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/易混淆词/process1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+          <folding>
+            <element signature="e#17#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/generate_csc_data_bert.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/large_data/generate_csc_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="537">
+          <caret line="55" column="42" lean-forward="true" selection-start-line="55" selection-start-column="42" selection-end-line="55" selection-end-column="42" />
+          <folding>
+            <element signature="e#25#35#0" expanded="true" />
+            <element signature="e#227#532#0" />
+            <element signature="e#574#659#0" />
+          </folding>
         </state>
       </provider>
     </entry>
