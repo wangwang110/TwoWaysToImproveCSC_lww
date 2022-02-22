@@ -1,0 +1,796 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="44661a0c-b41a-4f29-ba34-157e7c5e31d5" name="Default" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/chinese_xinhua$elasticsearch_idom_cut.coverage" NAME="elasticsearch_idom_cut Coverage Results" MODIFIED="1644547683850" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/chinese_xinhua$spacy_token.coverage" NAME="spacy_token Coverage Results" MODIFIED="1645160553942" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/chinese_xinhua$elasticsearch_ci.coverage" NAME="elasticsearch_ci Coverage Results" MODIFIED="1645170452677" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/chinese_xinhua$spacy_token_tmp.coverage" NAME="spacy_token_tmp Coverage Results" MODIFIED="1645410184345" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/chinese_xinhua$merge_es_process.coverage" NAME="merge_es_process Coverage Results" MODIFIED="1645234327701" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/chinese_xinhua$elasticsearch_cy.coverage" NAME="elasticsearch_cy Coverage Results" MODIFIED="1644548272618" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/chinese_xinhua$elasticsearch_poem.coverage" NAME="elasticsearch_poem Coverage Results" MODIFIED="1645085867210" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/chinese_xinhua$slm_token.coverage" NAME="slm_token Coverage Results" MODIFIED="1645410802197" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file leaf-file-name="merge_es_process.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/merge_es_process.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3078">
+              <caret line="124" column="20" selection-end-line="613" />
+              <folding>
+                <element signature="e#25#36#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="merge_es_process.log" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/merge_es_process.log">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1134">
+              <caret line="42" column="12" selection-start-line="42" selection-start-column="12" selection-end-line="42" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.log" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test.log">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="81">
+              <caret line="231" column="8" lean-forward="true" selection-start-line="231" selection-start-column="8" selection-end-line="231" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="spacy_token.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spacy_token.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="540">
+              <caret line="32" column="5" lean-forward="true" selection-start-line="15" selection-start-column="4" selection-end-line="32" selection-end-column="5" />
+              <folding>
+                <element signature="e#25#36#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="spacy_token_tmp.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spacy_token_tmp.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="864">
+              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_cut.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_cut.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="slm_token.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/slm_token.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="438">
+              <caret line="38" column="42" lean-forward="true" selection-start-line="38" selection-start-column="42" selection-end-line="38" selection-end-column="42" />
+              <folding>
+                <element signature="e#25#36#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>pinyin</find>
+      <find>word</find>
+      <find>find_most_similar</find>
+      <find>逆竟</find>
+      <find>天将降大任于斯人也，必先苦其心智，劳其筋骨</find>
+      <find>zh_ci_dict</find>
+      <find>ci_v2</find>
+      <find>hit['_source']['ci']</find>
+      <find>src</find>
+      <find>===============</find>
+      <find>百废</find>
+      <find>trg</find>
+      <find>======================</find>
+      <find>confusion_set</find>
+      <find>=============================</find>
+      <find>##################</find>
+      <find>tokenize</find>
+      <find>ci_v3</find>
+      <find>cici</find>
+      <find>ci_pos</find>
+      <find>匹配到诗句</find>
+      <find>pos</find>
+      <find>\# \-\*\- coding\: utf\-8 \-\*\-\n\nimport time\nfrom elasticsearch import Elasticsearch\nfrom elasticsearch import helpers\nimport json\nimport re\nimport spacy\nimport os\nimport pickle\nfrom pypinyin import pinyin\, lazy_pinyin\, Style\n\nnlp \= spacy\.load\(\&quot;zh_core_web_sm\&quot;\)\n\n\# 候选集\nfilepath \= \'\/data_local\/TwoWaysToImproveCSC\/BERT\/save\/confusion\.file\'\nwith open\(filepath\, \'rb\'\) as f\:\n    confusion_set \= pickle\.load\(f\)\n\n\nclass ElasticSearch\:\n    def __init__\(self\)\:\n        self\.es \= Elasticsearch\(\[\{\&quot;host\&quot;\: \&quot;10\.21\.2\.35\&quot;\, \&quot;port\&quot;\: 9201\}\]\)\n        \# ip \(不要加http\)\n        \# port\n\n    def batch_data\(self\, \)\:\n        \&quot;\&quot;\&quot; 批量写入数据 \&quot;\&quot;\&quot;\n        start \= time\.time\(\)\n        vocab_dict \= pickle\.load\(open\(\&quot;\.\/vocab_xiaoxue\.pkl\&quot;\, \&quot;rb\&quot;\)\)\n        chengyu_li \= \[\]\n        for s in vocab_dict\:\n            if 2 \&lt;\= len\(s\) \&lt;\= 4\:\n                pos \= \[str\(p\) for p in range\(len\(s\)\)\]\n                ci_pos_li \= \[w \+ \&quot;_\&quot; \+ p for w\, p in zip\(list\(s\)\, pos\)\]\n                ci_pos_str \= \&quot; \&quot;\.join\(ci_pos_li\)\n                pinyin \= \&quot; \&quot;\.join\(lazy_pinyin\(s\)\)\n                chengyu_li\.append\(\(s\, vocab_dict\[s\]\, pinyin\, ci_pos_str\)\)\n\n        print\(len\(chengyu_li\)\)  \# 264434\n\n        \# 写入数据\n        action \= \(\{\n            \&quot;_index\&quot;\: \&quot;ci_v4\&quot;\,\n            \&quot;_type\&quot;\: \&quot;_doc\&quot;\,\n            \&quot;_id\&quot;\: i\,\n            \&quot;_source\&quot;\: \{\n                \'ci\'\: chengyu_li\[i\]\[0\]\,  \# 词语\,\n                \'fre\'\: chengyu_li\[i\]\[1\]\,  \# 词频\,\n                \'pinyin\'\: chengyu_li\[i\]\[2\]\,\n                \'ci_pos\'\: chengyu_li\[i\]\[3\]\n            \}\n        \} for i in range\(len\(chengyu_li\)\)\)\n\n        helpers\.bulk\(self\.es\, action\)\n        print\(\'批量导入索引 共耗时约 \{\:\.2f\} 秒\'\.format\(time\.time\(\) \- start\)\)\n        return 0\n\n    def search\(self\, query_tran\=\'白费\'\)\:\n        \&quot;\&quot;\&quot;\n        输入四个字的词\n        \:param query_tran\:\n        \:return\:\n        \&quot;\&quot;\&quot;\n        num \= len\(query_tran\)\n\n        pos \= \[str\(p\) for p in range\(len\(query_tran\)\)\]\n        ci_pos_str \= \&quot; \&quot;\.join\(\[w \+ \&quot;_\&quot; \+ p for w\, p in zip\(list\(query_tran\)\, pos\)\]\)\n\n        query \= \{\n            \&quot;query\&quot;\: \{\n\n                \&quot;bool\&quot;\: \{\n                    \&quot;must\&quot;\:\[ \{\n                            \&quot;match\&quot;\: \{\n                                \&quot;ci_pos\&quot;\: \{\n                                    \&quot;query\&quot;\: ci_pos_str\,\n                                    \&quot;minimum_should_match\&quot;\: num\-1\n                                \}\n                            \}\}\n                    \]\,\n                    \&quot;should\&quot;\: \[\n                        \{\n                            \&quot;match\&quot;\: \{\n                                \&quot;ci\&quot;\: \{\n                                    \&quot;query\&quot;\: query_tran\,\n                                    \&quot;minimum_should_match\&quot;\: num \-1\n                                \}\n                            \}\}\,\n                        \{\n                            \&quot;match_phrase\&quot;\: \{\n                                \&quot;pinyin\&quot;\: \{\n                                    \&quot;query\&quot;\: \&quot; \&quot;\.join\(lazy_pinyin\(query_tran\)\)\n                                \}\n                            \}\}\n                    \]\n                \}\n\n            \}\,\n            \&quot;highlight\&quot;\: \{\n                \&quot;fields\&quot;\: \{\n                    \&quot;ci\&quot;\: \{\}\,\n                    \&quot;ci_pos\&quot;\: \{\}\n                \}\n            \}\n        \}\n\n        result \= self\.es\.search\(index\=\&quot;ci_v4\&quot;\, body\=query\, size\=10\)\n        hits_list \= result\[\'hits\'\]\[\'hits\'\]\n        str_li \= \[\]\n        for hit in hits_list\:\n            count \= 0\n            if len\(hit\[\'_source\'\]\[\'ci\'\]\) \!\= len\(query_tran\)\:\n                continue\n            for s\, t in zip\(query_tran\, hit\[\'_source\'\]\[\'ci\'\]\)\:\n                if s \=\= t\:\n                    count \+\= 1\n\n            if query_tran \=\= hit\[\'_source\'\]\[\'ci\'\]\:\n                str_li \= \[\(query_tran\, query_tran\)\]\n                return str_li\n            elif count \=\= num \- 1\:\n                pattern \= \&quot;\&quot;\n                match_character_li \= re\.findall\(\&quot;\&lt;em\&gt;\(\.\*\?\)\&lt;\/em\&gt;\&quot;\, hit\[\&quot;highlight\&quot;\]\[\&quot;ci\&quot;\]\[0\]\)\n                for w in hit\[\'_source\'\]\[\'ci\'\]\:\n                    if w not in match_character_li\:\n                        pattern \+\= \&quot;\.\&quot;\n                    else\:\n                        pattern \+\= w\n                str_li\.append\(\(pattern\, hit\[\'_source\'\]\[\'ci\'\]\)\)\n                \# 匹配模式\，匹配到的成语\n        return str_li\n\n    def delete_all\(self\, \)\:\n        start \= time\.time\(\)\n        delete_by_all \= \{\&quot;query\&quot;\: \{\&quot;match_all\&quot;\: \{\}\}\}\n        \# self\.es\.delete_by_query\(index\=\&quot;ci_v1\&quot;\, body\=delete_by_all\)\n        \# self\.es\.delete_by_query\(index\=\&quot;ci_v2\&quot;\, body\=delete_by_all\)\n        self\.es\.delete_by_query\(index\=\&quot;ci_v4\&quot;\, body\=delete_by_all\)\n        print\(\'删除全部索引 共耗时约 \{\:\.2f\} 秒\'\.format\(time\.time\(\) \- start\)\)\n\n\ndef find_most_similar\(src\, trgs\)\:\n    \&quot;\&quot;\&quot;\n    如果不用语言模型\，为了更好的保持高准确度\n    既要拼音一致\，又要在候选集\？\n    \:param src\:\n    \:param trgs\:\n    \:return\:\n    \&quot;\&quot;\&quot;\n    for trg in trgs\:\n        for s\, t in zip\(list\(src\)\, list\(trg\)\)\:\n            if s \!\= t\:\n                if lazy_pinyin\(s\) \=\= lazy_pinyin\(t\) and s in confusion_set and t in confusion_set\[s\]\:\n                    print\(\&quot;\+\+拼音一致\+\+\&quot;\, trg\)\n                    return trg\n                elif \(set\(lazy_pinyin\(s\)\[0\]\) \- set\(lazy_pinyin\(t\)\[0\]\) \=\= set\(\[\&quot;g\&quot;\]\) or\n                      set\(lazy_pinyin\(t\)\[0\]\) \- set\(lazy_pinyin\(s\)\[0\]\) \=\= set\(\[\&quot;g\&quot;\]\)\) \\\n                        and s in confusion_set and t in confusion_set\[s\]\:\n                    print\(\&quot;\+\+前后鼻不分\+\+\&quot;\, trg\)\n                    return trg\n                else\:\n                    if s not in confusion_set\:\n                        return src\n                    if t in confusion_set\[s\]\:\n                        print\(\&quot;\+\+在混淆集\+\+\&quot;\, trg\)\n                        return trg\n    return src\n\n\ndef correct_sent\(text\)\:\n    \&quot;\&quot;\&quot;\n    纠正输入文本 text\n    \:param text\:\n    \:return\:\n    \&quot;\&quot;\&quot;\n    words \= \[\]\n    words_tag \= \[\]\n    for w in nlp\(text\)\:\n        words\.append\(w\.text\)\n        words_tag\.append\(w\.tag_\)\n\n    \# 字数大于1的词语\n    four_words \= \[\]\n    num \= len\(words\)\n    for i in range\(num \- 1\)\:\n        if len\(words\[i\]\) \&gt; 1\:\n            four_words\.append\(words\[i\]\)\n\n    correct \= \{\}\n    \# print\(four_words\)\n    for src in four_words\:\n        res_li \= elastic_search\.search\(query_tran\=src\)\n        trgs \= \[\]\n        for res in res_li\:\n            pattern\, trg \= res\n            if src \=\= trg\:\n                \# print\(\&quot;发现成语\：\&quot;\, trg\)\n                break\n            else\:\n                match_idom \= re\.search\(pattern\, text\)\n                if match_idom is not None\:\n                    trgs\.append\(trg\)\n        if len\(trgs\) \&gt;\= 1\:\n            cor \= find_most_similar\(src\, trgs\)\n            correct\[src\] \= cor\n    print\(correct\)\n    for item in correct\:\n        text \= text\.replace\(item\, correct\[item\]\)\n    return text\n\n\nif __name__ \=\= \'__main__\'\:\n    elastic_search \= ElasticSearch\(\)\n    \# elastic_search\.delete_all\(\)\n    \# elastic_search\.batch_data\(\)\n\n    \# \# 测试词语纠错\n    text_li \= \[\n        \&quot;看侍\&quot;\,\n        \&quot;大自然也一样的\，无法天天都是晴天\，天天都很顺利\，但生活\，就是如此这般\，有失才有得\，只是每个人是如何去看侍的\。\&quot;\,\n        \&quot;在前往拥抱梦想的过程中\，往往都是一条充满毒蛇猛兽\，陷井重重的道路\，当你一但经历和刻服了这些关卡时\，就是你张开双手迎接成功的时候\。\&quot;\,\n        \&quot;有时候人会因为习管了身边的一切事物\，而渐渐的认为一切都是理所当然的\，开始不珍惜或是糟踏自己所理想当然的事物\，直到有一天它逍失了\，才感觉到它的重要性\，才了解到没有了它是多么不方便\。\&quot;\,\n        \&quot;另外\，还挂著个小时钟\，能够提醒大家在当下所该做的事\，时光是不可回朔的\，因此它珍贵过了一切\，小小的时钟告诉了我时刻\，也时时叮咛我把握当下\。\&quot;\,\n        \&quot;我认为\，\「方向\」和\「梦想\」有些相似\。只要朝著自己的方向前进\，同样的\，你也正朝著自己的梦想走\。所以\，人一定要有志向\，才不会白废自己的生命\。\&quot;\,\n        \&quot;已经开了两个多小时的会议\，双方代表还是莫衷一事\，没有定论\。\&quot;\n    \]\n    for sent in text_li\:\n        new_sent \= correct_sent\(sent\)\n        print\(sent\)\n        print\(new_sent\)\n        print\(\&quot;\\n\&quot;\)\n\n    \# path \= \&quot;\/data_local\/TwoWaysToImproveCSC\/BERT\/data\/13test\.txt\&quot;\n    \# with open\(path\, \&quot;r\&quot;\, encoding\=\&quot;utf\-8\&quot;\) as f\, open\(\&quot;\.\.\/data\/13test_ci\.txt\&quot;\, \&quot;w\&quot;\, encoding\=\&quot;utf\-8\&quot;\) as fw\:\n    \#     id \= 1\n    \#     for line in f\.readlines\(\)\:\n    \#         print\(\&quot;\=\=\=id\=\=\=\:\{\}\\n\&quot;\.format\(str\(id\)\)\)\n    \#         sent\, sent_trg \= line\.strip\(\)\.split\(\&quot; \&quot;\)\n    \#         new_sent \= correct_sent\(sent\.strip\(\)\)\n    \#\n    \#         if sent \!\= new_sent\:\n    \#             print\(sent\)\n    \#             print\(new_sent\)\n    \#             print\(sent_trg\)\n    \#             print\(\&quot;\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\\n\&quot;\)\n    \#             fw\.write\(new_sent \+ \&quot; \&quot; \+ sent_trg \+ \&quot;\\n\&quot;\)\n    \#         else\:\n    \#             fw\.write\(sent \+ \&quot; \&quot; \+ sent_trg \+ \&quot;\\n\&quot;\)\n    \#\n    \#         id \+\= 1\n    \#\n    \# path \= \&quot;\/data_local\/TwoWaysToImproveCSC\/BERT\/cc_data\/chinese_spell_4\.txt\&quot;\n    \# with open\(path\, \&quot;r\&quot;\, encoding\=\&quot;utf\-8\&quot;\) as f\, open\(\&quot;\.\.\/cc_data\/chinese_spell_ci_4\.txt\&quot;\, \&quot;w\&quot;\,\n    \#                                                   encoding\=\&quot;utf\-8\&quot;\) as fw\:\n    \#     id \= 1\n    \#     for line in f\.readlines\(\)\:\n    \#         print\(\&quot;\=\=\=id\=\=\=\:\{\}\\n\&quot;\.format\(str\(id\)\)\)\n    \#         sent\, sent_trg \= line\.strip\(\)\.split\(\&quot; \&quot;\)\n    \#         new_sent \= correct_sent\(sent\.strip\(\)\)\n    \#\n    \#         if sent \!\= new_sent\:\n    \#             print\(sent\)\n    \#             print\(new_sent\)\n    \#             print\(sent_trg\)\n    \#             print\(\&quot;\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\\n\&quot;\)\n    \#             fw\.write\(new_sent \+ \&quot; \&quot; \+ sent_trg \+ \&quot;\\n\&quot;\)\n    \#         else\:\n    \#             fw\.write\(sent \+ \&quot; \&quot; \+ sent_trg \+ \&quot;\\n\&quot;\)\n    \#\n    \#         id \+\= 1\n</find>
+      <find>correct_tag</find>
+      <find>cy_search</find>
+      <find>print</find>
+      <find>============</find>
+      <find>fw</find>
+    </findStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/elasticsearch_idom_cut.log" />
+        <option value="$PROJECT_DIR$/elasticsearch_idom_cut.py" />
+        <option value="$PROJECT_DIR$/elasticsearch_poem.py" />
+        <option value="$PROJECT_DIR$/elasticsearch_cy.py" />
+        <option value="$PROJECT_DIR$/merge_es_process_ci.log" />
+        <option value="$USER_HOME$/AppData/Local/Temp/scp46061/data_local/TwoWaysToImproveCSC/BERT/sighan13_run_bert.sh" />
+        <option value="$PROJECT_DIR$/elasticsearch_ci.py" />
+        <option value="$PROJECT_DIR$/merge_es_process.log" />
+        <option value="$PROJECT_DIR$/merge_es_process.py" />
+        <option value="$PROJECT_DIR$/test.log" />
+        <option value="$PROJECT_DIR$/spacy_token.py" />
+        <option value="$PROJECT_DIR$/spacy_token_tmp.py" />
+        <option value="$PROJECT_DIR$/slm_token.py" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="chinese-xinhua" type="b2602c69:ProjectViewProjectNode" />
+              <item name="chinese-xinhua" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="chinese-xinhua" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../.." />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="web.server" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT\chinese-xinhua" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.slm_token">
+    <configuration name="elasticsearch_ci" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="chinese-xinhua" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/elasticsearch_ci.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="merge_es_process" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="chinese-xinhua" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/merge_es_process.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="slm_token" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="chinese-xinhua" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/slm_token.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="spacy_token" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="chinese-xinhua" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/spacy_token.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="spacy_token_tmp" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="chinese-xinhua" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/spacy_token_tmp.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.elasticsearch_ci" />
+      <item itemvalue="Python.spacy_token" />
+      <item itemvalue="Python.merge_es_process" />
+      <item itemvalue="Python.slm_token" />
+      <item itemvalue="Python.spacy_token_tmp" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.slm_token" />
+        <item itemvalue="Python.spacy_token_tmp" />
+        <item itemvalue="Python.merge_es_process" />
+        <item itemvalue="Python.elasticsearch_ci" />
+        <item itemvalue="Python.spacy_token" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="44661a0c-b41a-4f29-ba34-157e7c5e31d5" name="Default" comment="" />
+      <created>1644481545027</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1644481545027</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <layout>
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="File Transfer" order="7" weight="0.1261574" />
+      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.15856482" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="right" id="Remote Host" order="3" weight="0.14538626" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20171674" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.046296295" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="8" weight="0.3298611" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/elasticsearch_cy.py</url>
+          <line>213</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/elasticsearch_poem.py</url>
+          <line>82</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/spacy_token.py</url>
+          <line>1</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/elasticsearch_ci.py</url>
+          <line>214</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/spacy_token.py</url>
+          <line>37</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/elasticsearch_cy.py</url>
+          <line>179</line>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/spacy_token.py</url>
+          <line>34</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/spacy_token.py</url>
+          <line>67</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/elasticsearch_ci.py</url>
+          <line>179</line>
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/elasticsearch_ci.py</url>
+          <line>202</line>
+          <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/elasticsearch_ci.py</url>
+          <line>118</line>
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/elasticsearch_ci.py</url>
+          <line>191</line>
+          <option name="timeStamp" value="71" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/merge_es_process.py</url>
+          <line>263</line>
+          <option name="timeStamp" value="86" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/merge_es_process.py</url>
+          <line>271</line>
+          <option name="timeStamp" value="88" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="90" />
+    </breakpoint-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>w_src</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>w_trg</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.getscores([&quot;自己 已后&quot;,'自今 已后'])</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.getscores([&quot;自己已后&quot;,'自今已后'])</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.getscores([&quot;悲观 离合&quot;,'悲欢 离合'])</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.getscores([&quot;悲观离合&quot;,'悲欢离合'])</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.getscores([&quot;无动 余中&quot;,'无动 于中'])</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.getscores([&quot;无动余中&quot;,'无动于中'])</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.getscores([&quot;浑然 不知&quot;,'浑然 无知'])</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/merge_es_process.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3078">
+          <caret line="124" column="20" selection-end-line="613" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/merge_es_process.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1134">
+          <caret line="42" column="12" lean-forward="true" selection-start-line="42" selection-start-column="12" selection-end-line="42" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spacy_token.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1620">
+          <caret line="70" column="22" lean-forward="true" selection-start-line="70" selection-start-column="22" selection-end-line="70" selection-end-column="22" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/slm_token.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="12" column="47" lean-forward="true" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="23" column="8" lean-forward="true" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/merge_es_process.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6021">
+          <caret line="223" lean-forward="true" selection-start-line="223" selection-end-line="223" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spacy_token.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1620">
+          <caret line="60" column="14" lean-forward="true" selection-start-line="60" selection-start-column="14" selection-end-line="60" selection-end-column="14" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/merge_es_process_ci.log" />
+    <entry file="file://$PROJECT_DIR$/elasticsearch_ci.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3024">
+          <caret line="112" column="11" selection-start-line="112" selection-start-column="8" selection-end-line="112" selection-end-column="14" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/elasticsearch_cy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1188">
+          <caret line="44" selection-start-line="44" selection-end-line="45" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+            <element signature="e#2588#3935#0" />
+            <element signature="e#3941#3966#0" />
+            <element signature="e#4412#4430#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/13test_cy.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/elasticsearch_ci.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1296">
+          <caret line="48" column="24" lean-forward="true" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="24" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/chengyu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1323">
+          <caret line="50" column="22" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_cut.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/remote_sources/396144521/-993343102/re.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="224" selection-start-line="224" selection-end-line="224" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/chengyu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1323">
+          <caret line="50" column="22" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/elasticsearch_idom_cut.log" />
+    <entry file="file://$PROJECT_DIR$/elasticsearch_idom.py" />
+    <entry file="file://$PROJECT_DIR$/elasticsearch_ci_new.log" />
+    <entry file="file://$PROJECT_DIR$/13test_cy.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-931">
+          <caret line="41" column="20" lean-forward="true" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/elasticsearch_ci_pinyin_new.log" />
+    <entry file="file://$PROJECT_DIR$/elasticsearch_poem.log" />
+    <entry file="file://$PROJECT_DIR$/elasticsearch_poem_obj.log" />
+    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/remote_sources/396144521/1559706342/spacy/language.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="1496" column="17" selection-start-line="1496" selection-start-column="8" selection-end-line="1496" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/elasticsearch_cy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+            <element signature="e#2588#3935#0" />
+            <element signature="e#3941#3966#0" />
+            <element signature="e#4412#4430#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/elasticsearch_poem.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-448">
+          <caret line="148" lean-forward="true" selection-start-line="148" selection-end-line="148" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/remote_sources/396144521/1559706342/elasticsearch/connection/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="328" selection-start-line="328" selection-end-line="328" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/elasticsearch_ci.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="7" selection-start-line="7" selection-end-line="7" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/scp46061/data_local/TwoWaysToImproveCSC/BERT/sighan13_run_bert.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="21" column="72" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/merge_es_process_ci.log" />
+    <entry file="file://$PROJECT_DIR$/elasticsearch_ci.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="211" column="39" lean-forward="true" selection-start-line="206" selection-start-column="6" selection-end-line="211" selection-end-column="39" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/error.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/merge_es_process_cy_1.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-59564">
+          <caret line="15" column="12" selection-start-line="15" selection-end-line="15" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/merge_es_process.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3078">
+          <caret line="124" column="20" selection-end-line="613" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/merge_es_process.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1134">
+          <caret line="42" column="12" selection-start-line="42" selection-start-column="12" selection-end-line="42" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="231" column="8" lean-forward="true" selection-start-line="231" selection-start-column="8" selection-end-line="231" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_cut.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spacy_token_tmp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="864">
+          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spacy_token.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="32" column="5" lean-forward="true" selection-start-line="15" selection-start-column="4" selection-end-line="32" selection-end-column="5" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/slm_token.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="438">
+          <caret line="38" column="42" lean-forward="true" selection-start-line="38" selection-start-column="42" selection-end-line="38" selection-end-column="42" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

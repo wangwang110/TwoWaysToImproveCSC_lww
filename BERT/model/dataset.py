@@ -19,10 +19,15 @@ def construct(filename):
     f = open(filename, encoding='utf8')
     list = []
     for line in f:
-        line = line.replace("\n", "")
-        pairs = line.split(" ")
-        elem = {'input': pairs[0], 'output': pairs[1]}
-        list.append(elem)
+        try:
+            line = line.replace("\n", "")
+            pairs = line.split(" ")
+            # print(pairs)
+            elem = {'input': pairs[0], 'output': pairs[1]}
+            list.append(elem)
+        except Exception as e:
+            print(e)
+            continue
     return list
 
 
@@ -37,8 +42,12 @@ def construct_ner(filename):
         pairs = line.split(" ")
         ner_ids_str = ner_li[i]
         # print(ner_ids_str)
-        elem = {'input': pairs[0], 'output': pairs[1], 'output_ner': ner_ids_str}
-        list.append(elem)
+        try:
+            elem = {'input': pairs[0], 'output': pairs[1], 'output_ner': ner_ids_str}
+            list.append(elem)
+        except Exception as e:
+            print(e)
+            continue
         i += 1
     return list
 

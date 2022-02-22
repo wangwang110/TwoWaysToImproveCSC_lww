@@ -94,6 +94,7 @@ def string2List(ustring):
 
 
 if __name__ == "__main__":
+    print(is_chinese("我们"))
     print(is_alphabet("hellAword"))
     # test Q2B and B2Q
     # for i in range(0x0020, 0x007F):

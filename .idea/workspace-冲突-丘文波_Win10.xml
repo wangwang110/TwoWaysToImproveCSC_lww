@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3be6c5d1-09b5-4fde-ba6a-b936fa0f4f55" name="Default" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$match_value.coverage" NAME="match_value Coverage Results" MODIFIED="1643339099833" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/data_analysis" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$bft_train_semi.coverage" NAME="bft_train_semi Coverage Results" MODIFIED="1643281290911" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$test_load_bert.coverage" NAME="test_load_bert Coverage Results" MODIFIED="1642557405790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$compare_file.coverage" NAME="compare_file Coverage Results" MODIFIED="1643081082746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/data" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$generate_csc_data_bert.coverage" NAME="generate_csc_data_bert Coverage Results" MODIFIED="1642646774871" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$new_bft_train2_detect.coverage" NAME="new_bft_train2_detect Coverage Results" MODIFIED="1643098410025" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$get_char_pinyin.coverage" NAME="get_char_pinyin Coverage Results" MODIFIED="1643104016463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/large_data" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$bert_eval.coverage" NAME="bert_eval Coverage Results" MODIFIED="1642667671847" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$strTools.coverage" NAME="strTools Coverage Results" MODIFIED="1643179508541" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/large_data" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$get_vocab.coverage" NAME="get_vocab Coverage Results" MODIFIED="1642754631933" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/large_data" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$parser_mita_res_13.coverage" NAME="parser_mita_res_13 Coverage Results" MODIFIED="1642577166759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/cc_data" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$new_bft_train2_ner.coverage" NAME="new_bft_train2_ner Coverage Results" MODIFIED="1642558908165" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$get_confusion.coverage" NAME="get_confusion Coverage Results" MODIFIED="1643274002930" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/save" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$bft_train.coverage" NAME="bft_train Coverage Results" MODIFIED="1643274558755" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$utils.coverage" NAME="utils Coverage Results" MODIFIED="1643185411240" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$get_cc_tag.coverage" NAME="get_cc_tag Coverage Results" MODIFIED="1642815001496" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/data_analysis" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$parser_res.coverage" NAME="parser_res Coverage Results" MODIFIED="1643168783239" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/cc_data" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$generate_csc_data.coverage" NAME="generate_csc_data Coverage Results" MODIFIED="1643182178563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/large_data" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$avarage_load.coverage" NAME="avarage_load Coverage Results" MODIFIED="1642813843442" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$bft_eval.coverage" NAME="bft_eval Coverage Results" MODIFIED="1642992450865" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$AdGen.coverage" NAME="AdGen Coverage Results" MODIFIED="1643274383845" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/model" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$get_similarchar.coverage" NAME="get_similarchar Coverage Results" MODIFIED="1643103862571" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/large_data" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$sighan15_data_ner.coverage" NAME="sighan15_data_ner Coverage Results" MODIFIED="1642490919598" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/large_data" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$functional.coverage" NAME="functional Coverage Results" MODIFIED="1643093969290" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/.PyCharm2018.1/system/remote_sources/746897114/47249651/torch/nn" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$bft_train_loss_weight.coverage" NAME="bft_train_loss_weight Coverage Results" MODIFIED="1642579098952" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$new_bft_train2.coverage" NAME="new_bft_train2 Coverage Results" MODIFIED="1643097184114" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$process.coverage" NAME="process Coverage Results" MODIFIED="1643362253741" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/易混淆词" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$bft_train_focal.coverage" NAME="bft_train_focal Coverage Results" MODIFIED="1642498662346" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$change_punct.coverage" NAME="change_punct Coverage Results" MODIFIED="1643080762595" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/data" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$character2pic.coverage" NAME="character2pic Coverage Results" MODIFIED="1642757414698" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/large_data" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$csc_eval.coverage" NAME="csc_eval Coverage Results" MODIFIED="1643177271386" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$cc_data_fuzzy.coverage" NAME="cc_data_fuzzy Coverage Results" MODIFIED="1643193986082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/cc_data" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>paper_preTrain</find>
+      <find>test_preTrain</find>
+      <find>all_text_paper_model</find>
+      <find>name2</find>
+      <find>c_loss</find>
+      <find>test_wang2018_punct</find>
+      <find>string2List</find>
+      <find>self_wang2018_new</find>
+      <find>testSet</find>
+      <find>construct</find>
+      <find>cc_testconstruct</find>
+      <find>copy</find>
+      <find>caclulate fuzzy:</find>
+      <find>vob</find>
+      <find>caclulate fuzzy</find>
+      <find>train</find>
+      <find>在</find>
+      <find>在==</find>
+      <find>三</find>
+      <find>#</find>
+      <find>cal_fuzzy</find>
+      <find>break</find>
+      <find>normalize</find>
+      <find>施</find>
+      <find>cal_fuzzy_tensor</find>
+      <find>然与燃</find>
+      <find>out</find>
+      <find>s</find>
+      <find>\# coding\: utf\-8\n\nfrom __future__ import print_function\nfrom __future__ import division\nfrom __future__ import absolute_import\n\nfrom collections import defaultdict\nimport re\nfrom pypinyin import pinyin\, lazy_pinyin\, Style\n\nmap_dict \= defaultdict\(set\)\n\n\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\npath \= \&quot;\.\/1\.txt\&quot;\nwith open\(path\, \&quot;r\&quot;\, encoding\=\&quot;utf\-8\&quot;\) as f\:\n    for line in f\.readlines\(\)\:\n        if re\.match\(\&quot;\\d\+\\\.\&quot;\, line\) is not None\:\n            line \= re\.sub\(\&quot;\\d\+\\\.\&quot;\, \&quot;\&quot;\, line\.strip\(\)\)\n            item_li \= line\.strip\(\)\.split\(\&quot; \&quot;\)\n            num \= len\(item_li\)\n            for i in range\(num \- 1\)\:\n                for j in range\(i \+ 1\, num\)\:\n                    src \= item_li\[i\]\n                    trg \= item_li\[j\]\n                    for s\, t in zip\(list\(src\)\, list\(trg\)\)\:\n                        if s \!\= t\:\n                            map_dict\[s\]\.add\(t\)\n                            map_dict\[t\]\.add\(s\)\n\n\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\n\# 需要拼音和字形辅助\，字形还没做\npath \= \&quot;\.\/2\.txt\&quot;\nwith open\(path\, \&quot;r\&quot;\, encoding\=\&quot;utf\-8\&quot;\) as f\:\n    for line in f\.readlines\(\)\:\n        if re\.match\(\&quot;\\d\{3\}\．\&quot;\, line\) is not None\:\n            for text in line\.strip\(\)\.split\(\&quot; \&quot;\)\:\n                text \= re\.sub\(\&quot;\\d\{3\}\．\&quot;\, \&quot; \&quot;\, text\.strip\(\)\)\n                for item in text\.strip\(\)\.split\(\&quot; \&quot;\)\:\n                    words\, t \= re\.split\(\&quot;\\\(\|\（\&quot;\, item\)\n                    t \= t\.strip\(\&quot;\）\&quot;\)\.strip\(\&quot;\)\&quot;\)\n                    ch_pinyin_s \= lazy_pinyin\(words\)\n                    ch_pinyin_t \= lazy_pinyin\(t\)\n                    id \= 0\n                    tag \= 0\n                    for sitem in ch_pinyin_s\:\n                        if sitem in ch_pinyin_t\:\n                            tag \= 1\n                            map_dict\[t\]\.add\(words\[id\]\)\n                            map_dict\[words\[id\]\]\.add\(t\)\n                        id \+\= 1\n                    if tag \=\= 0\:\n                        print\(item\)\n\n\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\n\# path \= \&quot;\.\/3\.txt\&quot;\n\# with open\(path\, \&quot;r\&quot;\, encoding\=\&quot;utf\-8\&quot;\) as f\:\n\#     for line in f\.readlines\(\)\:\n\#         if \&quot;\—\—\&quot; in line\:\n\#             item_li \= list\(re\.sub\(\&quot;\—\—\&quot;\, \&quot;\&quot;\, line\.strip\(\)\)\)\n\#             num \= len\(item_li\)\n\#             for i in range\(0\, num\, 2\)\:\n\#                 map_dict\[item_li\[i\]\]\.add\(item_li\[i \+ 1\]\)\n\#                 map_dict\[item_li\[i \+ 1\]\]\.add\(item_li\[i\]\)\n\n\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\npath \= \&quot;\.\/4\.txt\&quot;\nwith open\(path\, \&quot;r\&quot;\, encoding\=\&quot;utf\-8\&quot;\) as f\:\n    lines \= \[\]\n    for line in f\.readlines\(\)\:\n        if line\.strip\(\) \=\= \&quot;\&quot; or \&quot;\、\&quot; in line\:\n            continue\n        lines\.append\(line\)\n    num \= len\(lines\)\n    for i in range\(0\, num\, 2\)\:\n        src \= re\.sub\(\&quot;\\\(\.\*\?\\\)\&quot;\, \&quot;\&quot;\, lines\[i\]\)\n        trg \= re\.sub\(\&quot;\\\(\.\*\?\\\)\&quot;\, \&quot;\&quot;\, lines\[i \+ 1\]\)\n        if len\(src\) \!\= len\(trg\)\:\n            continue\n        for s\, t in zip\(list\(src\)\, list\(trg\)\)\:\n            if s \!\= t\:\n                map_dict\[s\]\.add\(t\)\n                map_dict\[t\]\.add\(s\)\n\n\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\npath \= \&quot;\.\/5\.txt\&quot;\nwith open\(path\, \&quot;r\&quot;\, encoding\=\&quot;utf\-8\&quot;\) as f\:\n    lines \= \[\]\n    for line in f\.readlines\(\)\:\n        line \= line\.strip\(\)\.split\(\&quot;\：\“\&quot;\)\[0\]\n\n        try\:\n            src\, trg \= line\.split\(\&quot;\/\&quot;\)\n            for s\, t in zip\(list\(src\)\, list\(trg\)\)\:\n                if s \!\= t\:\n                    map_dict\[s\]\.add\(t\)\n                    map_dict\[t\]\.add\(s\)\n        except Exception as e\:\n            print\(line\)\n\n\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\npath \= \&quot;\.\/6\.txt\&quot;\nwith open\(path\, \&quot;r\&quot;\, encoding\=\&quot;utf\-8\&quot;\) as f\:\n    lines \= \[\]\n    for line in f\.readlines\(\)\:\n        line \= line\.strip\(\)\.split\(\&quot;\：\“\&quot;\)\[0\]\n        item_li \= re\.split\(\&quot;\\d\+\．\&quot;\, line\)\n        for item in item_li\:\n            if item \=\= \&quot;\&quot;\:\n                continue\n            item \= re\.sub\(\&quot;\\s\+\&quot;\, \&quot;\&quot;\, item\)\n            ss\, tt \= re\.split\(\&quot;\（\|\\\(\&quot;\, item\)\n            s \= ss\[\-1\]\n            t \= tt\[0\]\n            if s \!\= t\:\n                map_dict\[s\]\.add\(t\)\n                map_dict\[t\]\.add\(s\)\n\n\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\npath \= \&quot;\.\/7\.txt\&quot;\nwith open\(path\, \&quot;r\&quot;\, encoding\=\&quot;utf\-8\&quot;\) as f\:\n    lines \= \[\]\n    for line in f\.readlines\(\)\:\n        if line\.strip\(\) \=\= \&quot;\&quot;\:\n            continue\n        text \= re\.findall\(\&quot;\【\(\.\*\?\)\】\&quot;\, line\)\n        src\, trg \= text\[0\]\.split\(\&quot;与\&quot;\)\n        for s\, t in zip\(list\(src\)\, list\(trg\)\)\:\n            if s \!\= t\:\n                print\(s\, t\)\n                map_dict\[s\]\.add\(t\)\n                map_dict\[t\]\.add\(s\)\n\n\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\npath \= \&quot;\.\/8\.txt\&quot;\nwith open\(path\, \&quot;r\&quot;\, encoding\=\&quot;utf\-8\&quot;\) as f\:\n    lines \= \[\]\n    for line in f\.readlines\(\)\:\n        if line\.strip\(\) \=\= \&quot;\&quot;\:\n            continue\n        text \= re\.findall\(\&quot;\【\(\.\*\?\)\】\&quot;\, line\)\n        src\, trg \= text\[0\]\.split\(\&quot;与\&quot;\)\n        for s\, t in zip\(list\(src\)\, list\(trg\)\)\:\n            if s \!\= t\:\n                map_dict\[s\]\.add\(t\)\n                map_dict\[t\]\.add\(s\)\n\nimport pickle\npickle\.dump\(map_dict\,open\(\&quot;condusion_collect\.pkl\&quot;\,\&quot;wb\&quot;\)\,protocol\=0\)\nprint\(map_dict\)\n</find>
+      <find>print</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="23v7JIfi9zstMEReFf5WHRQs0E0" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../csc" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.customizations" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT" />
+      <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT" />
+      <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\large_data" />
+      <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT\data_analysis" />
+      <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT\cc_data" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT\model\BERT\baseline" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.kb_srab">
+    <configuration name="bft_train_semi" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="TwoWaysToImproveCSC_lww" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="CUDA_VISIBLE_DEVICES" value="0,1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BERT" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BERT/bft_train_semi.py" />
+      <option name="PARAMETERS" value="--task_name=sighan13 --gpu_num=2 --load_model=True --load_path=/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/initial/wang2018/model.pkl --do_train=True --train_data=./data/13train.txt --do_valid=True --valid_data=./data/13test.txt --domain_data=./cc_data/xiaoxue_sent_with_error.txt --epoch=10 --batch_size=20 --learning_rate=2e-5 --do_save=True --save_dir=/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/initial/semi_sighan13/ --seed=10" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="get_char_pinyin" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="TwoWaysToImproveCSC_lww" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/large_data" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/large_data/get_char_pinyin.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="kb_srab" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="TwoWaysToImproveCSC_lww" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/AppData/Local/Temp/scp43468/data_local/TwoWaysToImproveCSC/BERT" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/AppData/Local/Temp/scp43468/data_local/TwoWaysToImproveCSC/BERT/kb_srab.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="match_value" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="TwoWaysToImproveCSC_lww" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BERT/data_analysis" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BERT/data_analysis/match_value.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="process" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="TwoWaysToImproveCSC_lww" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BERT/易混淆词" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BERT/易混淆词/process.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.bft_train_semi" />
+      <item itemvalue="Python.match_value" />
+      <item itemvalue="Python.process" />
+      <item itemvalue="Python.get_char_pinyin" />
+      <item itemvalue="Python.kb_srab" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.kb_srab" />
+        <item itemvalue="Python.get_char_pinyin" />
+        <item itemvalue="Python.process" />
+        <item itemvalue="Python.match_value" />
+        <item itemvalue="Python.bft_train_semi" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3be6c5d1-09b5-4fde-ba6a-b936fa0f4f55" name="Default" comment="" />
+      <created>1642388723572</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1642388723572</updated>
+      <workItem from="1642602635812" duration="3771000" />
+      <workItem from="1642778098884" duration="132000" />
+      <workItem from="1642839100874" duration="687000" />
+      <workItem from="1644218146809" duration="9799000" />
+      <workItem from="1644592545093" duration="340000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="890" y="-835" key="#com.intellij.ide.ui.customization.CustomizableActionsPanel.FindAvailableActionsDialog" timestamp="1644219031709">
+      <screen x="126" y="-1080" width="1920" height="1040" />
+    </state>
+    <state x="764" y="245" key="#com.intellij.ide.ui.customization.CustomizableActionsPanel.FindAvailableActionsDialog/-126.1080.1440.933/0.0.1920.1040@0.0.1920.1040" timestamp="1642603594039" />
+    <state x="890" y="-835" key="#com.intellij.ide.ui.customization.CustomizableActionsPanel.FindAvailableActionsDialog/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644219031709" />
+    <state x="218" y="-988" width="1736" height="856" key="DiffContextDialog" timestamp="1644228924520">
+      <screen x="126" y="-1080" width="1920" height="1040" />
+    </state>
+    <state x="218" y="-988" width="1736" height="856" key="DiffContextDialog/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644228924520" />
+    <state x="1331" y="-919" width="540" height="504" key="FileChooserDialogImpl" timestamp="1644228932345">
+      <screen x="126" y="-1080" width="1920" height="1040" />
+    </state>
+    <state x="679" y="277" key="FileChooserDialogImpl/-126.1080.1440.933/0.0.1920.1040@0.0.1920.1040" timestamp="1642606067958" />
+    <state x="1331" y="-919" width="540" height="504" key="FileChooserDialogImpl/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644228932345" />
+    <state width="1867" height="124" key="GridCell.Tab.0.bottom" timestamp="1644245110415">
+      <screen x="126" y="-1080" width="1920" height="1040" />
+    </state>
+    <state width="1867" height="184" key="GridCell.Tab.0.bottom/-126.1080.1440.933/0.0.1920.1040@0.0.1920.1040" timestamp="1642638189832" />
+    <state width="1867" height="124" key="GridCell.Tab.0.bottom/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644245110415" />
+    <state width="1387" height="235" key="GridCell.Tab.0.bottom/0.0.1440.920@0.0.1440.920" timestamp="1642839795538" />
+    <state width="1867" height="124" key="GridCell.Tab.0.center" timestamp="1644245110415">
+      <screen x="126" y="-1080" width="1920" height="1040" />
+    </state>
+    <state width="1867" height="184" key="GridCell.Tab.0.center/-126.1080.1440.933/0.0.1920.1040@0.0.1920.1040" timestamp="1642638189832" />
+    <state width="1867" height="124" key="GridCell.Tab.0.center/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644245110415" />
+    <state width="1387" height="235" key="GridCell.Tab.0.center/0.0.1440.920@0.0.1440.920" timestamp="1642839795538" />
+    <state width="1867" height="124" key="GridCell.Tab.0.left" timestamp="1644245110415">
+      <screen x="126" y="-1080" width="1920" height="1040" />
+    </state>
+    <state width="1867" height="184" key="GridCell.Tab.0.left/-126.1080.1440.933/0.0.1920.1040@0.0.1920.1040" timestamp="1642638189832" />
+    <state width="1867" height="124" key="GridCell.Tab.0.left/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644245110415" />
+    <state width="1387" height="235" key="GridCell.Tab.0.left/0.0.1440.920@0.0.1440.920" timestamp="1642839795538" />
+    <state width="1867" height="124" key="GridCell.Tab.0.right" timestamp="1644245110415">
+      <screen x="126" y="-1080" width="1920" height="1040" />
+    </state>
+    <state width="1867" height="184" key="GridCell.Tab.0.right/-126.1080.1440.933/0.0.1920.1040@0.0.1920.1040" timestamp="1642638189832" />
+    <state width="1867" height="124" key="GridCell.Tab.0.right/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644245110415" />
+    <state width="1387" height="235" key="GridCell.Tab.0.right/0.0.1440.920@0.0.1440.920" timestamp="1642839795538" />
+    <state width="1387" height="235" key="GridCell.Tab.1.bottom" timestamp="1642839795539">
+      <screen x="0" y="0" width="1440" height="920" />
+    </state>
+    <state width="1387" height="235" key="GridCell.Tab.1.bottom/0.0.1440.920@0.0.1440.920" timestamp="1642839795539" />
+    <state width="1387" height="235" key="GridCell.Tab.1.center" timestamp="1642839795538">
+      <screen x="0" y="0" width="1440" height="920" />
+    </state>
+    <state width="1387" height="235" key="GridCell.Tab.1.center/0.0.1440.920@0.0.1440.920" timestamp="1642839795538" />
+    <state width="1387" height="235" key="GridCell.Tab.1.left" timestamp="1642839795538">
+      <screen x="0" y="0" width="1440" height="920" />
+    </state>
+    <state width="1387" height="235" key="GridCell.Tab.1.left/0.0.1440.920@0.0.1440.920" timestamp="1642839795538" />
+    <state width="1387" height="235" key="GridCell.Tab.1.right" timestamp="1642839795539">
+      <screen x="0" y="0" width="1440" height="920" />
+    </state>
+    <state width="1387" height="235" key="GridCell.Tab.1.right/0.0.1440.920@0.0.1440.920" timestamp="1642839795539" />
+    <state x="460" y="-926" key="SettingsEditor" timestamp="1644219124013">
+      <screen x="126" y="-1080" width="1920" height="1040" />
+    </state>
+    <state x="334" y="154" key="SettingsEditor/-126.1080.1440.933/0.0.1920.1040@0.0.1920.1040" timestamp="1642603597917" />
+    <state x="460" y="-926" key="SettingsEditor/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644219124013" />
+    <state x="953" y="-555" key="com.intellij.ide.ui.customization.CustomizableActionsPanel$EditIconDialog" timestamp="1644219122044">
+      <screen x="126" y="-1080" width="1920" height="1040" />
+    </state>
+    <state x="953" y="-555" key="com.intellij.ide.ui.customization.CustomizableActionsPanel$EditIconDialog/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644219122044" />
+    <state x="703" y="-777" key="com.intellij.ide.util.TipDialog" timestamp="1644592548240">
+      <screen x="126" y="-1080" width="1920" height="1040" />
+    </state>
+    <state x="703" y="-777" key="com.intellij.ide.util.TipDialog/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644592548240" />
+    <state x="719" y="418" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1642603530319">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="719" y="418" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-126.1080.1440.933/0.0.1920.1040@0.0.1920.1040" timestamp="1642603530319" />
+    <state x="826" y="188" width="623" height="662" key="ftp.server.browser" timestamp="1642603030451">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="826" y="188" width="623" height="662" key="ftp.server.browser/-126.1080.1440.933/0.0.1920.1040@0.0.1920.1040" timestamp="1642603030451" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/test_load_bert.py</url>
+          <line>14</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/bft_train_focal.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/bft_train_focal.py</url>
+          <line>18</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/bft_train_focal.py</url>
+          <line>251</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/new_bft_train2_detect.py</url>
+          <line>308</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/new_bft_train2_detect.py</url>
+          <line>48</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/new_bft_train2_detect.py</url>
+          <line>66</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/new_bft_train2_detect.py</url>
+          <line>69</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/new_bft_train2_detect.py</url>
+          <line>75</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/new_bft_train2_detect.py</url>
+          <line>60</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/new_bft_train2_detect.py</url>
+          <line>273</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/new_bft_train2_detect.py</url>
+          <line>338</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/bft_train_cl.py</url>
+          <line>49</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/bft_train_cl.py</url>
+          <line>57</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/bft_train_cl.py</url>
+          <line>62</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/bft_train_cl.py</url>
+          <line>68</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/csc_eval.py</url>
+          <line>139</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/generate_csc_data_bert.py</url>
+          <line>2</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/generate_csc_data_bert.py</url>
+          <line>113</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/generate_csc_data_bert.py</url>
+          <line>42</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/generate_csc_data_bert.py</url>
+          <line>77</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/bert_eval.py</url>
+          <line>107</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/bert_eval.py</url>
+          <line>75</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/bert_eval.py</url>
+          <line>88</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/large_data/get_vocab.py</url>
+          <line>26</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/large_data/get_similarchar.py</url>
+          <line>48</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/large_data/get_similarchar.py</url>
+          <line>20</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/large_data/get_similarchar.py</url>
+          <line>29</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/large_data/get_similarchar.py</url>
+          <line>62</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/avarage_load.py</url>
+          <line>8</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$USER_HOME$/AppData/Local/Temp/scp30290/data_local/see/transformers/models/bert/modeling_bert.py</url>
+          <line>88</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/new_bft_train2.py</url>
+          <line>212</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/new_bft_train2.py</url>
+          <line>219</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/large_data/strTools.py</url>
+          <line>102</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/cc_data/cc_data_fuzzy.py</url>
+          <line>25</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/cc_data/cc_data_fuzzy.py</url>
+          <line>24</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/cc_data/cc_data_fuzzy.py</url>
+          <line>20</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/model/AdGen.py</url>
+          <line>311</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/data_analysis/match_value.py</url>
+          <line>45</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/data_analysis/match_value.py</url>
+          <line>28</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$USER_HOME$/AppData/Local/Temp/scp43468/data_local/TwoWaysToImproveCSC/BERT/kb_srab.py</url>
+          <line>18</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$get_char_pinyin.coverage" NAME="get_char_pinyin Coverage Results" MODIFIED="1644225603304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/large_data" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$new_bft_train2_ner.coverage" NAME="new_bft_train2_ner Coverage Results" MODIFIED="1642603076863" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$test_api.coverage" NAME="test_api Coverage Results" MODIFIED="1642839524204" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$kb_srab.coverage" NAME="kb_srab Coverage Results" MODIFIED="1644243893904" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/AppData/Local/Temp/scp43468/data_local/TwoWaysToImproveCSC/BERT" />
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateCodeFragment">
+      <expression>
+        <expression-string># Copyright 2018 CVTE . All Rights Reserved.
+# coding: utf-8
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from collections import defaultdict
+import re
+map_dict = defaultdict(set)
+path = &quot;./1.txt&quot;
+with open(path, &quot;r&quot;, encoding=&quot;utf-8&quot;) as f:
+    for line in f.readlines():
+        if re.match(&quot;\d+\.&quot;, line) is not None:
+            line = re.sub(&quot;\d+\.&quot;, &quot;&quot;, line.strip())
+            src, trg = line.strip().split(&quot; &quot;)
+            for s, t in zip(list(src), list(trg)):
+                if s == t:
+                    continue
+                else:
+                    map_dict[s].add(t)
+print(map_dict)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+    </expressions>
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>line</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>re.findall(&quot;【.*?】&quot;, line)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>re.findall(&quot;【\.*?】&quot;, line)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>item_li</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>item</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>map_dict</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>t</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>s</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>ine.strip().split(&quot; &quot;)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

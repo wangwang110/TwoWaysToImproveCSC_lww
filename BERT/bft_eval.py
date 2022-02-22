@@ -110,7 +110,8 @@ class Trainer:
         d_sen_mod_acc = 0
         d_sen_tar_mod = 0
 
-        test_name = re.search("[0-9]+", args.test_data).group()
+        test_name = os.path.basename(args.test_data)
+        # re.search("[0-9]+", args.test_data).group()
         model_name = args.load_path.split("/")[-3]
         path = "./data_analysis/" + args.task_name + "_" + model_name + "_" + test_name + "_ori.txt"
         path_cor = "./data_analysis/" + args.task_name + "_" + model_name + "_" + test_name + "_cor.txt"

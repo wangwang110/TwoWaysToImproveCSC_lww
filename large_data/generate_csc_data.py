@@ -12,22 +12,22 @@ from strTools import stringQ2B
 import pickle
 
 
-def normalize(text):
-    """
-    # 非汉字全部半角化？
-    # 统一起来会比较好
-    :param text:
-    :return:
-    """
-    text = stringQ2B(text).lower()
-    text = re.sub("\s+", "", text)
-
-    table = {ord(f): ord(t) for f, t in zip(
-        u'“”‘’—', u'\"\"\'\'-')}
-    text = text.translate(table)
-    text = text.replace("…", "=")
-
-    return text
+# def normalize(text):
+#     """
+#     # 非汉字全部半角化？
+#     # 统一起来会比较好
+#     :param text:
+#     :return:
+#     """
+#     text = stringQ2B(text).lower()
+#     text = re.sub("\s+", "", text)
+#
+#     table = {ord(f): ord(t) for f, t in zip(
+#         u'“”‘’—', u'\"\"\'\'-')}
+#     text = text.translate(table)
+#     text = text.replace("…", "=")
+#
+#     return text
 
 
 def readAllConfusionSet(filepath):

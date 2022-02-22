@@ -18,10 +18,14 @@ with open("condusion_collect.txt", "r", encoding='utf-8') as f:
             if len(set(sitem_li[0]) & set(string.digits)) != 0:
                 print(sitem_li[0])
                 continue
+            if '“' in sitem_li[0] or '“' in sitem_li[0]:
+                print(sitem_li[0])
+            if len(set(sitem_li[0]) & set(string.punctuation)) != 0:
+                print(sitem_li[0])
+                continue
             map_dict[sitem_li[0]] = map_dict[sitem_li[0]] | set(sitem_li[1].strip().split(" "))
 
 import pickle
-
 pickle.dump(map_dict, open("condusion_collect_new.pkl", "wb"), protocol=0)
 print(len(map_dict))
 print(map_dict)

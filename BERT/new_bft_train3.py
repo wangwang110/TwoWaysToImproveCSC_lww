@@ -67,28 +67,22 @@ class Trainer:
 
             ori_c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
             ori_c_loss = ori_c_loss.view(input_ids.size()[0], input_ids.size()[1])
-            # ori_c_loss_stop = ori_c_loss.detach()
-            ori_c_loss = torch.log(ori_c_loss) * input_attn_mask
+            # B*S
+            with torch.no_grad():
+                a = ori_c_loss.detch() + 1e-4
+            ori_c_loss = (ori_c_loss / a) * input_attn_mask
             ori_c_loss = torch.sum(ori_c_loss) / torch.sum(input_attn_mask)
-
-            # sent_loss = self.criterion_cls(sent_prob, outputs["labels"])
 
             seq_loss = self.criterion_token_cls(torken_prob.reshape(batch * seq_len, 1),
                                                 output_token_label.reshape(batch * seq_len, 1))
-
-            # seq_loss = self.criterion_token_cls(torken_prob.view(-1, 1),
-            #                                     output_token_label.view(-1, 1))
-
             seq_loss = seq_loss.view(input_ids.size()[0], input_ids.size()[1])
-            # seq_loss_stop = seq_loss.detach()
-            seq_loss = torch.log(seq_loss) * input_attn_mask
+            # B*S
+            with torch.no_grad():
+                b = seq_loss.detch()
+            seq_loss = (seq_loss / b) * input_attn_mask
             seq_loss = torch.sum(seq_loss) / torch.sum(input_attn_mask)
 
-            # c_loss = ori_c_loss
             c_loss = ori_c_loss + seq_loss
-            # c_loss = torch.log(ori_c_loss) + torch.log(seq_loss)
-
-            # c_loss = 0.5*ori_c_loss + 0.5*seq_loss
 
             total_loss += c_loss.item()
             # total_loss += sent_loss.item()
@@ -125,30 +119,22 @@ class Trainer:
 
             ori_c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
             ori_c_loss = ori_c_loss.view(input_ids.size()[0], input_ids.size()[1])
+            # B*S
             with torch.no_grad():
                 a = ori_c_loss
             ori_c_loss = (ori_c_loss / a) * input_attn_mask
             ori_c_loss = torch.sum(ori_c_loss) / torch.sum(input_attn_mask)
 
-            # sent_loss = self.criterion_cls(sent_prob, outputs["labels"])
-
             seq_loss = self.criterion_token_cls(torken_prob.reshape(batch * seq_len, 1),
                                                 output_token_label.reshape(batch * seq_len, 1))
-
-            # seq_loss = self.criterion_token_cls(torken_prob.view(-1, 1),
-            #                                     output_token_label.view(-1, 1))
-
             seq_loss = seq_loss.view(input_ids.size()[0], input_ids.size()[1])
+            # B*S
             with torch.no_grad():
                 b = seq_loss
             seq_loss = (seq_loss / b) * input_attn_mask
             seq_loss = torch.sum(seq_loss) / torch.sum(input_attn_mask)
 
-            # c_loss = ori_c_loss
             c_loss = ori_c_loss + seq_loss
-            # c_loss = torch.log(ori_c_loss) + torch.log(seq_loss)
-
-            # c_loss = 0.5*ori_c_loss + 0.5*seq_loss
 
             total_loss += c_loss.item()
         return total_loss

@@ -52,7 +52,7 @@ if __name__ == '__main__':
     similarity_dict = {}
     # while True:
     # match_char = input("输入汉字: ")
-    match_char = "在"
+    match_char = "子"
     if match_char in img_vector_dict:
         match_vector = img_vector_dict[match_char]
         for char, vector in img_vector_dict.items():

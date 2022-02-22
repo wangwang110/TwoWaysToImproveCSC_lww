@@ -3,17 +3,11 @@
 import sys
 
 sys.path.append("..")
-import torch.nn as nn
 import torch
-import re
-import numpy as np
 import argparse
 from transformers import BertModel, BertConfig, BertTokenizer
-from torch.utils.data import DataLoader, Dataset
-from torch.optim import Adam
-import operator
+from torch.utils.data import DataLoader
 from model import BertCSC, li_testconstruct, BertDataset, BFTLogitGen, readAllConfusionSet, cc_testconstruct, construct
-import os
 
 vob = {}
 with open("/data_local/plm_models/chinese_L-12_H-768_A-12/vocab.txt", "r", encoding="utf-8") as f:
@@ -89,14 +83,67 @@ class CSCmodel:
 
         return srcs, res
 
+    def test(self, data):
+        sent = data["input"]
+        self.model.eval()
+        test = li_testconstruct([sent])
+        test = BertDataset(self.tokenizer, test)
+        test = DataLoader(test, batch_size=int(self.batch_size), shuffle=False)
+        res = []
+        srcs = []
+        for batch in test:
+            inputs = self.tokenizer(batch['input'], padding=True, truncation=True, return_tensors="pt").to(self.device)
+            max_len = 180
+            input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
+                                                    inputs['token_type_ids'][:, :max_len], \
+                                                    inputs['attention_mask'][:, :max_len]
+
+            input_lens = torch.sum(input_attn_mask, 1)
+            out = self.model(input_ids, input_tyi, input_attn_mask)
+            # 分析预测的前n个
+            # out_id_sort = [p for p in torch.argsort(out, dim=2, descending=True)[:, :, :10]]
+            #
+            # res_analysis = []
+            # sent_li = []
+            # for t in range(1, input_lens[0] - 1):
+            #     tmp_li = []
+            #     for s in range(10):
+            #         tmp_li.append(vob[out_id_sort[0][t][s].item()])
+            #     res_analysis.append(tmp_li)
+            # print(res_analysis)
+
+            # 返回修改后的句子
+            out = out.argmax(dim=-1)
+            # 修改过的句子
+
+            num_sample, _ = input_ids.size()
+            for idx in range(num_sample):
+                sent_li = []
+                src_sent_li = []
+                for t in range(1, input_lens[idx] - 1):
+                    src_sent_li.append(vob[input_ids[idx][t].item()])
+                    if vob[out[idx][t].item()] == "[UNK]":
+                        sent_li.append(vob[input_ids[idx][t].item()])
+                    else:
+                        sent_li.append(vob[out[idx][t].item()])
+                res.append("".join(sent_li))
+                srcs.append("".join(src_sent_li))
+
+        return srcs, res
+
 
 def correct_file(path, path_out):
     with open(path, "r", encoding="utf-8") as f, open(path_out, "w", encoding="utf-8") as fw:
         all_texts = []
         try:
             for line in f.readlines():
-                key, src = line.strip().split(" ")
-                all_texts.append(src)
+                item = line.strip().split(" ")
+                if len(item) == 2:
+                    key, src = item
+                    all_texts.append(src)
+                elif len(item) == 1:
+                    src = item[0]
+                    all_texts.append(src)
         except Exception as e:
             print(e)
 
@@ -111,7 +158,11 @@ if __name__ == "__main__":
     # add arguments
     parser = argparse.ArgumentParser(description="choose which model")
     parser.add_argument('--task_name', type=str, default='bert_pretrain')
-    parser.add_argument('--load_path', type=str, default='./save/13_train_seed0_1.pkl')
+    # parser.add_argument('--load_path', type=str, default='./save/13_train_seed0_1.pkl')
+
+    # 处理预训练数据
+    parser.add_argument('--input', type=str, default="./cc_data/xiaoxue_sent_all.txt")
+    parser.add_argument('--output', type=str, default="./cc_data/xiaoxue_sent_all_tmp.txt")
 
     # parser.add_argument('--batch_size', type=int, default=20)
     # parser.add_argument('--epoch', type=int, default=1)
@@ -126,14 +177,20 @@ if __name__ == "__main__":
 
     # 初始化模型
     bert_path = "/data_local/plm_models/chinese_L-12_H-768_A-12/"
-    args.load_path = "/data_local/TwoWaysToImproveCSC/BERT/save/bert_paper_model/preTrain/sighan13/model.pkl"
+    load_path = "/data_local/TwoWaysToImproveCSC/BERT/save/bert_paper_model/preTrain/sighan13/model.pkl"
     # args.load_path = "/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/sighan13/model.pkl"
     # /data_local/TwoWaysToImproveCSC/BERT/save/bert_paper_model/preTrain/sighan13
     #  "/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/sighan13/epoch10.pkl"
-    obj = CSCmodel(bert_path, args.load_path)
+    obj = CSCmodel(bert_path, load_path)
     input_text, model_ouput = obj.test_without_trg([
+        "这时，妈妈被我吵醒了，她问：“大半夜的，吵什么吵?”我说明了原因后，妈妈拿起电蚊拍，走到蚊子前，两下三下就消灭了蚊子，蚊子终子“命归西天”了。"
+        "没过几分钟，救护车来了，发出响亮而清翠的声音",
+        "没过几分钟，救护车来了，发出响亮而青翠的声音",
         "在我的印象中，哑巴是不同于正常人的，他说话总是叽里呱啦的，让人难解；我也常听别人说，哑巴非常“狠”，常打或者吓唬小孩，因此我从记事起就对哑巴产生了一种恐惧感，总怕突然被哑巴抓住暴打一顿，所以，每次上学经过哑巴叔叔门口时，总是跺的远远的。 "])
-    print(input_text[0])
-    print(model_ouput[0])
+    print(input_text)
+    print(model_ouput)
 
-    correct_file("./cc_data/xiaoxue_sent_all.txt", "./cc_data/xiaoxue_sent_all_cor.txt")
+    correct_file(args.input, args.output)
+
+    # correct_file("./cc_data/xiaoxue_sent_all.txt", "./cc_data/xiaoxue_sent_all_cor.txt")
+    # 微博预训练的语料，要先过一遍纠错模型（可能存在很多错误）

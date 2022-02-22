@@ -32,9 +32,12 @@ def count(trains):
 def calc_val(train, test):
     train_set = count(train)
     test_set = count(test)
+    print(test_set - train_set)
 
     return len(train_set & test_set) / len(test_set)
 
+
+"""
 
 #
 train = [
@@ -46,6 +49,7 @@ test = ["/data_local/TwoWaysToImproveCSC/BERT/data/13test.txt"]
 print(calc_val(train, test))
 # 0.969(0.968,0.14)
 # 加上预训练的数据
+#
 # 0.977
 
 # train = [
@@ -64,13 +68,15 @@ print(calc_val(train, test))
 # print(calc_val(train, test))
 # # 0.974
 
+"""
 
 # 作文测试集
 train = [
-    "/data_local/TwoWaysToImproveCSC/BERT/data/pretrain_auto.train",
+    "/data_local/TwoWaysToImproveCSC/BERT/data/wiki_00_lower.train",
     "/data_local/TwoWaysToImproveCSC/BERT/data/rep_autog_wang_train.txt",
     "/data_local/TwoWaysToImproveCSC/BERT/data/13train.txt"
 ]
+# wiki_00_lower_confuse.train
 # 0.619 (0.066 + 0.619) 13
 # 0.634 14
 # 0.628 15
