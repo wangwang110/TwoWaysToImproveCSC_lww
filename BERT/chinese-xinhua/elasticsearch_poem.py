@@ -27,6 +27,7 @@ class ElasticSearch:
         data.columns = ['title', 'author', 'dynasty', 'content_seg', 'sgl_cont']
         data = data.drop_duplicates(subset=['sgl_cont', 'title'], keep='first', inplace=False)
         data.index = range(len(data))
+        filter_set = ("猴王出世", "范进中举")
 
         action = ({
             "_index": "poem_v1",
@@ -40,7 +41,7 @@ class ElasticSearch:
                 'content_seg': data['content_seg'][i],  # 诗的整体内容
 
             }
-        } for i in range(len(data)))
+        } for i in range(len(data)) if data['title'][i] not in filter_set)
 
         helpers.bulk(self.es, action)
         print('批量导入索引 共耗时约 {:.2f} 秒'.format(time.time() - start))
@@ -86,8 +87,8 @@ class ElasticSearch:
 
     def delete_all(self, ):
         start = time.time()
-        # delete_by_all = {"query": {"match_all": {}}}
-        # self.es.delete_by_query(index="poem", body=delete_by_all)
+        delete_by_all = {"query": {"match_all": {}}}
+        self.es.delete_by_query(index="poem_v1", body=delete_by_all)
         # self.es.delete_by_query(index="test", body=delete_by_all)
         # self.es.delete_by_query(index="poem_test", body=delete_by_all)
         # self.es.delete_by_query(index="poem_v4", body=delete_by_all)
@@ -144,8 +145,9 @@ def correct_sent(text):
 
 if __name__ == '__main__':
     elastic_search = ElasticSearch()
-    # elastic_search.batch_data()
-    # elastic_search.delete_all()
+    elastic_search.delete_all()
+    elastic_search.batch_data()
+
 
     # 测试成语纠错
     # text = "古人曾说：「好鸟枝头奕朋友，落花水面皆文章。」、「万物静观皆自得。」在繁忙的生活中，不妨放慢脚步，好好「静观」万物，享受快乐吧！"

@@ -222,105 +222,41 @@ def get_model_output(model_out_path, all_text_ori):
 # # 原始数据
 print("===========sighan13 testing====================：")
 data = 13
-path_13 = "/data_local/TwoWaysToImproveCSC/BERT/data/13test.txt"
+path_13 = "/data_local/TwoWaysToImproveCSC/BERT/data/13test_lower.txt"
 all_srcs, all_trgs = find_ori_data(path_13)
 
-# model_out_path = "/data_local/TwoWaysToImproveCSC/BERT/data_analysis/paper_preTrain_13test.txt_cor.txt"
-# all_pres = get_model_output(model_out_path, all_srcs)
+model_out_path = "/data_local/TwoWaysToImproveCSC/BERT/data_analysis/self_base_998_13test_lower.txt_cor.txt"
+all_pres = get_model_output(model_out_path, all_srcs)
 
-# model_out_path_1 = "/data_local/TwoWaysToImproveCSC/BERT/data_analysis/paper_preTrain_13test_cy.txt_cor.txt"
-# all_pres_1 = get_model_output(model_out_path_1, all_srcs)
-#
-# model_out_path_2 = "/data_local/TwoWaysToImproveCSC/BERT/data_analysis/paper_preTrain_13test_cy_new.txt_cor.txt"
-# all_pres_2 = get_model_output(model_out_path_2, all_srcs)
-#
-# model_out_path_3 = "/data_local/TwoWaysToImproveCSC/BERT/data_analysis/paper_preTrain_13test_ci.txt_cor.txt"
-# all_pres_3 = get_model_output(model_out_path_3, all_srcs)
+print("句子级别：不做预处理")
+sent_mertic(all_srcs, all_pres, all_trgs)
 
-model_out_path_4 = "/data_local/TwoWaysToImproveCSC/BERT/data/13test.pre"
-all_pres_4 = [line.strip().split()[1] for line in open(model_out_path_4, encoding="utf-8").readlines()]
-
-print(len(all_srcs))
-print(len(all_pres_4))
-# print("句子级别：不做预处理")
-# sent_mertic(all_srcs, all_pres, all_trgs)
-
-# print("句子级别：做预处理")
-# sent_mertic(all_srcs, all_pres_1, all_trgs)
-#
-# print("句子级别：做预处理,无相邻词性相同")
-# sent_mertic(all_srcs, all_pres_2, all_trgs)
-#
-# print("句子级别：做预处理,无相邻词性相同")
-# sent_mertic(all_srcs, all_pres_3, all_trgs)
-
-print("句子级别：做预处理,无相邻词性相同")
-sent_mertic(all_srcs, all_pres_4, all_trgs)
-
-# print("token级别：不做预处理")
-# token_mertic(all_srcs, all_pres, all_trgs)
-
-# print("token级别：做预处理")
-# token_mertic(all_srcs, all_pres_1, all_trgs)
-#
-# print("token级别：做预处理,无相邻词性相同")
-# token_mertic(all_srcs, all_pres_2, all_trgs)
-#
-# print("token级别：做预处理,无相邻词性相同")
-# token_mertic(all_srcs, all_pres_3, all_trgs)
-
-print("token级别：做预处理,无相邻词性相同")
-token_mertic(all_srcs, all_pres_4, all_trgs)
+print("token级别：不做预处理")
+token_mertic(all_srcs, all_pres, all_trgs)
 
 print("===========cc testing====================：")
 
 path_4 = "/data_local/TwoWaysToImproveCSC/BERT/cc_data/chinese_spell_cy_4.txt"
 all_srcs, all_trgs = find_ori_data(path_4)
 
-# model_out_path = "/data_local/TwoWaysToImproveCSC/BERT/data_analysis/paper_preTrain_chinese_spell_4.txt_cor.txt"
-# all_pres = get_model_output(model_out_path, all_srcs)
+model_out_path = "/data_local/TwoWaysToImproveCSC/BERT/data_analysis/self_base_998_chinese_spell_lower_4.txt_cor.txt"
+all_pres = get_model_output(model_out_path, all_srcs)
 
-# model_out_path_1 = "/data_local/TwoWaysToImproveCSC/BERT/data_analysis/paper_preTrain_chinese_spell_cy_4.txt_cor.txt"
-# all_pres_1 = get_model_output(model_out_path_1, all_srcs)
-#
-# model_out_path_2 = "/data_local/TwoWaysToImproveCSC/BERT/data_analysis/paper_preTrain_chinese_spell_cy_new_4.txt_cor.txt"
-# all_pres_2 = get_model_output(model_out_path_2, all_srcs)
-#
-# model_out_path_3 = "/data_local/TwoWaysToImproveCSC/BERT/data_analysis/paper_preTrain_chinese_spell_ci_4.txt_cor.txt"
-# all_pres_3 = get_model_output(model_out_path_3, all_srcs)
+print("句子级别：不做预处理")
+sent_mertic(all_srcs, all_pres, all_trgs)
 
-model_out_path_4 = "/data_local/TwoWaysToImproveCSC/BERT/cc_data/chinese_spell_4.pre"
-all_pres_4 = [line.strip().split()[1] for line in open(model_out_path_4, encoding="utf-8").readlines()]
+print("token级别：不做预处理")
+token_mertic(all_srcs, all_pres, all_trgs)
 
-print(len(all_srcs))
-print(len(all_pres_4))
+print("=后处理=")
 
-# print("句子级别：不做预处理")
-# sent_mertic(all_srcs, all_pres, all_trgs)
+all_pres_1 = []
+with open("/data_local/TwoWaysToImproveCSC/BERT/chinese-xinhua/bert_out_cc.pre", "r", encoding="utf-8") as f:
+    for line in f.readlines():
+        src, trg = line.strip().split(" ")
+        all_pres_1.append(trg)
+print("句子级别：不做预处理")
+sent_mertic(all_srcs, all_pres_1, all_trgs)
 
-# print("句子级别：做预处理")
-# sent_mertic(all_srcs, all_pres_1, all_trgs)
-#
-# print("句子级别：做预处理,无相邻词性相同")
-# sent_mertic(all_srcs, all_pres_2, all_trgs)
-#
-# print("句子级别：做预处理,无相邻词性相同")
-# sent_mertic(all_srcs, all_pres_3, all_trgs)
-
-print("句子级别：做预处理,无相邻词性相同")
-sent_mertic(all_srcs, all_pres_4, all_trgs)
-
-# print("token级别：不做预处理")
-# token_mertic(all_srcs, all_pres, all_trgs)
-
-# print("token级别：做预处理")
-# token_mertic(all_srcs, all_pres_1, all_trgs)
-#
-# print("token级别：做预处理,无相邻词性相同")
-# token_mertic(all_srcs, all_pres_2, all_trgs)
-#
-# print("token级别：做预处理,无相邻词性相同")
-# token_mertic(all_srcs, all_pres_3, all_trgs)
-
-print("token级别：做预处理,无相邻词性相同")
-token_mertic(all_srcs, all_pres_4, all_trgs)
+print("token级别：不做预处理")
+token_mertic(all_srcs, all_pres_1, all_trgs)

@@ -62,13 +62,17 @@ data = os.path.basename(path)
 all_text_ori, all_text_trg = find_ori_data(path)
 
 task1 = "self"
-name1 = "wiki_00_base"
+name1 = "base_998"
 
 task2 = "self"
-name2 = "wiki_00_base_confuse"
+name2 = "base"
 
 model_out_path = "../data_analysis/" + task1 + "_" + str(name1) + "_" + str(data) + "_cor.txt"
 all_text_model = get_model_output(model_out_path, all_text_ori)
+###
+with open("/data_local/TwoWaysToImproveCSC/BERT/chinese-xinhua/bert_out_cc.txt", "w", encoding="utf-8") as ff:
+    for src, trg in zip(all_text_model, all_text_trg):
+        ff.write(src + " " + trg + "\n")
 
 model_out_path_new = "../data_analysis/" + task2 + "_" + str(name2) + "_" + str(data) + "_cor.txt"
 all_text_model_new = get_model_output(model_out_path_new, all_text_ori)
@@ -82,7 +86,7 @@ with open(path_out, "w", encoding="utf-8") as fw3:
         pre = remove_space(pre)
         pre1 = remove_space(pre1)
 
-        if pre == pre1:
+        if pre == trg or pre1 == trg:
             continue
 
         fw3.write(src + "\n")

@@ -1,17 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import time
-from elasticsearch import Elasticsearch
-from elasticsearch import helpers
-import json
-import re
-import spacy
-import os
-import pickle
-from tqdm import tqdm
-import sys
-from pypinyin import pinyin, lazy_pinyin, Style
-
 if __name__ == '__main__':
     paths = [
         # "/data_local/TwoWaysToImproveCSC/large_data/tmp.txt"

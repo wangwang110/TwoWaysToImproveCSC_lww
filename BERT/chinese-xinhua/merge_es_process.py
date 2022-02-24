@@ -9,6 +9,7 @@ import kenlm
 import spacy
 import re
 import os
+import jieba
 import pickle
 from pypinyin import pinyin, lazy_pinyin, Style
 
@@ -20,19 +21,19 @@ from pypinyin import pinyin, lazy_pinyin, Style
 """
 
 
-# 计算两个向量之间的余弦相似度
-def cosine_similarity(vector1, vector2):
-    dot_product = 0.0
-    normA = 0.0
-    normB = 0.0
-    for a, b in zip(vector1, vector2):
-        dot_product += a * b
-        normA += a ** 2
-        normB += b ** 2
-    if normA == 0.0 or normB == 0.0:
-        return 0
-    else:
-        return dot_product / ((normA ** 0.5) * (normB ** 0.5))
+# # 计算两个向量之间的余弦相似度
+# def cosine_similarity(vector1, vector2):
+#     dot_product = 0.0
+#     normA = 0.0
+#     normB = 0.0
+#     for a, b in zip(vector1, vector2):
+#         dot_product += a * b
+#         normA += a ** 2
+#         normB += b ** 2
+#     if normA == 0.0 or normB == 0.0:
+#         return 0
+#     else:
+#         return dot_product / ((normA ** 0.5) * (normB ** 0.5))
 
 
 class CscMatch:
@@ -42,21 +43,59 @@ class CscMatch:
         filepath = '/data_local/TwoWaysToImproveCSC/BERT/save/confusion.file'
         with open(filepath, 'rb') as f:
             self.confusion_set = pickle.load(f)
+
+        # 增加的混淆集
+        add_dict = {"辙": ["彻"]}
+        for s in add_dict:
+            if s not in self.confusion_set:
+                self.confusion_set[s] = set()
+            for w in add_dict[s]:
+                self.confusion_set[s].add(w)
+        # 单词匹配字典
+        # 一个检测，检测需要大一点，太小引入错误；一个候选，候选不能太大，太大引入错误
+        self.ci_dict = pickle.load(open("match_ci.pkl", "rb"))
+        self.ci_set = pickle.load(open("ci_set.pkl", "rb")) | pickle.load(open("ci_set_spacy.pkl", "rb"))
+
+        # self.ci_dict = pickle.load(open("match_ci_spacy.pkl", "rb"))
+        # self.ci_set = pickle.load(open("ci_set_spacy.pkl", "rb"))
+
+        # 成语匹配字典
+        self.cy_dict = pickle.load(open("match_cy.pkl", "rb"))
+        self.cy_set = pickle.load(open("cy_set.pkl", "rb"))
+
         self.nlp = spacy.load("zh_core_web_sm")
 
         bin_path = "/data_local/TwoWaysToImproveCSC/large_data/char_pic/character.bin"
         self.img_vector_dict = pickle.load(open(bin_path, "rb"))
 
-        self.model = kenlm.Model("/data_local/slm/chinese_csc.bin")
-        print("spell_slm model load success !!")
+        self.model_w = kenlm.Model("/data_local/slm/chinese_csc.bin")
+        self.model = kenlm.Model("/data_local/slm/chinese_csc_char.bin")
+        print("model load success !!")
 
     def tokenize(self, texts):
+        """
+        分词 jieba.cut("我来到北京清华大学", cut_all=False)
+        :param texts:
+        :return:
+        """
         res = []
         for doc in self.nlp.pipe(texts, disable=["tok2vec", "tagger", "parser", "ner"]):
             words = []
             for item in doc:
                 words.append(item.text)
             res.append(words)
+        return res
+
+    def tokenize_jieba(self, texts):
+        """
+        分词 jieba.cut("我来到北京清华大学", cut_all=False)
+        :param texts:
+        :return:
+        """
+        res = []
+        for text in texts:
+            cut_gen = jieba.cut(text, cut_all=False)
+            res.append(list(cut_gen))
         return res
 
     def getscores(self, sents):
@@ -71,9 +110,22 @@ class CscMatch:
             res.append(score)
         return res
 
+    def getscores_w(self, sents):
+        """
+        获得语言模型的得分
+        :param sents:
+        :return:
+        """
+        res = []
+        for text in sents:
+            score = self.model_w.score(text.strip(), bos=False, eos=False)
+            res.append(score)
+        return res
+
     def poem_search(self, query_tran='天生我材必有用'):
         """
-        匹配诗句，不用分词，至少有5个字一致
+        匹配诗句，不用分词，至少有6个字一致
+        不知道es怎么实现这个6个字必须是连续的，只能先匹配再用规则
         :param query_tran:
         :return:
         """
@@ -82,7 +134,7 @@ class CscMatch:
                 "match": {
                     "sgl_cont": {
                         "query": query_tran,
-                        "minimum_should_match": 5
+                        "minimum_should_match": 6
                     }
                 }
             },
@@ -94,20 +146,31 @@ class CscMatch:
         }
 
         result = self.es.search(index="poem_v1", body=query, size=1)
+        # 默认一个输入最多只包含1个诗句
         hits_list = result['hits']['hits']
         str_li = []
         for hit in hits_list:
-            pattern = ""
+            match_str = hit['_source']['sgl_cont']
             match_character_li = re.findall("<em>(.*?)</em>", hit["highlight"]["sgl_cont"][0])
-            if len(hit['_source']['sgl_cont']) - len(match_character_li) <= 4:
+            if len(match_str) - len(match_character_li) <= 4:
                 # 与原来的数据差别小于4个字，包括标点
-                for w in hit['_source']['sgl_cont']:
-                    if w not in match_character_li:
-                        pattern += "."
+                pattern_li = [w if w in match_character_li else "." for w in match_str]
+                match_idom = re.search("".join(pattern_li), query_tran)
+                if match_idom is not None:
+                    low, high = match_idom.span()
+                    src_text = query_tran[low:high]
+                    if match_str == src_text:
+                        res = (low, high, src_text, match_str)
+                        str_li.append(res)
                     else:
-                        pattern += w
-                str_li.append((pattern, hit['_source']['sgl_cont']))
-                # 匹配模式，匹配到的诗句
+                        trg_tokens = []
+                        for s, t in zip(list(src_text), list(match_str)):
+                            if s != t and self.is_mix(s, t):
+                                trg_tokens.append(t)
+                            else:
+                                trg_tokens.append(s)
+                        res = (low, high, src_text, "".join(trg_tokens))
+                        str_li.append(res)
         return str_li
 
     def poem_correct(self, text):
@@ -116,355 +179,147 @@ class CscMatch:
         :param text:
         :return:
         """
-        res_li = self.poem_search(query_tran=text)
+        query_text = text
+        change_poem_li = []
+        res_li = self.poem_search(query_tran=query_text)
         if len(res_li) == 0:
-            return text
+            return query_text, change_poem_li
 
-        # 已经匹配到的位置，不再处理。
-        # 防止将本身正确的改错，偷天换日--移天换日
-        correct = {}
         for res in res_li:
-            pattern, hit_sgl_cont = res
-            if pattern == hit_sgl_cont:
-                return text
-            else:
-                match_idom = re.search(pattern, text)
-                if match_idom is not None:
-                    s, t = match_idom.span()
-                    src = text[s:t]
-                    trg = self.poem_post_process(src, hit_sgl_cont)
-                    correct[src] = trg
-        print(correct)
-        for item in correct:
-            text = text.replace(item, correct[item])
-        return text
+            i, j, src_text, trg_text = res
+            change_poem_li.extend([p for p in range(i, j)])
+            query_text = query_text.replace(src_text, trg_text)
+        return query_text, change_poem_li
 
-    def poem_post_process(self, src, trg):
+    def cy_candidates(self, query_tran='高瞻远瞩'):
         """
-        如果有拼音相同的 或者 在候选集中的
-        :param src:
-        :param trgs:
-        :return:
-        """
-        res = ""
-        for s, t in zip(list(src), list(trg)):
-            if s != t and lazy_pinyin(s) == lazy_pinyin(t):
-                res += t
-            elif s != t and s in self.confusion_set and t in self.confusion_set[s]:
-                res += t
-            else:
-                res += s
-        return res
-
-    def cy_search(self, query_tran='高瞻远瞩'):
-        """
-        匹配成语，分词，组成四字的匹配
+        匹配成语
         :param query_tran:
         :return:
         """
+        candidates = set()
         num = len(query_tran)
-        query = {
-            "query": {
-                "match": {
-                    "word": {
-                        "query": query_tran,
-                        "minimum_should_match": num - 1
-                    }
-                }
-            },
-            "highlight": {
-                "fields": {
-                    "word": {}
-                }
-            }
-        }
-        result = self.es.search(index="idom_v1", body=query, size=5)
-        hits_list = result['hits']['hits']
-        str_li = []
-        for hit in hits_list:
-            match_cy = hit['_source']['word']
+        for i in range(num):
+            tokens = list(query_tran)
+            tokens[i] = "_"
+            key = "".join(tokens)
+            if key in self.cy_dict:
+                candidates = candidates | self.cy_dict[key]
 
-            if match_cy == query_tran:  # 无错
-                return [(query_tran, query_tran)]
-
-            if len(match_cy) != len(query_tran):
-                continue
-
-            correct_tag = 0
-            count = 0
-            for s, t in zip(query_tran, match_cy):
-                if s != t and self.is_mix(s, t):
-                    correct_tag = 1
-                elif s == t:
-                    count += 1
-
-            if count >= num - 1 and correct_tag == 1:
-                pattern = ""
-                match_character_li = re.findall("<em>(.*?)</em>", hit["highlight"]["word"][0])
-                for w in match_cy:
-                    if w not in match_character_li:
-                        pattern += "."
-                    else:
-                        pattern += w
-                str_li.append((pattern, hit['_source']['word']))
-                # 匹配模式，匹配到的成语
-        return str_li
-
-    def cy_process(self, w_src, src_text):
-        """
-        查找相似成语
-        :param src_text:
-        :return:
-        """
-        res_li = self.cy_search(query_tran=w_src)
-        match_trgs = []
-        for res in res_li:
-            pattern, match_str = res
-            if w_src == match_str:
-                return w_src
-            else:
-                match_trgs.append(match_str)
-        ##
-        if len(match_trgs) == 0:
-            return w_src
-
-        candidates = [src_text]
-        candidate_words = [w_src]
-        for match_trg in match_trgs:
-            tmp_text = src_text.replace(w_src, match_trg)
-            candidates.append(tmp_text)
-            candidate_words.append(match_trg)
-        candidate_scores = self.getscores(candidates)
-        item = sorted(zip(candidate_words, candidate_scores), key=lambda s: s[1], reverse=True)
-        if item[0][1] == item[1][1]:
-            return match_trgs[0]
-        else:
-            return item[0][0]
-
-    def cy_correct(self, text):
-        """
-        诗句中包含的错误的纠正并返回
-        :param text:
-        :return:
-        """
-        words = self.tokenize([text])[0]
-        # 前后组成4字候选成语
-
-        correct = {}
-
-        num = len(words)
-        for i in range(num - 1):
-            if len(words[i]) == 4:
-                w_src = words[i]
-                start = max(0, i - 2)
-                end = min(i + 3, num)
-                src_text = " ".join([words[t] for t in range(start, end)])
-                w_trg = self.cy_process(w_src, src_text)
-                if w_src != w_trg:
-                    correct[w_src] = w_trg
-            else:
-                j = i + 1
-                if len(words[i] + words[j]) == 4:
-                    w_src = words[i] + words[j]
-                    start = max(0, i - 2)
-                    end = min(j + 3, num)
-                    src_text = " ".join([words[t] for t in range(start, end)])
-                    w_trg = self.cy_process(w_src, src_text)
-                    if w_src != w_trg:
-                        correct[w_src] = w_trg
-        print(correct)
-        for item in correct:
-            text = text.replace(item, correct[item])
-        return text
-
-    def cy_post_process(self, src, trgs):
-        """
-           如果有拼音相同的 或者 在候选集中的
-           :param src:
-           :param trgs:
-           :return:
-        """
-        print(trgs)
-        for trg in trgs:
-            for s, t in zip(list(src), list(trg)):
-                if s != t:
-                    if lazy_pinyin(s) == lazy_pinyin(t):
-                        print("++拼音一致++", trg)
-                        return trg
-                    else:
-                        if s not in self.confusion_set:
-                            return src
-                        if t in self.confusion_set[s]:
-                            print("++在混淆集++", trg)
-                            return trg
-        return src
-
-    def ci_search(self, query_tran='挫折'):
-        """
-        找到一个词，对应的候选词
-        :param query_tran:
-        :return:
-        """
-        num = len(query_tran)
-        query = {
-            "query": {
-                "bool": {
-                    "must": [{
-                        "match": {
-                            "ci": {
-                                "query": query_tran,
-                                "minimum_should_match": num - 1
-                            }
-                        }}
-                    ],
-                    "should": [
-                        {
-                            "match_phrase": {
-                                "pinyin": {
-                                    "query": " ".join(lazy_pinyin(query_tran))
-                                }
-                            }}
-                    ]
-                }
-            },
-            "highlight": {
-                "fields": {
-                    "ci": {}
-                }
-            }
-        }
-        result = self.es.search(index="ci_v4", body=query, size=50)
-        hits_list = result['hits']['hits']
-        str_li = []
-        for hit in hits_list:
-
-            match_str = hit['_source']['ci']
-            if query_tran == match_str:
-                str_li = [(query_tran, query_tran)]
-                return str_li
-
-            if len(match_str) != len(query_tran):
-                continue
-
-            correct_tag = 0
-            count = 0
+        #
+        final_res = []
+        for match_str in candidates:
             for s, t in zip(query_tran, match_str):
-                if s != t and self.is_mix(s, t):
-                    correct_tag = 1
-                elif s == t:
-                    count += 1
-
-            if count >= num - 1 and correct_tag == 1:
-                pattern = ""
-                match_character_li = re.findall("<em>(.*?)</em>", hit["highlight"]["ci"][0])
-                for w in match_str:
-                    if w not in match_character_li:
-                        pattern += "."
-                    else:
-                        pattern += w
-                str_li.append((pattern, match_str))
-                # 匹配模式，匹配到的词语
-        return str_li
-
-    def ci_correct_no_lm(self, text):
-        """
-        :param text:
-        :return:
-        """
-        words = self.tokenize([text])[0]
-        # 字数大于1的词语
-        four_words = []
-        num = len(words)
-        for i in range(num - 1):
-            if len(words[i]) > 1:
-                four_words.append(words[i])
-
-        correct = {}
-        for w_src in four_words:
-            res_li = self.ci_search(query_tran=w_src)
-            word_trgs = []
-            for res in res_li:
-                pattern, match_word_trg = res
-                if w_src == match_word_trg:
-                    break
-                else:
-                    match_idom = re.search(pattern, text)
-                    if match_idom is not None:
-                        word_trgs.append(match_word_trg)
-            if len(word_trgs) >= 1:
-                # 用语言模型
-                w_cor = self.ci_post_process(w_src, word_trgs)
-                correct[w_src] = w_cor
-        print(correct)
-        for item in correct:
-            text = text.replace(item, correct[item])
-        return text
-
-    def ci_correct(self, text):
-        """
-        :param text:
-        :return:
-        """
-        words = self.tokenize([text])[0]
-        # 字数大于1的词语
-        # four_words = []
-        correct = {}
-        num = len(words)
-        for i in range(num - 1):
-            if len(words[i]) > 1:
-                w_src = words[i]
-                res_li = self.ci_search(query_tran=w_src)
-                start = max(0, i - 2)
-                end = min(i + 3, num)
-                src_text = " ".join([words[t] for t in range(start, end)])
-                candidates = [src_text]
-                candidate_words = [w_src]
-                for res in res_li:
-                    pattern, match_word_trg = res
-                    if w_src == match_word_trg:
-                        break
-                    else:
-                        match_idom = re.search(pattern, text)
-                        if match_idom is not None:
-                            tmp_text = src_text.replace(w_src, match_word_trg)
-                            candidates.append(tmp_text)
-                            candidate_words.append(match_word_trg)
-
-                if len(candidate_words) > 1:
-                    # 用语言模型
-                    candidate_scores = self.getscores(candidates)
-                    item = sorted(zip(candidate_words, candidate_scores), key=lambda s: s[1], reverse=True)
-                    if item[0][1] - item[1][1] > -0.3 * item[0][1]:
-                        correct[w_src] = item[0][0]
-        print(correct)
-        for item in correct:
-            text = text.replace(item, correct[item])
-        return text
-
-    def ci_post_process(self, src, trgs):
-        """
-        :param src:
-        :param trgs:
-        :return:
-        """
-        for trg in trgs:
-            for s, t in zip(list(src), list(trg)):
                 if s != t:
-                    if lazy_pinyin(s) == lazy_pinyin(t) and s in self.confusion_set and t in self.confusion_set[s]:
-                        print("++拼音一致++", trg)
-                        return trg
-                    elif (set(lazy_pinyin(s)[0]) - set(lazy_pinyin(t)[0]) == set(["g"]) or
-                          set(lazy_pinyin(t)[0]) - set(lazy_pinyin(s)[0]) == set(["g"])) \
-                            and s in self.confusion_set and t in self.confusion_set[s]:
-                        print("++前后鼻不分++", trg)
-                        return trg
-                    # else:
-                    #     if s not in confusion_set:
-                    #         return src
-                    #     if t in confusion_set[s]:
-                    #         print("++在混淆集++", trg)
-                    #         return trg
-        return src
+                    if self.is_mix(s, t):
+                        final_res.append(match_str)
+                    break
+        return final_res
+
+    def cy_correct(self, text, change_li):
+        """
+        :param text:
+        :param no_change_li:
+        :return:
+        """
+        query_text = text
+        words = self.tokenize([text])[0]
+        # 相邻两个组成4字候选成语
+        # jieba分词？
+        s = 0
+        correct = {}
+        cy_li = []
+        num = len(words)
+        for i in range(num):
+            for d in range(1, 5, 1):
+                j = i + d
+                if j < num:
+                    word_str = "".join(words[i:j])
+                    if len(word_str) == 4 and word_str not in self.cy_set \
+                            and not self.is_no_change(s, word_str, change_li):
+                        w_src = word_str
+                        match_trgs = self.cy_candidates(w_src)
+                        if len(match_trgs) != 0:
+                            w_trg = self.cy_lm_correct_part(match_trgs, i, j, words)
+                            if w_src != w_trg:
+                                correct[w_src] = w_trg
+                                cy_li.extend([s + p for p in range(len(word_str))])
+            s += len(words[i])
+        print(correct)
+        for item in correct:
+            query_text = query_text.replace(item, correct[item])
+        return query_text, cy_li
+
+    def ci_candidates(self, query_tran='高瞻远瞩'):
+        """
+        匹配成语
+        :param query_tran:
+        :return:
+        """
+        candidates = set()
+        num = len(query_tran)
+        for i in range(num):
+            tokens = list(query_tran)
+            tokens[i] = "_"
+            key = "".join(tokens)
+            if key in self.ci_dict:
+                candidates = candidates | self.ci_dict[key]
+        #
+        final_res = []
+        for match_str in candidates:
+            for s, t in zip(query_tran, match_str):
+                if s != t:
+                    if self.is_mix(s, t):
+                        final_res.append(match_str)
+                    break
+        return final_res
+
+    def is_tokenize_false(self, words, i):
+        """
+        判断分词有没有错，与前后字能否组成词
+        :param words:
+        :return:
+        """
+        low = len("".join(words[:i])) + 1
+        high = len("".join(words[:i + 1])) - 1
+        tokens = list("".join(words))
+        for p in range(2, 4):
+            s = max(0, low - p)
+            t = min(high + p, len(tokens))
+            if "".join(tokens[s:low]) in self.ci_set:
+                return False
+            if "".join(tokens[high:t]) in self.ci_set:
+                return False
+        return True
+
+    def ci_correct(self, text, change_li):
+        """
+
+        :param text:
+        :param change_li:
+        :return:
+        """
+        query_text = text
+        words = self.tokenize([text])[0]
+        # 相邻两个组成4字候选成语
+        s = 0
+        correct = {}
+        ci_li = []
+        num = len(words)
+        for i in range(num - 1):
+            if 1 < len(words[i]) < 4 and words[i] not in self.ci_set \
+                    and not self.is_no_change(s, words[i], change_li):
+                w_src = words[i]
+                match_trgs = self.ci_candidates(w_src)
+                if len(match_trgs) != 0 and w_src not in match_trgs:
+                    w_trg = self.cy_lm_correct_part(match_trgs, i, i + 1, words)
+                    if w_src != w_trg and self.is_tokenize_false(words, i):
+                        correct[w_src] = w_trg
+                        ci_li.extend([s + p for p in range(len(w_src))])
+        print(correct)
+        for item in correct:
+            query_text = query_text.replace(item, correct[item])
+        return query_text, ci_li
 
     def is_mix(self, s, t):
         """
@@ -473,8 +328,11 @@ class CscMatch:
         :param trgs:
         :return:
         """
-        s_pinyin = lazy_pinyin(s)[0]
-        t_pinyin = lazy_pinyin(t)[0]
+        # s_pinyin = lazy_pinyin(s)[0]
+        # t_pinyin = lazy_pinyin(t)[0]
+
+        s_pinyin = pinyin(s)[0][0]
+        t_pinyin = pinyin(t)[0][0]
         if s_pinyin == t_pinyin:
             print("++拼音一致++")
             return True
@@ -496,22 +354,202 @@ class CscMatch:
         if s_pinyin.replace('sh', 's') == t_pinyin or t_pinyin.replace('sh', 's') == s_pinyin:
             print("++平翘舌不分++")
             return True
-
-        if s in self.img_vector_dict and t in self.img_vector_dict:
-
-            s_vec = self.img_vector_dict[s]
-            t_vec = self.img_vector_dict[t]
-            if cosine_similarity(s_vec, t_vec) > 0.96:
-                print("++字形相似++")
-                return True
+        # 计算很慢
+        # 字形相似度（图片向量）
+        # if s in self.img_vector_dict and t in self.img_vector_dict:
+        #     s_vec = self.img_vector_dict[s]
+        #     t_vec = self.img_vector_dict[t]
+        #     if cosine_similarity(s_vec, t_vec) > 0.96:
+        #         print("++字形相似++")
+        #         return True
 
         return False
+
+    # def cy_lm_correct(self, match_trgs, start, end, words, name="cy"):
+    #     """
+    #     查找相似成语
+    #     :param src_text:
+    #     :return:
+    #     """
+    #
+    #     w_src_str = "".join(words[start:end])
+    #     w_src = " ".join(list(w_src_str))
+    #
+    #     src_sent = "".join(words)
+    #     src_text = " ".join(list(src_sent))
+    #
+    #     candidate_words = [w_src_str]
+    #     candidates = [src_text]
+    #     for match_trg in match_trgs:
+    #         match_str = " ".join(list(match_trg))
+    #         tmp_text = src_text.replace(w_src, match_str)
+    #         candidates.append(tmp_text)
+    #         candidate_words.append(match_trg)
+    #
+    #     candidate_scores = self.getscores(candidates)
+    #     item = sorted(zip(candidate_words, candidate_scores), key=lambda s: s[1], reverse=True)
+    #     print(w_src)
+    #     print(item)
+    #     if name == 'cy':
+    #         return item[0][0]
+    #     elif name == 'ci':
+    #         if item[0][1] - item[1][1] > -0.3 * item[0][1]:
+    #             return item[0][0]
+    #         else:
+    #             return w_src
+    #
+    # def cy_lm_correct_w(self, match_trgs, start, end, words, name="cy"):
+    #     """
+    #     查找相似成语
+    #     :param src_text:
+    #     :return:
+    #     """
+    #     w_src_str = "".join(words[start:end])
+    #     w_src = " ".join(words[start:end])
+    #     src_text = " ".join(words)  # 按照词分
+    #     # print(w_src)
+    #     # print(src_text)
+    #
+    #     candidates = [src_text]
+    #     candidate_words = [w_src_str]
+    #     for match_trg in match_trgs:
+    #         match_str = match_trg
+    #         if end - start > 1:
+    #             match_str = match_trg[0:len(words[start])] + " " + match_trg[len(words[start]):]
+    #         tmp_text = src_text.replace(w_src, match_str)
+    #         candidates.append(tmp_text)
+    #         candidate_words.append(match_trg)
+    #     candidate_scores = self.getscores_w(candidates)
+    #     item = sorted(zip(candidate_words, candidate_scores), key=lambda s: s[1], reverse=True)
+    #     print(item)
+    #     # 成语大都是不在字典里面的，一样unk也要改，小于原来的就不改
+    #     if name == 'cy':
+    #         if item[0][1] == item[1][1]:
+    #             # >= 要改
+    #             return match_trgs[0]
+    #         else:
+    #             return item[0][0]
+    #     elif name == 'ci':
+    #         if item[0][1] - item[1][1] > -0.3 * item[0][1]:
+    #             return item[0][0]
+    #         else:
+    #             return w_src
+
+    def cy_lm_correct_part(self, match_trgs, start, end, words, name="cy"):
+        """
+        查找相似成语
+        :param src_text:
+        :return:
+        """
+        # 前后个五个字
+        # A B C D EF AB  C D E F G
+        # 0 1 2 3  4  5  6 7 8 9 10
+
+        # A B C D E F A B C D E  F   G
+        # 0 1 2 3 4 5 6 7 8 9 10 11 12
+
+        w_src_str = "".join(words[start:end])
+        w_src = " ".join(list(w_src_str))
+
+        src_sent = "".join(words)
+
+        low = max(0, len("".join(words[:start])) - 4)  # 4  # start - 4
+        high = min(len(src_sent), len("".join(words[:end])) + 4)  # 8  #  end + 4
+
+        src_text = " ".join(list(src_sent)[low:high])
+
+        print(w_src)
+        print(src_text)
+
+        candidates = [src_text]
+        candidate_words = [w_src_str]
+        for match_trg in match_trgs:
+            match_str = " ".join(list(match_trg))
+            tmp_text = src_text.replace(w_src, match_str)
+            candidates.append(tmp_text)
+            candidate_words.append(match_trg)
+        candidate_scores = self.getscores(candidates)
+        item = sorted(zip(candidate_words, candidate_scores), key=lambda s: s[1], reverse=True)
+        print(w_src)
+        print(item)
+        if name == 'cy':
+            return item[0][0]
+        elif name == 'ci':
+            if item[0][1] - item[1][1] > -0.3 * item[0][1]:
+                return item[0][0]
+            else:
+                return w_src
+
+    def cy_lm_correct_part_w(self, match_trgs, start, end, words, name='cy'):
+        """
+        查找相似成语
+        :param src_text:
+        :return:
+        """
+        # A B C D E F A B C D
+        # 0 1 2 3 4 5 6 7 8 9 10
+        # start - 4
+        # end + 4
+
+        w_src_str = "".join(words[start:end])
+        w_src = " ".join(words[start:end])
+
+        low = max(0, start - 4)
+        high = min(end + 4, num)
+        src_text = " ".join(words[low:high])
+
+        print(w_src)
+        print(src_text)
+
+        # 替换之后和原来的分词一致
+        candidates = [src_text]
+        candidate_words = [w_src_str]
+        for match_trg in match_trgs:
+            match_str = match_trg
+            if end - start > 1:
+                match_str = match_trg[0:len(words[start])] + " " + match_trg[len(words[start]):]
+
+            tmp_text = src_text.replace(w_src, match_str)
+            candidates.append(tmp_text)
+            candidate_words.append(match_trg)
+        candidate_scores = self.getscores_w(candidates)
+        item = sorted(zip(candidate_words, candidate_scores), key=lambda s: s[1], reverse=True)
+        print(item)
+        # 成语大都是不在字典里面的，一样unk也要改，小于原来的就不改
+        if name == 'cy':
+            if item[0][1] == item[1][1]:
+                # >= 要改
+                return match_trgs[0]
+            else:
+                return item[0][0]
+        elif name == 'ci':
+            if item[0][1] - item[1][1] > -0.3 * item[0][1]:
+                return item[0][0]
+            else:
+                return w_src
+
+    def is_no_change(self, start, word, change_li):
+        """
+        诗词修改后的成语不修改
+        成语修改后的词语不修改
+        :param start:
+        :param word:
+        :param no_change_li:
+        :return:
+        """
+        no_change_tag = 0
+        for step in range(len(word)):
+            if start + step in change_li:
+                no_change_tag = 1
+                break
+        return no_change_tag
 
 
 if __name__ == '__main__':
     obj = CscMatch()
     all_texts = [
-
+        "人生中一定有不顺的事，但不能被打败，要坚持自己的意念，不管别人言语、行动去干扰你，你也能继续的往前走，不管多么多的拌脚石，你也能一次一次的站起来，把握时间，要做的事就去做，不犹豫，免得时机错过后悔莫及。",
+        "刘墉在三岁过年时，全家陷入火海，把家烧得面目全飞、体无完肤。"
         # "你的人生方向是什么？你要如何使自己更接近它呢？这只有你自己知道，撰择好一个目标，千万不要轻易放弃它，看好了方向才有努力的于地，有了努力才有成功的机会，好好把握那选择的机会。",
         # "在这小小的空间里，每个人都会分享一些生活点滴，我们也要保持教室的干静，才能安心的延续对这间教室的感情。",
         # "人的方向，由自己来决定。自己的决定都是快乐的，但如果你不能决定你自己的方向，那就要由别人帮你决定，他的决定也许你会不喜欢，但你是要尊从，因为你不能自己决定你人生的方向。",
@@ -525,6 +563,8 @@ if __name__ == '__main__':
 
     ]
     all_trgs = [
+        "人生中一定有不顺的事，但不能被打败，要坚持自己的意念，不管别人言语、行动去干扰你，你也能继续的往前走，不管多么多的拌脚石，你也能一次一次的站起来，把握时间，要做的事就去做，不犹豫，免得时机错过后悔莫及。",
+        "刘墉在三岁过年时，全家陷入火海，把家烧得面目全飞、体无完肤。"
         # "你的人生方向是什么？你要如何使自己更接近它呢？这只有你自己知道，撰择好一个目标，千万不要轻易放弃它，看好了方向才有努力的于地，有了努力才有成功的机会，好好把握那选择的机会。",
         # "在这小小的空间里，每个人都会分享一些生活点滴，我们也要保持教室的干静，才能安心的延续对这间教室的感情。",
         # "人的方向，由自己来决定。自己的决定都是快乐的，但如果你不能决定你自己的方向，那就要由别人帮你决定，他的决定也许你会不喜欢，但你是要尊从，因为你不能自己决定你人生的方向。",
@@ -535,11 +575,12 @@ if __name__ == '__main__':
         # "大自然也一样的，无法天天都是晴天，天天都很顺利，但生活，就是如此这般，有失才有得，只是每个人是如何去看侍的。",
         # "曾经听见在考试卷、讲议、功课、课本压得快变肉干的我对自己问：「还想念书吗？还想听课吗？」，但这些在考试与堆积如山的功课贬值成了一杯另人难以咽下的苦水。或许这苦水能让我活耀于分数上，但这是我想要的？」。",
         # "曾经听见在考试卷、讲议、功课、课本压得快变肉干的我对自己问：「还想念书吗？还想听课吗？」，但这些在考试与堆积如山的功课贬值成了一杯另人难以咽下的苦水。或许这苦水能让我活耀于分数上，但这是我想要的？」。"
-
     ]
     paths = [
-        "/data_local/TwoWaysToImproveCSC/BERT/data/13test.txt",
-        "/data_local/TwoWaysToImproveCSC/BERT/cc_data/chinese_spell_4.txt"
+        "./bert_out_cc.txt"
+        # "./13test_tmp.txt",
+        # "/data_local/TwoWaysToImproveCSC/BERT/data/13test.txt",
+        # "/data_local/TwoWaysToImproveCSC/BERT/cc_data/chinese_spell_4.txt"
     ]
     for path in paths:
         all_texts = []
@@ -551,22 +592,33 @@ if __name__ == '__main__':
                 all_trgs.append(trg)
 
         path_out = path.replace(".txt", ".pre")
-
         with open(path_out, "w", encoding="utf-8") as fw:
             num = len(all_texts)
             for i in range(num):
-                print("句子：", str(i))
+                print("\n\n\n句子：", str(i))
                 text = all_texts[i]
                 trg = all_trgs[i]
-                # text = obj.cy_correct(text)
-                # text = obj.ci_correct(text)
-                new_text = obj.poem_correct(text)
+                change_pos = []
 
-                fw.write(text + " " + new_text + "\n")
+                # 诗词匹配
+                poem_text, poem_li = obj.poem_correct(text)
+                change_pos.extend(poem_li)
 
-                if text != new_text:
+                # 成语匹配
+                cy_text, cy_li = obj.cy_correct(poem_text, change_pos)
+                change_pos.extend(cy_li)
+
+                # 词语匹配，容易引入错误，包括分词不准，专有名词，造成的错误
+                # 即使在模型的输出之后做也会有同样的问题
+                # 如果并行合并，召回率又会低很多
+                # ci_text = cy_text
+                ci_text, ci_li = obj.ci_correct(cy_text, change_pos)
+
+                fw.write(text + " " + ci_text + "\n")
+
+                if text != ci_text:
                     item_pre = set()
-                    for s, t in zip(text, new_text):
+                    for s, t in zip(text, ci_text):
                         if s != t:
                             item_pre.add((s, t))
 
@@ -578,36 +630,5 @@ if __name__ == '__main__':
                     if len(item_pre - item_label) != 0:
                         print("============")
                         print(text)
-                        print(new_text)
+                        print(ci_text)
                         print(trg)
-
-    # with open("./error_ci.txt", "w", encoding="utf-8") as fw:
-    #     num = len(all_texts)
-    #     for i in range(num):
-    #         print("句子：", str(i))
-    #         text = all_texts[i]
-    #         trg = all_trgs[i]
-    #         new_text = obj.ci_correct(text)
-    #         if text != new_text:
-    #             item_pre = set()
-    #             for s, t in zip(text, new_text):
-    #                 if s != t:
-    #                     item_pre.add((s, t))
-    #
-    #             item_label = set()
-    #             for s, t in zip(text, trg):
-    #                 if s != t:
-    #                     item_label.add((s, t))
-    #
-    #             if len(item_pre - item_label) != 0:
-    #                 # print("============")
-    #                 fw.write(text + "\n")
-    #                 print(text)
-    #                 print(new_text)
-    #                 print(trg)
-    #
-    #     for text in all_texts:
-    #         new_text = obj.cy_correct(text)
-    #         if text != new_text:
-    #             print(text)
-    #             print(new_text)

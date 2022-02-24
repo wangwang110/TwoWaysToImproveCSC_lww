@@ -62,14 +62,13 @@ new_zh_ci = {}
 sort_zh_ci_dict = sorted(zh_ci_dict.items(), key=lambda s: s[1], reverse=True)
 for item in sort_zh_ci_dict:
     word, fre = item
-    if re.search('[\u4e00-\u9fa5]', word) and fre > 263:  # 必须是汉字
+    if 1 < len(word) < 4 and not re.search('[^\u4e00-\u9fa5]', word) and fre > 10:  # 必须是汉字
         new_zh_ci[word] = fre
 
 print(len(new_zh_ci))
 print(new_zh_ci["逆境"])
 print(new_zh_ci["一旦"])
 print(new_zh_ci["关卡"])
-print(new_zh_ci["逆竟"])
 print(new_zh_ci["白费"])
-
-# pickle.dump(new_zh_ci, open("./vocab_xiaoxue.pkl", "wb"))
+pickle.dump(new_zh_ci, open("./vocab_xiaoxue.pkl", "wb"))
+print(len(new_zh_ci))
