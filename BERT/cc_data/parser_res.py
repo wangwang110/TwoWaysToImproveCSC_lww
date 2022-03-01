@@ -65,7 +65,7 @@ task1 = "self"
 name1 = "base_998"
 
 task2 = "self"
-name2 = "base"
+name2 = "wang2018"
 
 model_out_path = "../data_analysis/" + task1 + "_" + str(name1) + "_" + str(data) + "_cor.txt"
 all_text_model = get_model_output(model_out_path, all_text_ori)
@@ -86,7 +86,7 @@ with open(path_out, "w", encoding="utf-8") as fw3:
         pre = remove_space(pre)
         pre1 = remove_space(pre1)
 
-        if pre == trg or pre1 == trg:
+        if pre == pre1:
             continue
 
         fw3.write(src + "\n")

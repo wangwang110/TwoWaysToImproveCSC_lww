@@ -177,20 +177,16 @@ if __name__ == "__main__":
 
     # 初始化模型
     bert_path = "/data_local/plm_models/chinese_L-12_H-768_A-12/"
-    load_path = "/data_local/TwoWaysToImproveCSC/BERT/save/bert_paper_model/preTrain/sighan13/model.pkl"
+    load_path = "/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/base_998/sighan13/model.pkl"
     # args.load_path = "/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/sighan13/model.pkl"
     # /data_local/TwoWaysToImproveCSC/BERT/save/bert_paper_model/preTrain/sighan13
     #  "/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/sighan13/epoch10.pkl"
     obj = CSCmodel(bert_path, load_path)
     input_text, model_ouput = obj.test_without_trg([
-        "这时，妈妈被我吵醒了，她问：“大半夜的，吵什么吵?”我说明了原因后，妈妈拿起电蚊拍，走到蚊子前，两下三下就消灭了蚊子，蚊子终子“命归西天”了。"
         "没过几分钟，救护车来了，发出响亮而清翠的声音",
-        "没过几分钟，救护车来了，发出响亮而青翠的声音",
-        "在我的印象中，哑巴是不同于正常人的，他说话总是叽里呱啦的，让人难解；我也常听别人说，哑巴非常“狠”，常打或者吓唬小孩，因此我从记事起就对哑巴产生了一种恐惧感，总怕突然被哑巴抓住暴打一顿，所以，每次上学经过哑巴叔叔门口时，总是跺的远远的。 "])
+        "我见过一望无际、波澜壮阔的大海；玩赏过水平如镜、诗情画意的西湖；游览过翡翠般的漓江；让我难以忘怀的要数那荷叶飘香、群山都坏绕的普者黑。"])
     print(input_text)
     print(model_ouput)
 
-    correct_file(args.input, args.output)
-
-    # correct_file("./cc_data/xiaoxue_sent_all.txt", "./cc_data/xiaoxue_sent_all_cor.txt")
+    # correct_file(args.input, args.output)
     # 微博预训练的语料，要先过一遍纠错模型（可能存在很多错误）

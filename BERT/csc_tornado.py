@@ -1,28 +1,18 @@
-# Copyright 2018 CVTE . All Rights Reserved.
 # coding: utf-8
 
-from __future__ import print_function
-from __future__ import division
-from __future__ import absolute_import
-
-# Copyright 2018 CVTE . All Rights Reserved.
-# coding: utf-8
-
-from __future__ import print_function
-from __future__ import division
-from __future__ import absolute_import
 
 import json
 import tornado.web
 from tornado.options import define, options
-from csc_eval import CSCmodel
+from csc_main import CSC
 
 port = 18000
 num_process = 1
 define("port", default=port, help="run on the given port", type=int)
 bert_path = "/data_local/plm_models/chinese_L-12_H-768_A-12/"
-model_path = "/data_local/TwoWaysToImproveCSC/BERT/save/bert_paper_model/preTrain/sighan13/model.pkl"
-check_object = CSCmodel(bert_path, model_path)
+# model_path = "/data_local/TwoWaysToImproveCSC/BERT/save/bert_paper_model/preTrain/sighan13/model.pkl"
+model_path = "/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/base_998/sighan13/model.pkl"
+check_object = CSC(bert_path, model_path)
 
 
 class IndexHandler(tornado.web.RequestHandler):
@@ -34,9 +24,10 @@ class IndexHandler(tornado.web.RequestHandler):
     def post(self):
         # result = {}
         data = json.loads(self.request.body.decode('utf-8'))
-        all_error_list = check_object.test(data)
+        all_error_list = check_object.correct(data)
         # result["res"] = all_error_list
-        self.write(json.dumps(all_error_list, ensure_ascii=False))
+        # self.write(json.dumps(all_error_list, ensure_ascii=False))
+        self.write(json.dumps(all_error_list, indent=6, separators=(', ', ': '), ensure_ascii=False))
 
 
 if __name__ == "__main__":
