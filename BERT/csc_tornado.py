@@ -1,6 +1,5 @@
 # coding: utf-8
 
-
 import json
 import tornado.web
 from tornado.options import define, options
@@ -10,8 +9,7 @@ port = 18000
 num_process = 1
 define("port", default=port, help="run on the given port", type=int)
 bert_path = "/data_local/plm_models/chinese_L-12_H-768_A-12/"
-# model_path = "/data_local/TwoWaysToImproveCSC/BERT/save/bert_paper_model/preTrain/sighan13/model.pkl"
-model_path = "/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/base_998/sighan13/model.pkl"
+model_path = "/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/base_all/sighan13/model.pkl"
 check_object = CSC(bert_path, model_path)
 
 

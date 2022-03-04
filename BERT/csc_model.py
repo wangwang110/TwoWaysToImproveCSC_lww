@@ -94,7 +94,6 @@ class CSCmodel:
         test = BertDataset(self.tokenizer, test)
         test = DataLoader(test, batch_size=int(self.batch_size), shuffle=False)
         trgs = []
-        srcs = []
         for batch in test:
             inputs = self.tokenizer(batch['input'], padding=True, truncation=True, return_tensors="pt").to(self.device)
             max_len = 180
@@ -121,9 +120,7 @@ class CSCmodel:
                     else:
                         sent_li.append(self.vob[out[idx][t].item()])
                 trgs.append("".join(sent_li))
-                srcs.append("".join(src_sent_li))
-
-        return srcs, trgs
+        return trgs
 
 
 def correct_file(path, path_out):

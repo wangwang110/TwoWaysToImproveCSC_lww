@@ -4,7 +4,6 @@ import time
 from elasticsearch import Elasticsearch
 from elasticsearch import helpers
 import json
-import pandas as pd
 import kenlm
 import spacy
 import re
@@ -548,6 +547,7 @@ class CscMatch:
 if __name__ == '__main__':
     obj = CscMatch()
     all_texts = [
+        "「不禁一番寒辙骨，焉得梅花扑鼻香。」这就是最好的说明，没有失败哪里来的成功呢？"
         "人生中一定有不顺的事，但不能被打败，要坚持自己的意念，不管别人言语、行动去干扰你，你也能继续的往前走，不管多么多的拌脚石，你也能一次一次的站起来，把握时间，要做的事就去做，不犹豫，免得时机错过后悔莫及。",
         "刘墉在三岁过年时，全家陷入火海，把家烧得面目全飞、体无完肤。"
         # "你的人生方向是什么？你要如何使自己更接近它呢？这只有你自己知道，撰择好一个目标，千万不要轻易放弃它，看好了方向才有努力的于地，有了努力才有成功的机会，好好把握那选择的机会。",
@@ -563,6 +563,7 @@ if __name__ == '__main__':
 
     ]
     all_trgs = [
+        "「不禁一番寒辙骨，焉得梅花扑鼻香。」这就是最好的说明，没有失败哪里来的成功呢？"
         "人生中一定有不顺的事，但不能被打败，要坚持自己的意念，不管别人言语、行动去干扰你，你也能继续的往前走，不管多么多的拌脚石，你也能一次一次的站起来，把握时间，要做的事就去做，不犹豫，免得时机错过后悔莫及。",
         "刘墉在三岁过年时，全家陷入火海，把家烧得面目全飞、体无完肤。"
         # "你的人生方向是什么？你要如何使自己更接近它呢？这只有你自己知道，撰择好一个目标，千万不要轻易放弃它，看好了方向才有努力的于地，有了努力才有成功的机会，好好把握那选择的机会。",
@@ -583,8 +584,8 @@ if __name__ == '__main__':
         # "/data_local/TwoWaysToImproveCSC/BERT/cc_data/chinese_spell_4.txt"
     ]
     for path in paths:
-        all_texts = []
-        all_trgs = []
+        # all_texts = []
+        # all_trgs = []
         with open(path, "r", encoding="utf-8") as f:
             for line in f.readlines():
                 sent, trg = line.strip().split(" ")

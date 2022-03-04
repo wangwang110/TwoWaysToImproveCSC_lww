@@ -86,6 +86,64 @@ class CSCmatch:
             res.append(score)
         return res
 
+    def mrmy_search(self, query_tran='时间就是生命'):
+        """
+        诗句和成语，都是一字不差
+        但是名人名言，有时候差几个字也没有问题（名人名言暂时不纠正吧）
+        :param query_tran:
+        :return:
+        """
+        query = {
+            "query": {
+                "match": {
+                    "content": {
+                        "query": query_tran,
+                        "minimum_should_match": 6
+                    }
+                }
+            },
+            "highlight": {
+                "fields": {
+                    "content": {}
+                }
+            }
+        }
+
+        result = self.es.search(index="mrmy_v1", body=query, size=5)
+        hits_list = result['hits']['hits']
+        str_li = []
+        for hit in hits_list:
+            match_str = hit['_source']['content']
+            match_character_li = re.findall("<em>(.*?)</em>", hit["highlight"]["content"][0])
+            if len(match_str) - len(match_character_li) <= 0.25 * len(match_str):
+                # 字数相差小于原来的1/4
+                if hit['_source']["author"] != "":
+                    return [hit['_source']]
+                else:
+                    str_li.append(hit['_source'])
+        return str_li
+
+    def mrmy_correct(self, texts):
+        """
+        匹配名人名言，纠正并返回
+        :param text:
+        :return:
+        """
+        match_mrmy_li = []
+        for text in texts:
+            query_text = text
+            correct = {}
+            res_li = self.mrmy_search(query_tran=query_text)
+            if len(res_li) == 0:
+                match_mrmy_li.append(correct)
+                continue
+
+            for res in res_li[:1]:
+                src_text, author = res["content"], res["author"]
+                correct[src_text] = author
+                match_mrmy_li.append(correct)
+        return match_mrmy_li
+
     def poem_search(self, query_tran='天生我材必有用'):
         """
         匹配诗句，不用分词，至少有6个字一致
@@ -109,14 +167,15 @@ class CSCmatch:
             }
         }
 
-        result = self.es.search(index="poem_v1", body=query, size=1)
+        result = self.es.search(index="poem_v1", body=query, size=2)
         # 默认一个输入最多只包含1个诗句
         hits_list = result['hits']['hits']
         str_li = []
         for hit in hits_list:
             match_str = hit['_source']['sgl_cont']
+            info = hit['_source']['title'] + "|" + hit['_source']['dynasty'] + "|" + hit['_source']['author']
             match_character_li = re.findall("<em>(.*?)</em>", hit["highlight"]["sgl_cont"][0])
-            if len(match_str) - len(match_character_li) <= 4:
+            if len(match_str) - len(match_character_li) <= 5:
                 # 与原来的数据差别小于4个字，包括标点
                 pattern_li = [w if w in match_character_li else "." for w in match_str]
                 match_idom = re.search("".join(pattern_li), query_tran)
@@ -124,7 +183,7 @@ class CSCmatch:
                     low, high = match_idom.span()
                     src_text = query_tran[low:high]
                     if match_str == src_text:
-                        res = (low, high, src_text, match_str)
+                        res = (low, high, src_text, match_str, info)
                         str_li.append(res)
                     else:
                         trg_tokens = []
@@ -133,7 +192,7 @@ class CSCmatch:
                                 trg_tokens.append(t)
                             else:
                                 trg_tokens.append(s)
-                        res = (low, high, src_text, "".join(trg_tokens))
+                        res = (low, high, src_text, "".join(trg_tokens), info)
                         str_li.append(res)
         return str_li
 
@@ -148,18 +207,19 @@ class CSCmatch:
         for text in texts:
             query_text = text
             change_poem_li = []
+            correct = {}
             res_li = self.poem_search(query_tran=query_text)
             if len(res_li) == 0:
-                sents_res_li.append(query_text)
-                res_poem_li.append([])
+                sents_res_li.append(correct)
+                res_poem_li.append(change_poem_li)
                 continue
 
             for res in res_li:
-                i, j, src_text, trg_text = res
+                i, j, src_text, trg_text, info = res
                 change_poem_li.extend([p for p in range(i, j)])
-                query_text = query_text.replace(src_text, trg_text)
-            sents_res_li.append(query_text)
-            res_poem_li.append([])
+                correct[src_text] = trg_text + "####" + info
+            sents_res_li.append(correct)
+            res_poem_li.append(change_poem_li)
         return sents_res_li, res_poem_li
 
     def cy_candidates(self, query_tran='高瞻远瞩'):
@@ -193,8 +253,8 @@ class CSCmatch:
         :param no_change_li:
         :return:
         """
-        res_li = []
-        # res_poem_li = []
+        match_cy_li = []
+        pos_cy_li = []
 
         for text, change_li in zip(texts, change_li_all):
             query_text = text
@@ -210,8 +270,12 @@ class CSCmatch:
                     j = i + d
                     if j < num:
                         word_str = "".join(words[i:j])
-                        if len(word_str) == 4 and word_str not in self.cy_set \
-                                and not self.is_no_change(s, word_str, change_li):
+
+                        if len(word_str) == 4 and word_str in self.cy_set:
+                            correct[word_str] = word_str
+                            # 正确的匹配到的
+                            continue
+                        if len(word_str) == 4 and not self.is_no_change(s, word_str, change_li):
                             w_src = word_str
                             match_trgs = self.cy_candidates(w_src)
                             if len(match_trgs) != 0:
@@ -220,11 +284,10 @@ class CSCmatch:
                                     correct[w_src] = w_trg
                                     cy_li.extend([s + p for p in range(len(word_str))])
                 s += len(words[i])
-            # print(correct)
-            for item in correct:
-                query_text = query_text.replace(item, correct[item])
-            res_li.append(query_text)
-        return res_li
+
+            pos_cy_li.append(cy_li)
+            match_cy_li.append(correct)
+        return match_cy_li, pos_cy_li
 
     def ci_candidates(self, query_tran='高瞻远瞩'):
         """

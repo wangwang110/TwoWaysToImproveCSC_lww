@@ -36,6 +36,9 @@ class CSC:
 
         句子输入，文章输入要做哪些前处理 （借鉴语法纠错）
 
+        2. 要不要返回检索到的名人名言，诗词，成语
+
+
         :param data:
         :return:
         """
@@ -43,7 +46,7 @@ class CSC:
         output_dict = {
             "status": 0,
             "msg": u"错别字纠正完成",
-            "data": {"input_text": "", "output_text": "", "edits": []}}
+            "data": {"input_text": "", "output_text": "", "edits": [], "chengyu": [], "poem": [], "mrmy": []}}
 
         try:
             original_text = str(data.get("article"))
@@ -78,21 +81,24 @@ class CSC:
         if len("".join(input_li_space)) != len(original_text):
             output_dict["msg"] = u"系统错误"
             output_dict["status"] = 13
-            print('=============================== error ===============================')
         else:
+            all_pos = [[] for _ in range(len(input_li))]
             if self.match_process_tag:
-                res_li, res_poem_li = self.match_model.poem_correct(input_li)
-                src_li = self.match_model.cy_correct(res_li, res_poem_li)
+                src_li, output_mymy_li, output_poem_li, output_cy_li = self.match_sents(input_li, all_pos)
+                output_dict["data"]["mrmy"] = output_mymy_li
+                output_dict["data"]["poem"] = output_poem_li
+                output_dict["data"]["chengyu"] = output_cy_li
             else:
                 src_li = input_li
 
-            _, trg_li = self.model.test(src_li)
+            trg_li = self.model.test(src_li)
+            reset_trg_li = self.post_process(src_li, trg_li, all_pos)
 
             # 获得修改列表，位置对应好
             edits = []
             pos = 0
             new_trg_li = []
-            for src, trg in zip(input_li, trg_li):
+            for src, trg in zip(input_li, reset_trg_li):
                 new_trg = []
                 for s, t in zip(src, trg):
                     if s in self.punct:
@@ -100,7 +106,6 @@ class CSC:
                         new_trg.append(s)
                         pos += 1
                         continue
-
                     if s != t:
                         edit = {"pos": position_mapping[pos], "src_token": s, "trg_token": t}
                         edits.append(edit)
@@ -113,6 +118,81 @@ class CSC:
             output_dict["data"]["edits"] = edits
 
         return output_dict
+
+    def post_process(self, src_li, trg_li, all_pos):
+        """
+        :param src_li:
+        :param trg_li:
+        :param all_pos:
+        :return:
+        """
+        final_res_li = []
+        for src_sent, trg_sent, pos_li in zip(src_li, trg_li, all_pos):
+            pos = 0
+            src_tokens = list(src_sent)
+            trg_tokens = list(trg_sent)
+            for s, t in zip(src_tokens, trg_tokens):
+                if s != t and pos in pos_li:
+                    trg_tokens[pos] = src_tokens[pos]
+                pos += 1
+            final_res_li.append("".join(trg_tokens))
+        return final_res_li
+
+    def help_match_sents(self, input_li, match_poem_li, pos_poem_li, all_pos, name):
+        """
+        根据修正返回原句
+        :param input_li:
+        :param match_poem_li:
+        :return:
+        """
+        match_res_li = []
+        res_li = []
+        num = len(input_li)
+        for i in range(num):
+            query_text = input_li[i]
+            for src_text in match_poem_li[i]:
+                if name == "poem":
+                    trg_text, info = match_poem_li[i][src_text].split("####")
+                else:
+                    trg_text = match_poem_li[i][src_text]
+                    info = ""
+                query_text = query_text.replace(src_text, trg_text)
+                if src_text == trg_text:
+                    match_item = {"src": src_text, "trg": trg_text, "info": info}
+                else:
+                    match_item = {"src": src_text, "trg": trg_text, "info": info}
+                match_res_li.append(match_item)
+            res_li.append(query_text)
+
+        for pos_li, poem_li in zip(all_pos, pos_poem_li):
+            pos_li.extend(poem_li)
+
+        return res_li, match_res_li
+
+    def match_sents(self, input_li, all_pos):
+        """
+        匹配名人名言，诗词，成语，并返回结果
+        :return:
+        """
+
+        # 1. 匹配名人名言, 不纠正
+        match_mrmy_li = self.match_model.mrmy_correct(input_li)
+        output_mymy_li = []
+        for i in range(len(input_li)):
+            for src_text in match_mrmy_li[i]:
+                author = match_mrmy_li[i][src_text]
+                match_item = {"src": input_li[i], "trg": src_text, "info": author}
+                output_mymy_li.append(match_item)
+
+        # 2. 匹配诗句，纠正
+        match_poem_li, pos_poem_li = self.match_model.poem_correct(input_li)
+        res_poem_li, output_poem_li = self.help_match_sents(input_li, match_poem_li, pos_poem_li, all_pos, name="poem")
+
+        # 3. 匹配成语
+        match_cy_li, pos_cy_li = self.match_model.cy_correct(res_poem_li, all_pos)
+        res_cy_li, output_cy_li = self.help_match_sents(res_poem_li, match_cy_li, pos_cy_li, all_pos, name="chengyu")
+
+        return res_cy_li, output_mymy_li, output_poem_li, output_cy_li
 
     def get_mapping_positon(self, source, candidate):
         i = 0
@@ -146,15 +226,19 @@ class CSC:
 if __name__ == "__main__":
     # 初始化模型
     bert_path = "/data_local/plm_models/chinese_L-12_H-768_A-12/"
-    load_path = "/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/base_998/sighan13/model.pkl"
+    load_path = "/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/base_all/sighan13/model.pkl"
     obj = CSC(bert_path, load_path)
     texts = [
+        "爱迪生曾说过：天才是百分之九十九的汗水，加百分之一的天分",
+        "时间就是生命。赶快行动起来吧！",
+        "剪不断，理还乱，是离愁，别是一办滋味在心头。四年级:李孜",
+        "我见过一望无际、波澜壮阔的大海；玩赏过水平如镜、诗情画意的西湖；游览过翡翠般的漓江；让我难以忘怀的要数那荷叶飘香、群山坏绕的普者黑。",
+        "「不禁一番寒辙骨，焉得梅花扑鼻香。」这就是最好的说明，没有失败哪里来的成功呢？",
         "今天天气很好 ，风和日里，出去玩吧，你 觉得如喝。这个月冲值有优惠吗？我这个月重置了话费？请帮我查木月的流量；",
         "我们要牢记见贤思其，见不贤而内自醒",
         "我爱北进天安门。。。我爱北京天按门",
         "我爱北京天按门",
         "没过几分钟，救护车来了，发出响亮而清翠的声音",
-        "我见过一望无际、波澜壮阔的大海；玩赏过水平如镜、诗情画意的西湖；游览过翡翠般的漓江；让我难以忘怀的要数那荷叶飘香、群山坏绕的普者黑。"
     ]
     for text in texts:
         print(text)
@@ -162,7 +246,7 @@ if __name__ == "__main__":
             "article": text
         }
         res = obj.correct(data)
-        # print(res)
+        print(res)
 
         for item in res['data']['edits']:
             print(item["src_token"] + "==" + list(text)[item["pos"]])

@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3be6c5d1-09b5-4fde-ba6a-b936fa0f4f55" name="Default" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,16 +17,21 @@
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$compare_file.coverage" NAME="compare_file Coverage Results" MODIFIED="1643081082746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/data" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$clean_baike_zh.coverage" NAME="clean_baike_zh Coverage Results" MODIFIED="1644570891752" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/large_data" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$strTools.coverage" NAME="strTools Coverage Results" MODIFIED="1645078733604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/large_data" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$hac_md5_1.coverage" NAME="hac_md5_1 Coverage Results" MODIFIED="1646211729619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/chinese-xinhua" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$parser_mita_res_13.coverage" NAME="parser_mita_res_13 Coverage Results" MODIFIED="1642577166759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/cc_data" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$elasticsearch_mrmy.coverage" NAME="elasticsearch_mrmy Coverage Results" MODIFIED="1646363167252" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/chinese-xinhua" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$geyan_spider.coverage" NAME="geyan_spider Coverage Results" MODIFIED="1646360647222" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/chinese-xinhua" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$elasticsearch_idom_cut.coverage" NAME="elasticsearch_idom_cut Coverage Results" MODIFIED="1644546520696" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/chinese-xinhua" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$test_ed.coverage" NAME="test_ed Coverage Results" MODIFIED="1645527921718" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$spacy_token.coverage" NAME="spacy_token Coverage Results" MODIFIED="1644997211153" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/chinese-xinhua" />
-    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$parser_res.coverage" NAME="parser_res Coverage Results" MODIFIED="1645669345517" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/cc_data" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$merge_es_process.coverage" NAME="merge_es_process Coverage Results" MODIFIED="1646190546305" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/chinese-xinhua" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$parser_res.coverage" NAME="parser_res Coverage Results" MODIFIED="1646191971793" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/cc_data" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$generate_csc_data.coverage" NAME="generate_csc_data Coverage Results" MODIFIED="1643182178563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/large_data" />
-    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$test_cut.coverage" NAME="test_cut Coverage Results" MODIFIED="1644810169471" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/large_data" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$test_cut.coverage" NAME="test_cut Coverage Results" MODIFIED="1646206457604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/chinese-xinhua" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$avarage_load.coverage" NAME="avarage_load Coverage Results" MODIFIED="1642813843442" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$bft_eval.coverage" NAME="bft_eval Coverage Results" MODIFIED="1642992450865" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$get_similarchar.coverage" NAME="get_similarchar Coverage Results" MODIFIED="1645154936528" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/large_data" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$test_spider.coverage" NAME="test_spider Coverage Results" MODIFIED="1646361755647" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/chinese-xinhua" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$new_bft_train2.coverage" NAME="new_bft_train2 Coverage Results" MODIFIED="1644305097451" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$process.coverage" NAME="process Coverage Results" MODIFIED="1644310230981" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/易混淆词" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$elasticsearch_cy_new.coverage" NAME="elasticsearch_cy_new Coverage Results" MODIFIED="1644906545525" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/chinese-xinhua" />
@@ -37,6 +41,7 @@
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$match_value.coverage" NAME="match_value Coverage Results" MODIFIED="1644566061720" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/data_analysis" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$dataset.coverage" NAME="dataset Coverage Results" MODIFIED="1644840630527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/model" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$elasticsearch_cy.coverage" NAME="elasticsearch_cy Coverage Results" MODIFIED="1644908919807" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/chinese-xinhua" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$motto_spider.coverage" NAME="motto_spider Coverage Results" MODIFIED="1646305594106" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/chinese-xinhua" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$wang_data_process.coverage" NAME="wang_data_process Coverage Results" MODIFIED="1645442643087" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/data" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$parser_res_text.coverage" NAME="parser_res_text Coverage Results" MODIFIED="1644918303074" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/cc_data" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$generate_csc_data_bert.coverage" NAME="generate_csc_data_bert Coverage Results" MODIFIED="1642646774871" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
@@ -61,93 +66,58 @@
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$functional.coverage" NAME="functional Coverage Results" MODIFIED="1643093969290" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/.PyCharm2018.1/system/remote_sources/746897114/47249651/torch/nn" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$bft_train_loss_weight.coverage" NAME="bft_train_loss_weight Coverage Results" MODIFIED="1642579098952" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$get_chengyu.coverage" NAME="get_chengyu Coverage Results" MODIFIED="1644547584291" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/chinese-xinhua" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$hac_md5.coverage" NAME="hac_md5 Coverage Results" MODIFIED="1646211447016" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/chinese-xinhua" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$bft_train_focal.coverage" NAME="bft_train_focal Coverage Results" MODIFIED="1642498662346" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$csc_match.coverage" NAME="csc_match Coverage Results" MODIFIED="1646380388611" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$character2pic.coverage" NAME="character2pic Coverage Results" MODIFIED="1642757414698" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/large_data" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$generate_csc_data_test.coverage" NAME="generate_csc_data_test Coverage Results" MODIFIED="1644564971352" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/large_data" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$baike_mrmy.coverage" NAME="baike_mrmy Coverage Results" MODIFIED="1646306183516" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/chinese-xinhua" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$csc_main.coverage" NAME="csc_main Coverage Results" MODIFIED="1646386785815" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="parser_res.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BERT/cc_data/parser_res.py">
+      <file leaf-file-name="csc_tornado.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BERT/csc_tornado.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="346">
-              <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+            <state relative-caret-position="324">
+              <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
               <folding>
-                <element signature="e#180#548#0" />
+                <element signature="e#18#29#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bert_model_res.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BERT/cc_data/bert_model_res.py">
+      <file leaf-file-name="csc_model.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BERT/csc_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1377" />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="parser_mita_res.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BERT/cc_data/parser_mita_res.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-5236" />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BERT/save/test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="31" column="13" lean-forward="true" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+            <state relative-caret-position="-2268">
+              <caret line="34" selection-start-line="34" selection-end-line="34" />
+              <folding>
+                <element signature="e#1390#3361#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_api.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test_api.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file leaf-file-name="cc_confuse.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BERT/save/cc_confuse.txt">
+      <file leaf-file-name="csc_main.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/BERT/csc_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="26" selection-start-line="26" selection-end-line="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="normalization.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.PyCharm2018.1/system/remote_sources/746897114/47249651/torch/nn/modules/normalization.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="130" column="69" selection-start-line="130" selection-start-column="51" selection-end-line="130" selection-end-column="69" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="generate_csc_data_process.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/large_data/generate_csc_data_process.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="557">
-              <caret line="165" lean-forward="true" selection-start-line="165" selection-end-line="165" />
+            <state relative-caret-position="129">
+              <caret line="95" lean-forward="true" selection-end-line="253" />
               <folding>
                 <element signature="e#25#35#0" expanded="true" />
+                <element signature="e#4532#5330#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="getF1.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BERT/data_analysis/getF1.py">
+      <file leaf-file-name="csc_utils.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BERT/csc_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="257" column="19" lean-forward="true" selection-start-line="257" selection-start-column="19" selection-end-line="257" selection-end-column="19" />
-              <folding>
-                <element signature="e#62#99#0" expanded="true" />
-                <element signature="e#253#3363#0" />
-                <element signature="e#3418#6940#0" />
-                <element signature="e#7065#7433#0" />
-              </folding>
+            <state relative-caret-position="486">
+              <caret line="33" column="58" lean-forward="true" selection-start-line="31" selection-start-column="2" selection-end-line="33" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -175,24 +145,24 @@
       <find>畔</find>
       <find>着</find>
       <find />
-      <find />
-      <find />
-      <find />
-      <find />
-      <find />
-      <find />
-      <find />
-      <find />
-      <find />
-      <find />
-      <find />
-      <find />
-      <find />
-      <find />
-      <find />
       <find>跺</find>
-      <find />
       <find>self_base_998</find>
+      <find>爱迪生</find>
+      <find>print</find>
+      <find>黑发不知勤学早，白首方悔读书迟</find>
+      <find>莫泊桑</find>
+      <find>高尔基</find>
+      <find>关汉卿</find>
+      <find>陆游</find>
+      <find>时间就是生命</find>
+      <find>cy_correct</find>
+      <find>edits</find>
+      <find>help_match_sents</find>
+      <find>mrmy</find>
+      <find>mrmy_search</find>
+      <find>match_sents</find>
+      <find>熟读唐诗三百首</find>
+      <find>poem_search</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -201,43 +171,15 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/BERT/chinese-xinhua/elasticsearch_cy.log" />
-        <option value="$PROJECT_DIR$/large_data/generate_csc_data_trans.py" />
-        <option value="$PROJECT_DIR$/large_data/clean_trans_zh.py" />
-        <option value="$PROJECT_DIR$/large_data/test_cut.py" />
-        <option value="$PROJECT_DIR$/BERT/model/dataset.py" />
-        <option value="$PROJECT_DIR$/BERT/bft_train.py" />
-        <option value="$PROJECT_DIR$/BERT/chinese-xinhua/elasticsearch_cy_new.py" />
-        <option value="$PROJECT_DIR$/large_data/generate_csc_data.py" />
-        <option value="$PROJECT_DIR$/BERT/bft_eval.py" />
-        <option value="$PROJECT_DIR$/BERT/data_analysis/A_paper_13test_paper_13test_cy_13.txt" />
-        <option value="$PROJECT_DIR$/BERT/cc_data/parser_res_text.py" />
-        <option value="$PROJECT_DIR$/BERT/chinese-xinhua/elasticsearch_cy.py" />
-        <option value="$PROJECT_DIR$/BERT/paper_eval.sh" />
-        <option value="$PROJECT_DIR$/BERT/chinese-xinhua/spacy_token.py" />
-        <option value="$PROJECT_DIR$/BERT/chinese-xinhua/elasticsearch_poem.py" />
-        <option value="$PROJECT_DIR$/BERT/chinese-xinhua/elasticsearch_ci.py" />
-        <option value="$USER_HOME$/AppData/Local/Temp/scp46061/data_local/TwoWaysToImproveCSC/BERT/sighan13_run_bert.sh" />
-        <option value="$PROJECT_DIR$/BERT/save/test.py" />
-        <option value="$USER_HOME$/AppData/Local/Temp/scp09772/data_local/TwoWaysToImproveCSC/BERT/data/wiki_data_process.sh" />
-        <option value="$PROJECT_DIR$/large_data/clean_wiki_zh.py" />
-        <option value="$PROJECT_DIR$/large_data/clean_weibo_zh.py" />
-        <option value="$PROJECT_DIR$/large_data/clean_baike_zh.py" />
-        <option value="$PROJECT_DIR$/large_data/strTools.py" />
-        <option value="$PROJECT_DIR$/BERT/csc_eval.py" />
-        <option value="$PROJECT_DIR$/large_data/get_similarchar.py" />
-        <option value="$USER_HOME$/AppData/Local/Temp/scp00599/data_local/TwoWaysToImproveCSC/BERT/pretrain_bert_test.sh" />
-        <option value="$PROJECT_DIR$/BERT/data_analysis/ttest.py" />
-        <option value="$PROJECT_DIR$/large_data/generate_csc_data_process.py" />
-        <option value="$PROJECT_DIR$/BERT/data_analysis/A_self_wiki_00_base_self_wiki_00_base_confuse_chinese_spell_lower_4.txt.txt" />
-        <option value="$PROJECT_DIR$/BERT/save/cc_confuse.txt" />
-        <option value="$PROJECT_DIR$/BERT/data/process_pretrain.sh" />
-        <option value="$USER_HOME$/AppData/Local/Temp/scp08297/data_local/TwoWaysToImproveCSC/BERT/sighan13_run_bert.sh" />
-        <option value="$PROJECT_DIR$/BERT/data/wang_data_process.py" />
-        <option value="$PROJECT_DIR$/BERT/test_ed.py" />
-        <option value="$USER_HOME$/AppData/Local/Temp/scp33299/data_local/TwoWaysToImproveCSC/BERT/data/process_pretrain.sh" />
-        <option value="$PROJECT_DIR$/BERT/cc_data/parser_res.py" />
-        <option value="$PROJECT_DIR$/BERT/data_analysis/getF1.py" />
+        <option value="$PROJECT_DIR$/BERT/chinese-xinhua/xiaoxue_mrmy.txt" />
+        <option value="$PROJECT_DIR$/BERT/chinese-xinhua/elasticsearch_poem_mrmy.py" />
+        <option value="$PROJECT_DIR$/BERT/chinese-xinhua/test_spider.py" />
+        <option value="$PROJECT_DIR$/BERT/chinese-xinhua/elasticsearch_mrmy.py" />
+        <option value="$PROJECT_DIR$/BERT/csc_tornado.py" />
+        <option value="$PROJECT_DIR$/BERT/csc_model.py" />
+        <option value="$PROJECT_DIR$/BERT/csc_match.py" />
+        <option value="$PROJECT_DIR$/BERT/chinese-xinhua/geyan_spider.py" />
+        <option value="$PROJECT_DIR$/BERT/csc_main.py" />
       </list>
     </option>
   </component>
@@ -279,13 +221,7 @@
               <item name="TwoWaysToImproveCSC_lww" type="b2602c69:ProjectViewProjectNode" />
               <item name="TwoWaysToImproveCSC_lww" type="462c0819:PsiDirectoryNode" />
               <item name="BERT" type="462c0819:PsiDirectoryNode" />
-              <item name="cc_data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwoWaysToImproveCSC_lww" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwoWaysToImproveCSC_lww" type="462c0819:PsiDirectoryNode" />
-              <item name="BERT" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="chinese-xinhua" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TwoWaysToImproveCSC_lww" type="b2602c69:ProjectViewProjectNode" />
@@ -310,13 +246,13 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../csc" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -328,16 +264,16 @@
     <property name="settings.editor.selected.configurable" value="fileTemplates" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT\chinese-xinhua" />
-      <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT\model\BERT\baseline" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT\data" />
       <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT\chinese-xinhua" />
+      <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT\data" />
       <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT\chinese-xinhua\other_resource" />
       <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\large_data" />
       <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT\cc_data" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT\chinese-xinhua" />
+      <recent name="E:\刘旺旺的坚果云\工作\211-project\TwoWaysToImproveCSC_lww\BERT\model\BERT\baseline" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -352,65 +288,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.getF1">
-    <configuration name="getF1" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="TwoWaysToImproveCSC_lww" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BERT/data_analysis" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BERT/data_analysis/getF1.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="get_similarchar" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="TwoWaysToImproveCSC_lww" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/large_data" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/large_data/get_similarchar.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="parser_res" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="TwoWaysToImproveCSC_lww" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BERT/cc_data" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BERT/cc_data/parser_res.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="test_ed" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.csc_main">
+    <configuration name="csc_main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="TwoWaysToImproveCSC_lww" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -423,13 +302,13 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BERT/test_ed.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BERT/csc_main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="wang_data_process" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="csc_match" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="TwoWaysToImproveCSC_lww" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -437,31 +316,88 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BERT/data" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BERT" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BERT/data/wang_data_process.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BERT/csc_match.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="elasticsearch_mrmy" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="TwoWaysToImproveCSC_lww" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BERT/chinese-xinhua" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BERT/chinese-xinhua/elasticsearch_mrmy.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="geyan_spider" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="TwoWaysToImproveCSC_lww" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BERT/chinese-xinhua" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BERT/chinese-xinhua/geyan_spider.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="test_spider" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="TwoWaysToImproveCSC_lww" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BERT/chinese-xinhua" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BERT/chinese-xinhua/test_spider.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <list>
-      <item itemvalue="Python.get_similarchar" />
-      <item itemvalue="Python.getF1" />
-      <item itemvalue="Python.parser_res" />
-      <item itemvalue="Python.wang_data_process" />
-      <item itemvalue="Python.test_ed" />
+      <item itemvalue="Python.geyan_spider" />
+      <item itemvalue="Python.test_spider" />
+      <item itemvalue="Python.elasticsearch_mrmy" />
+      <item itemvalue="Python.csc_main" />
+      <item itemvalue="Python.csc_match" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.getF1" />
-        <item itemvalue="Python.parser_res" />
-        <item itemvalue="Python.test_ed" />
-        <item itemvalue="Python.wang_data_process" />
-        <item itemvalue="Python.get_similarchar" />
+        <item itemvalue="Python.csc_main" />
+        <item itemvalue="Python.csc_match" />
+        <item itemvalue="Python.elasticsearch_mrmy" />
+        <item itemvalue="Python.test_spider" />
+        <item itemvalue="Python.geyan_spider" />
       </list>
     </recent_temporary>
   </component>
@@ -479,6 +415,7 @@
       <workItem from="1642778098884" duration="132000" />
       <workItem from="1642839100874" duration="687000" />
       <workItem from="1644218146809" duration="9799000" />
+      <workItem from="1646147063134" duration="1289000" />
     </task>
     <servers />
   </component>
@@ -490,17 +427,18 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5005365" side_tool="true" weight="0.2939815" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="File Transfer" order="7" weight="0.005787037" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946353" visible="true" weight="0.18518518" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946353" visible="true" weight="0.2048611" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.3298611" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="right" id="Remote Host" order="3" visible="true" weight="0.11319742" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49876237" visible="true" weight="0.34012875" />
+      <window_info anchor="right" id="Remote Host" order="3" weight="0.33422747" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49876237" visible="true" weight="0.16738197" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.12731482" />
       <window_info anchor="right" id="SciView" order="3" weight="0.30096567" />
       <window_info id="Structure" order="1" sideWeight="0.50123763" side_tool="true" weight="0.21137339" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.30671296" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.18055555" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -508,14 +446,10 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="WindowStateProjectService">
     <state x="890" y="-835" key="#com.intellij.ide.ui.customization.CustomizableActionsPanel.FindAvailableActionsDialog" timestamp="1644219031709">
@@ -531,11 +465,11 @@
       <screen x="126" y="-1080" width="1920" height="1040" />
     </state>
     <state x="84" y="-919" width="1736" height="856" key="DiffContextDialog/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644596486692" />
-    <state x="1331" y="-919" width="540" height="504" key="FileChooserDialogImpl" timestamp="1644593359827">
+    <state x="1331" y="-919" width="540" height="504" key="FileChooserDialogImpl" timestamp="1646147759611">
       <screen x="126" y="-1080" width="1920" height="1040" />
     </state>
     <state x="679" y="277" key="FileChooserDialogImpl/-126.1080.1440.933/0.0.1920.1040@0.0.1920.1040" timestamp="1642606067958" />
-    <state x="1331" y="-919" width="540" height="504" key="FileChooserDialogImpl/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644593359827" />
+    <state x="1331" y="-919" width="540" height="504" key="FileChooserDialogImpl/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1646147759611" />
     <state width="1867" height="248" key="GridCell.Tab.0.bottom" timestamp="1644596486554">
       <screen x="126" y="-1080" width="1920" height="1040" />
     </state>
@@ -593,6 +527,10 @@
       <screen x="126" y="-1080" width="1920" height="1040" />
     </state>
     <state x="953" y="-555" key="com.intellij.ide.ui.customization.CustomizableActionsPanel$EditIconDialog/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1644219122044" />
+    <state x="703" y="-777" key="com.intellij.ide.util.TipDialog" timestamp="1646147062334">
+      <screen x="126" y="-1080" width="1920" height="1040" />
+    </state>
+    <state x="703" y="-777" key="com.intellij.ide.util.TipDialog/0.0.1440.920/126.-1080.1920.1040@126.-1080.1920.1040" timestamp="1646147062334" />
     <state x="719" y="418" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1642603530319">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -686,11 +624,6 @@
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/BERT/csc_eval.py</url>
-          <line>196</line>
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/BERT/bert_eval.py</url>
           <line>107</line>
           <option name="timeStamp" value="3" />
@@ -752,7 +685,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/large_data/strTools.py</url>
-          <line>103</line>
+          <line>104</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -821,13 +754,8 @@
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/BERT/csc_eval.py</url>
-          <line>38</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/large_data/clean_baike_zh.py</url>
-          <line>127</line>
+          <line>130</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -851,7 +779,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/BERT/cc_data/parser_res.py</url>
-          <line>91</line>
+          <line>77</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -864,8 +792,69 @@
           <line>57</line>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/chinese-xinhua/geyan_spider.py</url>
+          <line>67</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/chinese-xinhua/geyan_spider.py</url>
+          <line>46</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/chinese-xinhua/geyan_spider.py</url>
+          <line>16</line>
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/chinese-xinhua/elasticsearch_mrmy.py</url>
+          <line>114</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/csc_main.py</url>
+          <line>227</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/csc_main.py</url>
+          <line>25</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/csc_main.py</url>
+          <line>78</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/csc_main.py</url>
+          <line>86</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/csc_match.py</url>
+          <line>289</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/csc_match.py</url>
+          <line>282</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/csc_main.py</url>
+          <line>187</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="28" />
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+      <option name="time" value="23" />
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
@@ -879,225 +868,53 @@
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>layer_norm</expression-string>
+        <expression-string>0.25*len(match_str)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>path_out</expression-string>
+        <expression-string>0.2*len(match_str)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>src, trg, pre, pre_new</expression-string>
+        <expression-string>len(match_str)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>pre_new,trg</expression-string>
+        <expression-string>0.5*len(match_str)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>pre_newtrg</expression-string>
+        <expression-string>match_str</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>pre_new == trg</expression-string>
+        <expression-string>&quot;&quot;.join(pattern_li)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>pre_new</expression-string>
+        <expression-string>query_tran</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>sen_acc</expression-string>
+        <expression-string>result</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>sen_mod_acc</expression-string>
+        <expression-string>match_character_li</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/BERT/chinese-xinhua/elasticsearch_ci_pinyin.log" />
-    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/A_test_wiki_00_lower_test_wiki_00_lower_confuse_13.txt" />
-    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/A_paper_13test_paper_13test_cy_13.txt" />
-    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/A_test_wiki_00test_wiki_00_confusion_large_4.txt" />
-    <entry file="file://$PROJECT_DIR$/BERT/chinese-xinhua/13test_cy.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/chinese-xinhua/elasticsearch_poem.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="996">
-          <caret line="176" selection-start-line="176" selection-end-line="176" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/large_data/clean_trans_zh.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="34" column="62" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/cc_data/chinese_spell_4.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/chinese-xinhua/spacy_token.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-506" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/chinese-xinhua/elasticsearch_ci.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4840">
-          <caret line="48" column="21" lean-forward="true" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/scp46061/data_local/TwoWaysToImproveCSC/BERT/sighan13_run_bert.sh" />
-    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/A_self_wiki_00_lower_self_wiki_00_lower_confuse_13test_lower.txt.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1305">
-          <caret line="1960" column="6" lean-forward="true" selection-start-line="1960" selection-start-column="6" selection-end-line="1960" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/chinese-xinhua/elasticsearch_cy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="295" column="32" selection-start-line="295" selection-start-column="32" selection-end-line="295" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/save/get_confusion.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="16" column="35" selection-end-line="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/scp26681/data_local/TwoWaysToImproveCSC/large_data/wiki_csc.sh" />
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/scp09772/data_local/TwoWaysToImproveCSC/BERT/data/wiki_data_process.sh" />
-    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/A_self_wiki_00_lower_self_wiki_00_lower_confuse_chinese_spell_lower_4.txt.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5913">
-          <caret line="129" column="5" lean-forward="true" selection-start-line="129" selection-start-column="5" selection-end-line="129" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/large_data/clean_wiki_zh.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="9" column="19" lean-forward="true" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/large_data/strTools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="105" selection-start-line="105" selection-end-line="105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/csc_eval.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="196" lean-forward="true" selection-start-line="196" selection-end-line="196" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/scp00599/data_local/TwoWaysToImproveCSC/BERT/pretrain_bert_test.sh" />
-    <entry file="file://$PROJECT_DIR$/large_data/clean_baike_zh.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="33" column="36" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="36" />
-          <folding>
-            <element signature="e#25#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/cc_data/parser_mita_res_13.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/large_data/get_similarchar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="58" column="68" selection-start-line="58" selection-start-column="68" selection-end-line="58" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/large_data/get_char_pinyin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="621">
-          <caret line="26" column="39" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/large_data/clean_weibo_zh.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="49" selection-start-line="49" selection-end-line="56" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/cc_data/parser_res_text.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="58" column="64" selection-start-line="58" selection-start-column="64" selection-end-line="58" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/A_self_wiki_00_base_self_wiki_00_base_confuse_13test_lower.txt.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="5" column="10" lean-forward="true" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/A_self_wiki_00_base_self_wiki_00_base_confuse_chinese_spell_lower_4.txt.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="13" column="20" lean-forward="true" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/scp08297/data_local/TwoWaysToImproveCSC/BERT/sighan13_run_bert.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="864">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/data/13test.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="30" column="39" selection-start-line="30" selection-end-line="30" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/chinese-xinhua/scripts/ci.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/BERT/data/process_pretrain.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
@@ -1107,38 +924,15 @@
     </entry>
     <entry file="file://$USER_HOME$/.PyCharm2018.1/system/remote_sources/746897114/47249651/torch/nn/modules/normalization.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
+        <state relative-caret-position="3348">
           <caret line="130" column="69" selection-start-line="130" selection-start-column="51" selection-end-line="130" selection-end-column="69" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/test_ed.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-          <folding>
-            <element signature="e#62#74#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/scp54225/data_local/TwoWaysToImproveCSC/BERT/pretrain_bert.sh">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/scp33299/data_local/TwoWaysToImproveCSC/BERT/data/process_pretrain.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="32" column="19" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/A_self_base_998_self_base_chinese_spell_lower_4.txt.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="1312" column="10" lean-forward="true" selection-start-line="1312" selection-start-column="10" selection-end-line="1312" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/test_ed.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/scp54225/data_local/TwoWaysToImproveCSC/BERT/pretrain_bert.sh" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/scp33299/data_local/TwoWaysToImproveCSC/BERT/data/process_pretrain.sh" />
+    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/A_self_base_998_self_base_chinese_spell_lower_4.txt.txt" />
     <entry file="file://$PROJECT_DIR$/BERT/data/wang_data_process.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1323">
@@ -1151,8 +945,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/large_data/generate_csc_data_process.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="557">
-          <caret line="165" lean-forward="true" selection-start-line="165" selection-end-line="165" />
+        <state relative-caret-position="4185">
+          <caret line="165" selection-start-line="165" selection-end-line="165" />
           <folding>
             <element signature="e#25#35#0" expanded="true" />
           </folding>
@@ -1161,15 +955,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BERT/save/cc_confuse.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
+        <state relative-caret-position="702">
           <caret line="26" selection-start-line="26" selection-end-line="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BERT/data_analysis/getF1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="257" column="19" lean-forward="true" selection-start-line="257" selection-start-column="19" selection-end-line="257" selection-end-column="19" />
+        <state relative-caret-position="2457">
+          <caret line="257" column="19" selection-start-line="257" selection-start-column="19" selection-end-line="257" selection-end-column="19" />
           <folding>
             <element signature="e#62#99#0" expanded="true" />
             <element signature="e#253#3363#0" />
@@ -1179,51 +973,305 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/cc_data/zuowen.test" />
+    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/ttest.py" />
+    <entry file="file://$PROJECT_DIR$/BERT/model/test1.py" />
+    <entry file="file://$PROJECT_DIR$/BERT/model/test2.py" />
+    <entry file="file://$PROJECT_DIR$/BERT/save/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/cc_data/parser_mita_res.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/cc_data/bert_model_res.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/save_code.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="15" column="34" lean-forward="true" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/avarage_load.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="11" column="40" lean-forward="true" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/cc_bad.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="2210" column="18" selection-start-line="2210" selection-start-column="18" selection-end-line="2210" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/remote_sources/746897114/-9014705/hashlib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="67" column="68" selection-start-line="67" selection-start-column="57" selection-end-line="67" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/chinese-xinhua/hac_md5_1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="13" column="20" lean-forward="true" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/chinese-xinhua/hac_md5.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="20" column="44" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="44" />
+          <folding>
+            <element signature="e#17#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/chinese-xinhua/test_cut.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="29" selection-start-line="29" selection-end-line="36" selection-end-column="10" />
+          <folding>
+            <element signature="e#19#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/test_load_bert.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/13_good.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="1002" column="10" lean-forward="true" selection-start-line="1002" selection-start-column="10" selection-end-line="1002" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/13_bad.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="671" column="14" lean-forward="true" selection-start-line="671" selection-start-column="14" selection-end-line="671" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/cc_good.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5184">
+          <caret line="1752" selection-start-line="1752" selection-end-line="1752" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BERT/cc_data/parser_res.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+        <state relative-caret-position="-218">
+          <caret line="88" column="22" selection-start-line="88" selection-start-column="22" selection-end-line="88" selection-end-column="22" />
           <folding>
             <element signature="e#180#548#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/cc_data/bert_model_res.py">
+    <entry file="file://$PROJECT_DIR$/BERT/bft_train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1377" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/cc_data/zuowen.test">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/ttest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="484">
+          <caret line="315" column="29" selection-start-line="315" selection-start-column="29" selection-end-line="315" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/model/test1.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/model/test2.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/cc_data/parser_mita_res.py">
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5236" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/save/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="31" column="13" lean-forward="true" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+        <state relative-caret-position="303">
+          <caret line="1663" column="10" selection-end-line="1664" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_api.py">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/remote_sources/746897114/-9014705/codecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="311" selection-start-line="311" selection-end-line="311" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/211-local/mingrenmingyan/motto_spider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9469">
+          <caret line="12" column="11" lean-forward="true" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/chinese-xinhua/motto_spider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="292" column="40" lean-forward="true" selection-start-line="292" selection-start-column="40" selection-end-line="292" selection-end-column="40" />
+          <folding>
+            <element signature="e#124#138#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/chinese-xinhua/baike_mrmy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="62" column="33" lean-forward="true" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="33" />
+          <folding>
+            <element signature="e#124#135#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/large_data/clean_baike_zh.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="33" column="35" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="35" />
+          <folding>
+            <element signature="e#25#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/chinese-xinhua/baike_mrmy.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/chinese-xinhua/selenium_mrmy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="18" column="34" lean-forward="true" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/chinese-xinhua/test_spider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="67">
+          <caret line="21" selection-start-line="21" selection-end-line="38" selection-end-column="44" />
+          <folding>
+            <element signature="e#178#189#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/csc_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="33" column="58" lean-forward="true" selection-start-line="31" selection-start-column="2" selection-end-line="33" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/chinese-xinhua/merge_es_process.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="549">
+          <caret line="189" column="35" selection-start-line="189" selection-start-column="25" selection-end-line="189" selection-end-column="35" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/chinese-xinhua/elasticsearch_poem.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="26" column="53" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="53" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/chinese-xinhua/elasticsearch_mrmy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="972">
+          <caret line="96" column="93" lean-forward="true" selection-start-line="74" selection-start-column="8" selection-end-line="96" selection-end-column="93" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/chinese-xinhua/geyan_spider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="66" column="26" lean-forward="true" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
+          <folding>
+            <element signature="e#124#145#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/csc_tornado.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
+          <folding>
+            <element signature="e#18#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/csc_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2268">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+          <folding>
+            <element signature="e#1390#3361#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/chinese-xinhua/xiaoxue_mrmy.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-34">
+          <caret line="3347" column="13" selection-start-line="3347" selection-start-column="13" selection-end-line="3347" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/csc_match.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="183" column="51" lean-forward="true" selection-start-line="183" selection-start-column="51" selection-end-line="183" selection-end-column="51" />
+          <folding>
+            <element signature="e#5404#6053#0" />
+            <element signature="e#8892#10623#0" />
+            <element signature="e#7609#8257#0" />
+            <element signature="e#8310#8810#0" />
+            <element signature="e#8863#9873#0" />
+            <element signature="e#9911#11422#0" />
+            <element signature="e#11508#12860#0" />
+            <element signature="e#12922#13257#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/csc_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="95" lean-forward="true" selection-end-line="253" />
+          <folding>
+            <element signature="e#25#35#0" expanded="true" />
+            <element signature="e#4532#5330#0" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
   <component name="masterDetails">
