@@ -219,44 +219,66 @@ def get_model_output(model_out_path, all_text_ori):
     return all_model_outputs
 
 
-# # 原始数据
-print("===========sighan13 testing====================：")
-data = 13
-path_13 = "/data_local/TwoWaysToImproveCSC/BERT/data/13test_lower.txt"
-all_srcs, all_trgs = find_ori_data(path_13)
+if __name__ == "__main__":
+    # # 原始数据
+    print("===========sighan13 testing====================：")
+    data = 13
+    path_13 = "/data_local/TwoWaysToImproveCSC/BERT/data/13test_lower.txt"
+    all_srcs, all_trgs = find_ori_data(path_13)
 
-model_out_path = "/data_local/TwoWaysToImproveCSC/BERT/data_analysis/self_base_998_13test_lower.txt_cor.txt"
-all_pres = get_model_output(model_out_path, all_srcs)
+    # path_mita = "/data_local/TwoWaysToImproveCSC/BERT/data/13test_lower_mita.txt"
+    # _, all_pres = find_ori_data(path_mita)
 
-print("句子级别：不做预处理")
-sent_mertic(all_srcs, all_pres, all_trgs)
+    path_mita1 = "/data_local/TwoWaysToImproveCSC/BERT/data/13test_lower_mita_punct.txt"
+    _, all_pres1 = find_ori_data(path_mita1)
 
-print("token级别：不做预处理")
-token_mertic(all_srcs, all_pres, all_trgs)
+    path_model = "/data_local/TwoWaysToImproveCSC/BERT/data/13test_lower_model.txt"
+    _, all_pres_model = find_ori_data(path_model)
 
-print("===========cc testing====================：")
+    # model_out_path = "/data_local/TwoWaysToImproveCSC/BERT/data_analysis/self_base_998_13test_lower.txt_cor.txt"
+    # all_pres = get_model_output(model_out_path, all_srcs)
 
-path_4 = "/data_local/TwoWaysToImproveCSC/BERT/cc_data/chinese_spell_cy_4.txt"
-all_srcs, all_trgs = find_ori_data(path_4)
+    print("sighan13 句子级别:")
+    sent_mertic(all_srcs, all_pres_model, all_trgs)
+    sent_mertic(all_srcs, all_pres1, all_trgs)
 
-model_out_path = "/data_local/TwoWaysToImproveCSC/BERT/data_analysis/self_base_998_chinese_spell_lower_4.txt_cor.txt"
-all_pres = get_model_output(model_out_path, all_srcs)
+    print("sighan13 token级别:")
+    token_mertic(all_srcs, all_pres_model, all_trgs)
+    token_mertic(all_srcs, all_pres1, all_trgs)
+    print("===========cc testing====================：")
 
-print("句子级别：不做预处理")
-sent_mertic(all_srcs, all_pres, all_trgs)
+    path_4 = "/data_local/TwoWaysToImproveCSC/BERT/cc_data/chinese_spell_lower_4.txt"
+    all_srcs, all_trgs = find_ori_data(path_4)
 
-print("token级别：不做预处理")
-token_mertic(all_srcs, all_pres, all_trgs)
+    # model_out_path = "/data_local/TwoWaysToImproveCSC/BERT/data_analysis/self_base_998_chinese_spell_lower_4.txt_cor.txt"
+    # all_pres = get_model_output(model_out_path, all_srcs)
 
-print("=后处理=")
+    # path_mita = "/data_local/TwoWaysToImproveCSC/BERT/data/chinese_spell_lower_4_mita.txt"
+    # _, all_pres = find_ori_data(path_mita)
 
-all_pres_1 = []
-with open("/data_local/TwoWaysToImproveCSC/BERT/chinese-xinhua/bert_out_cc.pre", "r", encoding="utf-8") as f:
-    for line in f.readlines():
-        src, trg = line.strip().split(" ")
-        all_pres_1.append(trg)
-print("句子级别：不做预处理")
-sent_mertic(all_srcs, all_pres_1, all_trgs)
+    path_mita1 = "/data_local/TwoWaysToImproveCSC/BERT/data/chinese_spell_lower_4_mita_punct.txt"
+    _, all_pres1 = find_ori_data(path_mita1)
 
-print("token级别：不做预处理")
-token_mertic(all_srcs, all_pres_1, all_trgs)
+    path_model = "/data_local/TwoWaysToImproveCSC/BERT/data/chinese_spell_lower_4_model.txt"
+    _, all_pres_model = find_ori_data(path_model)
+
+    print("cc句子级别:")
+    sent_mertic(all_srcs, all_pres_model, all_trgs)
+    sent_mertic(all_srcs, all_pres1, all_trgs)
+
+    print("cc token级别:")
+    token_mertic(all_srcs, all_pres_model, all_trgs)
+    token_mertic(all_srcs, all_pres1, all_trgs)
+
+    # print("=后处理=")
+    #
+    # all_pres_1 = []
+    # with open("/data_local/TwoWaysToImproveCSC/BERT/chinese-xinhua/bert_out_cc.pre", "r", encoding="utf-8") as f:
+    #     for line in f.readlines():
+    #         src, trg = line.strip().split(" ")
+    #         all_pres_1.append(trg)
+    # print("句子级别：不做预处理")
+    # sent_mertic(all_srcs, all_pres_1, all_trgs)
+    #
+    # print("token级别：不做预处理")
+    # token_mertic(all_srcs, all_pres_1, all_trgs)

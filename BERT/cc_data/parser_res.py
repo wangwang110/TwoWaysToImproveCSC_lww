@@ -61,11 +61,11 @@ path = "/data_local/TwoWaysToImproveCSC/BERT/cc_data/chinese_spell_lower_4.txt"
 data = os.path.basename(path)
 all_text_ori, all_text_trg = find_ori_data(path)
 
-task1 = "self"
-name1 = "base_998"
+task1 = "Test"
+name1 = "base_998_mask"
 
-task2 = "self"
-name2 = "wang2018"
+task2 = "Test"
+name2 = "base_998_mask"
 
 model_out_path = "../data_analysis/" + task1 + "_" + str(name1) + "_" + str(data) + "_cor.txt"
 all_text_model = get_model_output(model_out_path, all_text_ori)
@@ -86,7 +86,8 @@ with open(path_out, "w", encoding="utf-8") as fw3:
         pre = remove_space(pre)
         pre1 = remove_space(pre1)
 
-        if pre != trg:
+        if pre == trg or pre == src:
+            # 没改或者完全改对了都不看
             continue
 
         fw3.write(src + "\n")

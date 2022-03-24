@@ -268,7 +268,7 @@ class CSCmatch:
             for i in range(num):
                 for d in range(1, 5, 1):
                     j = i + d
-                    if j < num:
+                    if j <= num:
                         word_str = "".join(words[i:j])
 
                         if len(word_str) == 4 and word_str in self.cy_set:

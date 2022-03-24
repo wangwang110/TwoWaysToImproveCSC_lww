@@ -1,63 +1,51 @@
-#
 # coding: utf-8
 
-from __future__ import print_function
-from __future__ import division
-from __future__ import absolute_import
+"""
+@File    : geyan_spider.py.py
+@Time    : 2022/3/3 10:16
+@Author  : liuwangwang
+@Software: PyCharm
+"""
+
+import urllib.request
+from lxml import etree
+import os
+import time
+import re
 
 
-# url = "https://poem.research-pro.sy.cvte.cn/poem_retrieve/"
-# headers = {'content-type': 'application/json'}
-#
-# # 诗句
-# requestData = {
-#     "query": "天下谁人不识君", "intention": "诗句"
-# }
-# ret = requests.post(url, json=requestData, headers=headers)
-# if ret.status_code == 200:
-#     res = json.loads(ret.text)
-#     print(res)
-#
-# # 题目
-# requestData = {
-#     "query": "咏鹅", "intention": "题目"
-# }
-# ret = requests.post(url, json=requestData, headers=headers)
-# if ret.status_code == 200:
-#     res = json.loads(ret.text)
-#     print(res)
-#
-# # 题目
-# requestData = {
-#     "query": "咏梅", "intention": "题目","author_name":"陆游"
-# }
-# ret = requests.post(url, json=requestData, headers=headers)
-# if ret.status_code == 200:
-#     res = json.loads(ret.text)
-#     print(res)
-#
-#
-# # 作者
-# requestData = {
-#     "query": "白居易", "intention": "作者"
-# }
-# ret = requests.post(url, json=requestData, headers=headers)
-# if ret.status_code == 200:
-#     res = json.loads(ret.text)
-#     print(res)
-
-import requests
-import json
+def visit_xiaoxueurl():
+    f = open("./ceshi.html").read()
+    html = etree.HTML(f)
+    res_li = []
+    try:
+        data_li = html.xpath('//p')
+        text = ""
+        for item in data_li:
+            text += "\n"
+            if item.text is not None:
+                text += item.text
+            elif text.strip() != "":
+                res_li.append(text.strip())
+                text = ""
+            for sitem in item.findall("span"):
+                if sitem.text is not None:
+                    text += sitem.text
+                    for ssitem in sitem.findall("br"):
+                        if ssitem.tail is not None:
+                            tmp = "\n" + ssitem.tail
+                            text += tmp
+            # print(text)
+    except Exception as e:
+        print(e)
+    return res_li
 
 
-url = "https://poem.research-pro.sy.cvte.cn/poem_retrieve/"
-headers = {'content-type': 'application/json'}
-
-# 诗句
-requestData = {
-    "query": "老骥伏枥", "intention": "诗句"
-}
-ret = requests.post(url, json=requestData, headers=headers)
-if ret.status_code == 200:
-    res = json.loads(ret.text)
-    print(res)
+if __name__ == "__main__":
+    content_li = visit_xiaoxueurl()
+    i = 1
+    for s in content_li:
+        print(i)
+        print(s)
+        print("#######")
+        i += 1

@@ -13,43 +13,96 @@ from torch.optim import Adam
 import operator
 from model import BertFineTune, construct, BertDataset, BFTLogitGen, readAllConfusionSet
 import os
-from focalloss import FocalLoss
+import pickle
+from data_analysis.getF1 import sent_mertic, token_mertic
+
+vob = set()
+with open("/data_local/plm_models/chinese_L-12_H-768_A-12/vocab.txt", "r", encoding="utf-8") as f:
+    for line in f.readlines():
+        vob.add(line.strip())
+
+
+def is_chinese(usen):
+    """判断一个unicode是否是汉字"""
+    for uchar in usen:
+        if uchar >= '\u4e00' and uchar <= '\u9fa5':
+            continue
+        else:
+            return False
+    else:
+        return True
 
 
 class Trainer:
-    def __init__(self, bert, optimizer, tokenizer, device, add_spellgcn_set=True):
+    def __init__(self, bert, optimizer, tokenizer, device):
         self.model = bert
         self.optim = optimizer
         self.tokenizer = tokenizer
         self.criterion_c = nn.NLLLoss()
-        self.criterion_focal = FocalLoss(gamma=2)
+        # self.criterion_c = nn.MultiMarginLoss(p=1, margin=1)
+        # MarginLoss()
+        # CrossEntropyLoss
+        # self.criterion_focal = FocalLoss(gamma=2)
         # ignore_index=0
         self.device = device
         self.confusion_set = readAllConfusionSet('/data_local/TwoWaysToImproveCSC/BERT/save/confusion.file')
-        # /data_local/TwoWaysToImproveCSC/BERT/save/confusion.file
-        # ../save/confusion.file
-        if add_spellgcn_set:
-            path = "/data_local/TwoWaysToImproveCSC/BERT/save/spellGraphs.txt"
-            with open(path, "r", encoding="utf-8") as f:
-                for line in f.readlines():
-                    s, t, r = line.strip().split("|")
-                    if r not in ["同音同调", "同音异调", "形近"]:
-                        continue
-                    if s not in self.confusion_set:
-                        self.confusion_set[s] = set()
-                    self.confusion_set[s].add(t)
 
-                    if t not in self.confusion_set:
-                        self.confusion_set[t] = set()
-                    self.confusion_set[t].add(s)
+        # 动态掩码,sighan13略好，cc略差
+        vocab = pickle.load(open("/data_local/TwoWaysToImproveCSC/large_data/zh_wiki_sent/wiki_vocab.pkl", "rb"))
+        self.vocab = [s for s in vocab if s in vob and is_chinese(s)]
+
+        # bert的词典
+        self.vob = {}
+        with open("/data_local/plm_models/chinese_L-12_H-768_A-12/vocab.txt", "r", encoding="utf-8") as f:
+            for i, line in enumerate(f):
+                self.vob.setdefault(i, line.strip())
+
+    def replace_token(self, lines):
+        """
+        # 随机选取id，查看id对应的词是否在候选集中
+        # 如果在90%替换为候选词，10%随机选取token（来自哪里呢？统计字典）
+        # 直到1/4的字符被替换
+        :param line:
+        :return:
+        """
+        generate_srcs = []
+        for line in lines:
+            num = len(line)
+            tokens = list(line)
+            index_li = [i for i in range(num)]
+            # 有可能是引入的错误个数太多了
+            up_num = num // 4
+            # 有可能是引入的错误个数太多了
+            np.random.shuffle(index_li)
+            count = 0
+            for i in index_li:
+                if tokens[i] in self.confusion_set:
+                    count += 1
+                    if np.random.rand(1) > 0.9:  # 这个比例是否要控制
+                        idx = np.random.randint(0, len(self.vocab))
+                        tokens[i] = self.vocab[idx]
+                    else:
+                        token_conf_set = self.confusion_set[tokens[i]]
+                        idx = np.random.randint(0, len(token_conf_set))
+                        tokens[i] = list(token_conf_set)[idx]
+                    if count == up_num:
+                        break
+            generate_srcs.append("".join(tokens))
+        return generate_srcs
 
     def train(self, train):
         self.model.train()
         total_loss = 0
         for batch in train:
+            # # 每个batch进行数据构造，类似于动态mask
+            # if "pretrain" in args.task_name:
+            #     generate_srcs = self.replace_token(batch['output'])
+            #     batch['input'] = generate_srcs
+
             inputs = self.tokenizer(batch['input'], padding=True, truncation=True, return_tensors="pt").to(self.device)
             outputs = self.tokenizer(batch['output'], padding=True, truncation=True, return_tensors="pt").to(
                 self.device)
+
             max_len = 180
             input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
                                                     inputs['token_type_ids'][:, :max_len], \
@@ -68,10 +121,7 @@ class Trainer:
             # out_logit = out.view(batch * seq_len, -1)
             # focal_loss = self.criterion_focal(out_logit, output_ids.view(-1))
 
-            #
             c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
-            # c_loss = self.criterion_c(out.transpose(1, 2),
-            #                           (1 - output_attn_mask) * self.criterion_c.ignore_index + output_ids)
             # padding的部分的loss不置为0吗？
             total_loss += c_loss.item()
             print(c_loss.item())
@@ -98,8 +148,6 @@ class Trainer:
 
             out = self.model(input_ids, input_tyi, input_attn_mask)
             c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
-            # c_loss = self.criterion_c(out.transpose(1, 2),
-            #                           (1 - output_attn_mask) * self.criterion_c.ignore_index + output_ids)
             # padding的部分的loss不置为0吗？
 
             total_loss += c_loss.item()
@@ -245,6 +293,7 @@ if __name__ == "__main__":
     # device_ids=[0,1]
     device_ids = [i for i in range(int(args.gpu_num))]
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    #
     bert_path = "/data_local/plm_models/chinese_L-12_H-768_A-12/"
     bert = BertModel.from_pretrained(bert_path, return_dict=True)
     tokenizer = BertTokenizer.from_pretrained(bert_path)
@@ -270,9 +319,10 @@ if __name__ == "__main__":
     if args.do_test:
         test = construct(args.test_data)
         test = BertDataset(tokenizer, test)
-        test = DataLoader(test, batch_size=int(args.batch_size), shuffle=True)
+        test = DataLoader(test, batch_size=int(args.batch_size), shuffle=False)
 
     optimizer = Adam(model.parameters(), float(args.learning_rate))
+    # 这里的学习率，没有随着学习率更新次数而变化
     # optimizer = nn.DataParallel(optimizer, device_ids=device_ids)
 
     trainer = Trainer(model, optimizer, tokenizer, device)

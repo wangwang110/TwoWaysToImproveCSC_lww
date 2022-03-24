@@ -9,7 +9,8 @@ port = 18000
 num_process = 1
 define("port", default=port, help="run on the given port", type=int)
 bert_path = "/data_local/plm_models/chinese_L-12_H-768_A-12/"
-model_path = "/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/base_all/sighan13/model.pkl"
+model_path = "/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/base_998_mask/sighan13/model.pkl"
+# 所有的参数已经在这里，可能是模型定义部分需要处理下
 check_object = CSC(bert_path, model_path)
 
 

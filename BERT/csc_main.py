@@ -13,6 +13,7 @@ base_path = base_path[:base_path.rfind("/")]
 sys.path.append(base_path)
 
 logger = logger_fn('csc_main', base_path + '/log/csc_main.log')
+import string
 
 
 class CSC:
@@ -24,13 +25,14 @@ class CSC:
         """
         self.model = CSCmodel(bert_path, model_path)
         self.match_model = CSCmatch()
-        self.match_process_tag = 1
-        self.punct = ["…", "‘", "’", "“", "”"]
+        self.match_process_tag = 0
+        # self.punct = ["…", "‘", "’", "“", "”","：","；"]
+        self.punct = string.punctuation
 
     def correct(self, data):
         """
         错别字纠正
-        1. 返回输入句子，输出句子，修改列表 == 哪个位置 == 原来是哪个字 ==替换成哪个字
+        1. 返回输入文本，输出文本，修改列表 == 哪个位置 == 原来是哪个字 ==替换成哪个字
 
         模型前后要做哪些后处理，
 
@@ -97,30 +99,38 @@ class CSC:
             # 获得修改列表，位置对应好
             edits = []
             pos = 0
-            new_trg_li = []
             for src, trg in zip(input_li, reset_trg_li):
-                new_trg = []
+                # src = src.replace("[UNK]", "#")
+                trg = trg.replace("[UNK]", "#")
                 for s, t in zip(src, trg):
-                    if s in self.punct:
+                    if s in self.punct or t == "#":
                         # 不做修改的
-                        new_trg.append(s)
                         pos += 1
+                        # 每次位置是要变化的，[UNK]占了五个字符
+                        # 有些单词love被认为是一个词，但是修改之后会替换回来
                         continue
                     if s != t:
                         edit = {"pos": position_mapping[pos], "src_token": s, "trg_token": t}
                         edits.append(edit)
-                    new_trg.append(s)
                     pos += 1
-                new_trg_li.append("".join(new_trg))
 
-            output_dict["data"]["input_text"] = "".join(input_li)
-            output_dict["data"]["output_text"] = "".join(trg_li)
+            output_dict["data"]["input_text"] = original_text
+            tokens = list(original_text)
+            for e in edits:
+                pos = e["pos"]
+                src_token = e["src_token"]
+                trg_token = e["trg_token"]
+                if tokens[pos] == src_token:
+                    tokens[pos] = trg_token
+
+            output_dict["data"]["output_text"] = "".join(tokens)
             output_dict["data"]["edits"] = edits
 
         return output_dict
 
     def post_process(self, src_li, trg_li, all_pos):
         """
+        前面已经匹配纠正的不做处理
         :param src_li:
         :param trg_li:
         :param all_pos:
@@ -226,9 +236,11 @@ class CSC:
 if __name__ == "__main__":
     # 初始化模型
     bert_path = "/data_local/plm_models/chinese_L-12_H-768_A-12/"
-    load_path = "/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/base_all/sighan13/model.pkl"
+    load_path = "/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/base_998_mask/sighan13/model.pkl"
     obj = CSC(bert_path, load_path)
     texts = [
+        "……在世界上，没有一条路是可以让人安全走过的，每一条路都有其崎岖之处在等待人们掉入，这些险阱便是痛苦、失望、难过、挫折……",
+        "风和日丽",
         "爱迪生曾说过：天才是百分之九十九的汗水，加百分之一的天分",
         "时间就是生命。赶快行动起来吧！",
         "剪不断，理还乱，是离愁，别是一办滋味在心头。四年级:李孜",
@@ -238,7 +250,7 @@ if __name__ == "__main__":
         "我们要牢记见贤思其，见不贤而内自醒",
         "我爱北进天安门。。。我爱北京天按门",
         "我爱北京天按门",
-        "没过几分钟，救护车来了，发出响亮而清翠的声音",
+        "没过几分钟，救护车来了，发出  响亮而清翠的声音",
     ]
     for text in texts:
         print(text)
@@ -251,3 +263,23 @@ if __name__ == "__main__":
         for item in res['data']['edits']:
             print(item["src_token"] + "==" + list(text)[item["pos"]])
             print(item["trg_token"])
+
+    with open("./data/13test_lower.txt", "r", encoding="utf-8")as f, \
+            open("./data/13test_lower_model.txt", "w", encoding="utf-8") as fw:
+        for line in f.readlines():
+            src, trg = line.strip().split()
+            data = {
+                "article": src
+            }
+            res = obj.correct(data)
+            fw.write(src + " " + res["data"]["output_text"] + "\n")
+
+    with open("./cc_data/chinese_spell_lower_4.txt", "r", encoding="utf-8")as f, \
+            open("./data/chinese_spell_lower_4_model.txt", "w", encoding="utf-8") as fw:
+        for line in f.readlines():
+            src, trg = line.strip().split()
+            data = {
+                "article": src
+            }
+            res = obj.correct(data)
+            fw.write(src + " " + res["data"]["output_text"] + "\n")

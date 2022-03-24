@@ -4,7 +4,7 @@ import sys
 import os
 
 sys.path.append("..")
-os.environ["CUDA_VISIBLE_DEVICES"] = "2"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 import torch
 import argparse
@@ -20,12 +20,14 @@ class CSCmodel:
         :param model_path:
         :param gpu_id:
         """
+        #
         bert = BertModel.from_pretrained(bert_path, return_dict=True)
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.tokenizer = BertTokenizer.from_pretrained(bert_path)
         self.config = BertConfig.from_pretrained(bert_path)
         self.batch_size = 20
         self.model = BertCSC(bert, self.tokenizer, self.device).to(self.device)
+        #
         self.model.load_state_dict(torch.load(model_path))
         # 混淆集
         self.confusion_set = readAllConfusionSet('/data_local/TwoWaysToImproveCSC/BERT/save/confusion.file')

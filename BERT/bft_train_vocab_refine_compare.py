@@ -14,6 +14,7 @@ import operator
 from model import BertFineTune, construct, BertDataset, BFTLogitGen, readAllConfusionSet
 import os
 import pickle
+from data_analysis.getF1 import sent_mertic, token_mertic
 
 vob = set()
 with open("/data_local/plm_models/chinese_L-12_H-768_A-12/vocab.txt", "r", encoding="utf-8") as f:
@@ -38,9 +39,10 @@ class Trainer:
         self.optim = optimizer
         self.tokenizer = tokenizer
         self.criterion_c = nn.NLLLoss()
-        self.criterion_cls = nn.BCEWithLogitsLoss()
-        self.criterion_token_cls = nn.BCEWithLogitsLoss(pos_weight=torch.tensor([2.0]))
-        # pos_weight=2
+        # self.criterion_c = nn.MultiMarginLoss(p=1, margin=1)
+        # MarginLoss()
+        # CrossEntropyLoss
+        # self.criterion_focal = FocalLoss(gamma=2)
         # ignore_index=0
         self.device = device
         self.confusion_set = readAllConfusionSet('/data_local/TwoWaysToImproveCSC/BERT/save/confusion.file')
@@ -48,6 +50,12 @@ class Trainer:
         # 动态掩码,sighan13略好，cc略差
         vocab = pickle.load(open("/data_local/TwoWaysToImproveCSC/large_data/zh_wiki_sent/wiki_vocab.pkl", "rb"))
         self.vocab = [s for s in vocab if s in vob and is_chinese(s)]
+
+        # bert的词典
+        self.vob = {}
+        with open("/data_local/plm_models/chinese_L-12_H-768_A-12/vocab.txt", "r", encoding="utf-8") as f:
+            for i, line in enumerate(f):
+                self.vob.setdefault(i, line.strip())
 
     def replace_token(self, lines):
         """
@@ -82,19 +90,11 @@ class Trainer:
             generate_srcs.append("".join(tokens))
         return generate_srcs
 
-    def train(self, train, gradient_accumulation_steps=1):
+    def train(self, train):
         self.model.train()
         total_loss = 0
-        i = 0
         for batch in train:
-            i += 1
-            # # 每个batch进行数据构造，类似于动态mask
-            # if "pretrain" in args.task_name:
-            #     generate_srcs = self.replace_token(batch['output'])
-            #     batch['input'] = generate_srcs
-
-            inputs, outputs = self.help_vectorize_ori(batch)
-
+            inputs, outputs = self.help_vectorize(batch)
             max_len = 180
             input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
                                                     inputs['token_type_ids'][:, :max_len], \
@@ -106,40 +106,28 @@ class Trainer:
             # print(input_tyi.size())
             # print(input_attn_mask.size())
 
-            out, sent_out, token_out = self.model(input_ids, input_tyi, input_attn_mask)
+            out = self.model(input_ids, input_tyi, input_attn_mask)  # out:[batch_size,seq_len,vocab_size]
 
             # # 实现focal_loss
             # batch, seq_len = input_ids.size()
             # out_logit = out.view(batch * seq_len, -1)
             # focal_loss = self.criterion_focal(out_logit, output_ids.view(-1))
 
-            ori_c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
-            sent_loss = self.criterion_cls(sent_out, outputs["labels"])
-
-            # output_token_label = outputs["token_labels"][:, :max_len, :]
-            # batch_size, seq_len = input_ids.size()
-            # seq_loss = self.criterion_token_cls(token_out.reshape(batch_size * seq_len, 1),
-            #                                     output_token_label.reshape(batch_size * seq_len, 1))
-
-            # ori_c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
-            # ori_c_loss = ori_c_loss * input_attn_mask
-            # ori_c_loss = torch.sum(ori_c_loss) / torch.sum(input_attn_mask)
-            # c_loss = torch.log(ori_c_loss) + torch.log(seq_loss)
-
-            c_loss = (ori_c_loss + sent_loss) / gradient_accumulation_steps
-            c_loss.backward()
+            c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
+            # padding的部分的loss不置为0吗？
             total_loss += c_loss.item()
-            if i % gradient_accumulation_steps == 0 or i == len(train):
-                print(c_loss.item())
-                self.optim.step()
-                self.optim.zero_grad()
+            print(c_loss.item())
+            self.optim.zero_grad()
+            c_loss.backward()
+            # backward始终用的这一个
+            self.optim.step()
         return total_loss
 
     def test(self, test):
         self.model.eval()
         total_loss = 0
         for batch in test:
-            inputs, outputs = self.help_vectorize_ori(batch)
+            inputs, outputs = self.help_vectorize(batch)
             max_len = 180
             input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
                                                     inputs['token_type_ids'][:, :max_len], \
@@ -148,17 +136,10 @@ class Trainer:
                                                        outputs['token_type_ids'][:, :max_len], \
                                                        outputs['attention_mask'][:, :max_len]
 
-            out, sent_out, token_out = self.model(input_ids, input_tyi, input_attn_mask)
-            sent_loss = self.criterion_cls(sent_out, outputs["labels"])
+            out = self.model(input_ids, input_tyi, input_attn_mask)
+            c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
+            # padding的部分的loss不置为0吗？
 
-            # output_token_label = outputs["token_labels"][:, :max_len, :]
-            # batch_size, seq_len = input_ids.size()
-            # seq_loss = self.criterion_token_cls(token_out.reshape(batch_size * seq_len, 1),
-            #                                     output_token_label.reshape(batch_size * seq_len, 1))
-
-            ori_c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
-
-            c_loss = ori_c_loss + sent_loss
             total_loss += c_loss.item()
         return total_loss
 
@@ -178,18 +159,12 @@ class Trainer:
         sen_mod = 0
         sen_mod_acc = 0
         sen_tar_mod = 0
-
         d_sen_acc = 0
         d_sen_mod = 0
         d_sen_mod_acc = 0
         d_sen_tar_mod = 0
-
-        d_sen_acc2 = 0
-        d_sen_mod2 = 0
-        d_sen_mod_acc2 = 0
-
         for batch in test:
-            inputs, outputs = self.help_vectorize_ori(batch)
+            inputs, outputs = self.help_vectorize(batch)
             max_len = 180
             input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
                                                     inputs['token_type_ids'][:, :max_len], \
@@ -198,80 +173,35 @@ class Trainer:
             output_ids, output_tyi, output_attn_mask = outputs['input_ids'][:, :max_len], \
                                                        outputs['token_type_ids'][:, :max_len], \
                                                        outputs['attention_mask'][:, :max_len]
-            out_prob, sent_prob, torken_prob = self.model(input_ids, input_tyi, input_attn_mask)
-
-            out = out_prob.argmax(dim=-1)
-
-            # # 原单词不再前10，才认为有错
-            # sorted, indices = torch.sort(out_prob, dim=-1, descending=True)
-            # indices = indices[:, :, :5]
-            # out_new = copy.deepcopy(input_ids)
-            # for i in range(len(out)):
-            #     for j in range(input_lens[i]):
-            #         if out[i][j] != input_ids[i][j] and input_ids[i][j] not in indices[i][j]:
-            #             out_new[i][j] = out[i][j]
-            # out = out_new
-
-            # 检测有错，并且修正了的才算真正的有错
-            # out_new = copy.deepcopy(input_ids)
-            # for i in range(len(out)):
-            #     for j in range(input_lens[i]):
-            #         if torken_prob[i][j] >= 0.5 and out[i][j] != input_ids[i][j]:
-            #             out_new[i][j] = out[i][j]
-            #
-            # out = out_new
-
-            #
+            out = self.model(input_ids, input_tyi, input_attn_mask)
+            out = out.argmax(dim=-1)
             mod_sen = [not out[i][:input_lens[i]].equal(input_ids[i][:input_lens[i]]) for i in range(len(out))]
-            # 预测有错的句子
+            # 修改过的句子
             acc_sen = [out[i][:input_lens[i]].equal(output_ids[i][:input_lens[i]]) for i in range(len(out))]
             # 修改正确的句子
             tar_sen = [not output_ids[i].equal(input_ids[i]) for i in range(len(output_ids))]
-            # 实际有错的句子
-
+            # 应该修改的句子
             sen_mod += sum(mod_sen)
-            # 预测有错的句子
             sen_mod_acc += sum(np.multiply(np.array(mod_sen), np.array(acc_sen)))
-            # 预测有错的句子里面，预测对了的句子
             sen_tar_mod += sum(tar_sen)
-            # 实际有错的句子
-            # sen_acc += sum([out[i].equal(output_ids[i]) for i in range(len(out))])
-            sen_acc += sum(acc_sen)
-            # 预测对了句子，包括修正和不修正的
+            sen_acc += sum([out[i].equal(output_ids[i]) for i in range(len(out))])
             setsum += output_ids.shape[0]
 
-            prob_2 = [[0 if torken_prob[i][j] < 0.5 else 1 for j in range(input_lens[i])] for i in range(len(out))]
             prob_ = [[0 if out[i][j] == input_ids[i][j] else 1 for j in range(input_lens[i])] for i in range(len(out))]
-            label = [[0 if input_ids[i][j] == output_ids[i][j] else 1 for j in range(input_lens[i])] for i in
-                     range(len(input_ids))]
-
+            label = [[0 if input_ids[i][j] == output_ids[i][j] else 1 for j in
+                      range(input_lens[i])] for i in range(len(input_ids))]
             d_acc_sen = [operator.eq(prob_[i], label[i]) for i in range(len(prob_))]
-            d_acc_sen2 = [operator.eq(prob_2[i], label[i]) for i in range(len(prob_2))]
-
             d_mod_sen = [0 if sum(prob_[i]) == 0 else 1 for i in range(len(prob_))]
-            d_mod_sen2 = [0 if sum(prob_2[i]) == 0 else 1 for i in range(len(prob_2))]
-
             d_tar_sen = [0 if sum(label[i]) == 0 else 1 for i in range(len(label))]
-
             d_sen_mod += sum(d_mod_sen)
-            d_sen_mod2 += sum(d_mod_sen2)
-            # 预测有错的句子
             d_sen_mod_acc += sum(np.multiply(np.array(d_mod_sen), np.array(d_acc_sen)))
-            d_sen_mod_acc2 += sum(np.multiply(np.array(d_mod_sen2), np.array(d_acc_sen2)))
-            # 预测有错的里面，位置预测正确的
             d_sen_tar_mod += sum(d_tar_sen)
-            # 实际有错的句子
             d_sen_acc += sum(d_acc_sen)
-            d_sen_acc2 += sum(d_acc_sen2)
-        #
-        d_precision2 = d_sen_mod_acc2 / d_sen_mod2
-        d_recall2 = d_sen_mod_acc2 / d_sen_tar_mod
-        d_F12 = 2 * d_precision2 * d_recall2 / (d_precision2 + d_recall2)
-        #
+        print(d_sen_mod)
+        print(d_sen_tar_mod)
 
-        print("new detection sentence accuracy:{0},precision:{1},recall:{2},F1:{3}".format(d_sen_acc2 / setsum,
-                                                                                           d_precision2,
-                                                                                           d_recall2, d_F12))
+        print(sen_mod)
+        print(sen_tar_mod)
 
         d_precision = d_sen_mod_acc / d_sen_mod
         d_recall = d_sen_mod_acc / d_sen_tar_mod
@@ -279,7 +209,6 @@ class Trainer:
         c_precision = sen_mod_acc / sen_mod
         c_recall = sen_mod_acc / sen_tar_mod
         c_F1 = 2 * c_precision * c_recall / (c_precision + c_recall)
-
         print("detection sentence accuracy:{0},precision:{1},recall:{2},F1:{3}".format(d_sen_acc / setsum, d_precision,
                                                                                        d_recall, d_F1))
         print("correction sentence accuracy:{0},precision:{1},recall:{2},F1:{3}".format(sen_acc / setsum,
@@ -291,30 +220,34 @@ class Trainer:
         # accuracy, precision, recall, F1
         return sen_acc / setsum, sen_mod_acc / sen_mod, sen_mod_acc / sen_tar_mod, c_F1
 
-    def help_vectorize_ori(self, batch):
-        """
-        也是文本分batch，之后再向量化
-        :param text_a:
-        :param text_b:
-        :return:
-        """
-        inputs = self.tokenizer(batch['input'], padding=True, truncation=True, return_tensors="pt").to(self.device)
-        outputs = self.tokenizer(batch['output'], padding=True, truncation=True, return_tensors="pt").to(
-            self.device)
+    def testSet_true(self, test):
+        self.model.eval()
+        all_srcs = []
+        all_trgs = []
+        all_pres = []
+        for batch in test:
+            all_srcs.extend(batch["input"])
+            all_trgs.extend(batch["output"])
+            inputs, outputs = self.help_vectorize(batch)
+            max_len = 180
+            input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
+                                                    inputs['token_type_ids'][:, :max_len], \
+                                                    inputs['attention_mask'][:, :max_len]
+            out = self.model(input_ids, input_tyi, input_attn_mask)
+            out = out.argmax(dim=-1)
+            num = len(batch["input"])
+            for i in range(num):
+                trg = batch["input"][i]
+                tokens = list(trg)
+                for j in range(len(tokens) + 1):
+                    if out[i][j + 1] != input_ids[i][j + 1]:
+                        val = out[i][j + 1].item()
+                        tokens[j] = self.vob[val]
+                out_sent = "".join(tokens)
+                all_pres.append(out_sent)
 
-        # 句子的分类标签
-        sent_labels = [0 if batch['input'][i] == batch['output'][i] else 1 for i in range(len(batch['input']))]
-        outputs_labels = torch.tensor(sent_labels, dtype=torch.float32).to(self.device).unsqueeze(-1)
-        outputs["labels"] = outputs_labels
-
-        # 每个位置对应的分类，其中padding部分需要去掉
-        token_labels = [
-            [0 if inputs['input_ids'][i][j] == outputs['input_ids'][i][j] else 1
-             for j in range(inputs['input_ids'].size()[1])] for i in range(len(batch['input']))]
-
-        outputs["token_labels"] = torch.tensor(token_labels, dtype=torch.float32).to(self.device).unsqueeze(-1)
-        #
-        return inputs, outputs
+        sent_mertic(all_srcs, all_pres, all_trgs)
+        token_mertic(all_srcs, all_pres, all_trgs)
 
     def text2vec(self, src, max_seq_length):
         """
@@ -425,12 +358,6 @@ if __name__ == "__main__":
     parser.add_argument('--test_data', type=str, default='../data/13test.txt')
 
     parser.add_argument('--batch_size', type=int, default=20)
-    parser.add_argument(
-        "--gradient_accumulation_steps",
-        type=int,
-        default=1,
-        help="Number of updates steps to accumulate before performing a backward/update pass.",
-    )
     parser.add_argument('--epoch', type=int, default=1)
     parser.add_argument('--learning_rate', type=float, default=2e-5)
     parser.add_argument('--do_save', type=str2bool, nargs='?', const=False)
@@ -454,7 +381,7 @@ if __name__ == "__main__":
     tokenizer = BertTokenizer.from_pretrained(bert_path)
     config = BertConfig.from_pretrained(bert_path)
 
-    model = BertFineTune(bert, tokenizer, device, device_ids, is_correct_sent=True).to(device)
+    model = BertFineTune(bert, tokenizer, device, device_ids).to(device)
 
     if args.load_model:
         model.load_state_dict(torch.load(args.load_path))
@@ -474,7 +401,7 @@ if __name__ == "__main__":
     if args.do_test:
         test = construct(args.test_data)
         test = BertDataset(tokenizer, test)
-        test = DataLoader(test, batch_size=int(args.batch_size), shuffle=True)
+        test = DataLoader(test, batch_size=int(args.batch_size), shuffle=False)
 
     optimizer = Adam(model.parameters(), float(args.learning_rate))
     # 这里的学习率，没有随着学习率更新次数而变化
@@ -486,7 +413,7 @@ if __name__ == "__main__":
 
     if args.do_train:
         for e in range(int(args.epoch)):
-            train_loss = trainer.train(train, args.gradient_accumulation_steps)
+            train_loss = trainer.train(train)
 
             if args.do_valid:
                 valid_loss = trainer.test(valid)
@@ -518,4 +445,4 @@ if __name__ == "__main__":
         os.system('cp ' + model_best_path + " " + model_save_path)
 
     if args.do_test:
-        trainer.testSet(test)
+        trainer.testSet_true(test)

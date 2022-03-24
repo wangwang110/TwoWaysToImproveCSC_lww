@@ -107,6 +107,33 @@ class BertMlm:
                 batch_res.append("".join(tokens).replace("##", "") + " " + batch['input'][sent_id])
             yield batch_res
 
+    def mlm_predict(self, all_texts):
+        test = li_testconstruct(all_texts)
+        test = BertDataset(self.tokenizer, test)
+        test = DataLoader(test, batch_size=int(self.batch_size), shuffle=False)
+
+        for batch in test:
+            inputs = self.tokenizer(batch['input'], padding=True, truncation=True, return_tensors="pt").to(
+                self.device)
+            max_len = 180
+            input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
+                                                    inputs['token_type_ids'][:, :max_len], \
+                                                    inputs['attention_mask'][:, :max_len]
+            model_out = self.model(input_ids, input_tyi, input_attn_mask)
+            out = model_out.logits
+            #
+            input_lens = torch.sum(input_attn_mask, 1).detach().cpu().numpy()
+            prob, index = torch.max(out, 2)
+            # prob, index = torch.argsort(out, dim=2, descending=True)[:, :, :10]
+
+            batch_size, _ = input_ids.size()
+            batch_res = []
+            for sent_id in range(batch_size):
+                num = input_lens[sent_id] - 2  # [cls],[sep]
+                tokens = [self.tokenizer.ids_to_tokens[t.item()] for t in index[sent_id][1:num + 1]]
+                batch_res.append("".join(tokens).replace("##", ""))
+                print(batch_res)
+
     def read_path(self, path):
         print("reading now......")
         all_texts = []
@@ -149,19 +176,27 @@ def GenerateCSC(infile, outfile, vocab):
 
 
 if __name__ == "__main__":
-    parser = OptionParser()
-    parser.add_option("--path", dest="path", default="", help="path file")
-    parser.add_option("--input", dest="input", default="", help="input file")
-    parser.add_option("--output", dest="output", default="", help="output file")
-    (options, args) = parser.parse_args()
-    path = options.path
-    input = options.input
-    output = options.output
-    vocab = [s for s in pickle.load(open(path, "rb"))]
-    # vocab = [s for s in pickle.load(open(path, "rb"))][:5000]
+    # parser = OptionParser()
+    # parser.add_option("--path", dest="path", default="", help="path file")
+    # parser.add_option("--input", dest="input", default="", help="input file")
+    # parser.add_option("--output", dest="output", default="", help="output file")
+    # (options, args) = parser.parse_args()
+    # path = options.path
+    # input = options.input
+    # output = options.output
+    # vocab = [s for s in pickle.load(open(path, "rb"))]
+    # # vocab = [s for s in pickle.load(open(path, "rb"))][:5000]
+    #
+    # try:
+    #     GenerateCSC(infile=input, outfile=output, vocab=vocab)
+    #     print("All Finished.")
+    # except Exception as err:
+    #     print(err)
 
-    try:
-        GenerateCSC(infile=input, outfile=output, vocab=vocab)
-        print("All Finished.")
-    except Exception as err:
-        print(err)
+    obj = BertMlm(bert_path="/data_local/plm_models/chinese_L-12_H-768_A-12/")
+
+    obj.mlm_predict(["我们立刻前往土著人的村庄，发[MASK]表哥在一个笼子里啊！",
+                     "彤红的手紧紧地抓着绳子，显然十分坚难[MASK]在行走。",
+                     "彤红的手紧紧地抓着绳子，显然十分[MASK]难的在行走。",
+                     "老师的汗水不住地滴下，时间也不[MASK]地流逝。",
+                     "童年可真是美好，所以这件事成了我脑海里难以忘记的时刻，[MASK]，真想回到童年呀!可是时间是不能倒流的……"])

@@ -5,42 +5,116 @@ import sys
 sys.path.append("..")
 import torch.nn as nn
 import torch
-import re
 import numpy as np
 import argparse
 from transformers import BertModel, BertConfig, BertTokenizer
 from torch.utils.data import DataLoader, Dataset
 from torch.optim import Adam
 import operator
-from model import BertFineTune, construct, BertDataset, BFTLogitGen, readAllConfusionSet, cc_testconstruct, construct
+from model import BertFineTune, construct, BertDataset, BFTLogitGen, readAllConfusionSet
 import os
+import pickle
+from focalloss import FocalLoss
 
-vob = {}
+vob = set()
 with open("/data_local/plm_models/chinese_L-12_H-768_A-12/vocab.txt", "r", encoding="utf-8") as f:
-    for i, line in enumerate(f):
-        vob.setdefault(i, line.strip())
+    for line in f.readlines():
+        vob.add(line.strip())
+
+
+def is_chinese(usen):
+    """判断一个unicode是否是汉字"""
+    for uchar in usen:
+        if uchar >= '\u4e00' and uchar <= '\u9fa5':
+            continue
+        else:
+            return False
+    else:
+        return True
 
 
 class Trainer:
-    def __init__(self, bert, optimizer, tokenizer, device):
+    def __init__(self, bert, optimizer, tokenizer, device, add_spellgcn_set=True):
         self.model = bert
         self.optim = optimizer
         self.tokenizer = tokenizer
         self.criterion_c = nn.NLLLoss()
+        self.criterion_focal = FocalLoss(gamma=2)
         # ignore_index=0
         self.device = device
-        self.confusion_set = readAllConfusionSet('/data_local/TwoWaysToImproveCSC/BERT/save/confusion.file')
-        # /data_local/TwoWaysToImproveCSC/BERT/save/confusion.file
-        # ../save/confusion.file
+        # self.confusion_set = readAllConfusionSet('/data_local/TwoWaysToImproveCSC/BERT/save/confusion.file')
+        self.confusion_set = {}
+
+        self.confusion_s = pickle.load(
+            open("/data_local/csc/SpellGCN-master/data/gcn_graph.ty_xj/spellgcn_simS.bin", "rb"))
+        self.confusion_p = pickle.load(
+            open("/data_local/csc/SpellGCN-master/data/gcn_graph.ty_xj/spellgcn_simP.bin", "rb"))
+
+        for s in self.confusion_s:
+            t = self.confusion_s[s]
+            if s not in self.confusion_set:
+                self.confusion_set[s] = set()
+            self.confusion_set[s] = self.confusion_set[s] | t
+
+        for s in self.confusion_p:
+            t = self.confusion_p[s]
+            if s not in self.confusion_set:
+                self.confusion_set[s] = set()
+            self.confusion_set[s] = self.confusion_set[s] | t
+
+        # 动态掩码,sighan13略好，cc略差
+        vocab = pickle.load(open("/data_local/TwoWaysToImproveCSC/large_data/zh_wiki_sent/wiki_vocab.pkl", "rb"))
+        self.vocab = [s for s in vocab if s in vob and is_chinese(s)]
+
+    def replace_token(self, lines):
+        """
+        # 随机选取id，查看id对应的词是否在候选集中
+        # 如果在90%替换为候选词，10%随机选取token（来自哪里呢？统计字典）
+        # 直到1/4的字符被替换
+        :param line:
+        :return:
+        """
+        generate_srcs = []
+        for line in lines:
+            num = len(line)
+            tokens = list(line)
+            index_li = [i for i in range(num)]
+            # 有可能是引入的错误个数太多了
+            up_num = num // 4
+            # 有可能是引入的错误个数太多了
+            np.random.shuffle(index_li)
+            count = 0
+            for i in index_li:
+                if tokens[i] in self.confusion_set:
+                    count += 1
+                    if np.random.rand(1) > 0.9:  # 这个比例是否要控制
+                        idx = np.random.randint(0, len(self.vocab))
+                        tokens[i] = self.vocab[idx]
+                    else:
+                        token_conf_set = self.confusion_set[tokens[i]]
+                        idx = np.random.randint(0, len(token_conf_set))
+                        tokens[i] = list(token_conf_set)[idx]
+                    if count == up_num:
+                        break
+            generate_srcs.append("".join(tokens))
+        return generate_srcs
 
     def train(self, train):
         self.model.train()
         total_loss = 0
         for batch in train:
+
+            # 每个batch进行数据构造，类似于动态mask
+            if "pretrain" in args.task_name:
+                generate_srcs = self.replace_token(batch['output'])
+                batch['input'] = generate_srcs
+
             inputs = self.tokenizer(batch['input'], padding=True, truncation=True, return_tensors="pt").to(self.device)
             outputs = self.tokenizer(batch['output'], padding=True, truncation=True, return_tensors="pt").to(
                 self.device)
+
             max_len = 180
+
             input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
                                                     inputs['token_type_ids'][:, :max_len], \
                                                     inputs['attention_mask'][:, :max_len]
@@ -53,8 +127,13 @@ class Trainer:
 
             out = self.model(input_ids, input_tyi, input_attn_mask)  # out:[batch_size,seq_len,vocab_size]
 
-            c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
+            # # 实现focal_loss
+            # batch, seq_len = input_ids.size()
+            # out_logit = out.view(batch * seq_len, -1)
+            # focal_loss = self.criterion_focal(out_logit, output_ids.view(-1))
 
+            #
+            c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
             # c_loss = self.criterion_c(out.transpose(1, 2),
             #                           (1 - output_attn_mask) * self.criterion_c.ignore_index + output_ids)
             # padding的部分的loss不置为0吗？
@@ -62,6 +141,7 @@ class Trainer:
             print(c_loss.item())
             self.optim.zero_grad()
             c_loss.backward()
+            # backward始终用的这一个
             self.optim.step()
         return total_loss
 
@@ -100,43 +180,73 @@ class Trainer:
 
     def testSet(self, test):
         self.model.eval()
-        test_name = re.search("[0-9]+", args.test_data).group()
-        model_name = args.load_path.split("/")[-3]
-        path = "./data_analysis/" + args.task_name + "_" + model_name + "_" + test_name + "_ori.txt"
-        path_cor = "./data_analysis/" + args.task_name + "_" + model_name + "_" + test_name + "_cor.txt"
-        f = open(path, "w", encoding="utf-8")
-        f_cor = open(path_cor, "w", encoding="utf-8")
-
+        sen_acc = 0
+        setsum = 0
+        sen_mod = 0
+        sen_mod_acc = 0
+        sen_tar_mod = 0
+        d_sen_acc = 0
+        d_sen_mod = 0
+        d_sen_mod_acc = 0
+        d_sen_tar_mod = 0
         for batch in test:
             inputs = self.tokenizer(batch['input'], padding=True, truncation=True, return_tensors="pt").to(self.device)
+            outputs = self.tokenizer(batch['output'], padding=True, truncation=True, return_tensors="pt").to(
+                self.device)
             max_len = 180
             input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
                                                     inputs['token_type_ids'][:, :max_len], \
                                                     inputs['attention_mask'][:, :max_len]
             input_lens = torch.sum(input_attn_mask, 1)
-            # output_ids, output_tyi, output_attn_mask = outputs['input_ids'][:, :max_len], \
-            #                                            outputs['token_type_ids'][:, :max_len], \
-            #                                            outputs['attention_mask'][:, :max_len]
+            output_ids, output_tyi, output_attn_mask = outputs['input_ids'][:, :max_len], \
+                                                       outputs['token_type_ids'][:, :max_len], \
+                                                       outputs['attention_mask'][:, :max_len]
             out = self.model(input_ids, input_tyi, input_attn_mask)
             out = out.argmax(dim=-1)
             mod_sen = [not out[i][:input_lens[i]].equal(input_ids[i][:input_lens[i]]) for i in range(len(out))]
             # 修改过的句子
-            idx = 0
-            for s in mod_sen:
-                f.write(batch["output"][idx])
-                f_cor.write(batch["output"][idx])
-                for t in range(input_lens[idx]):
-                    f.write(vob[input_ids[idx][t].item()])
-                    if vob[out[idx][t].item()] == "[UNK]":
-                        f_cor.write(vob[input_ids[idx][t].item()])
-                    else:
-                        f_cor.write(vob[out[idx][t].item()])
-                f.write("\n")
-                f_cor.write("\n")
+            acc_sen = [out[i][:input_lens[i]].equal(output_ids[i][:input_lens[i]]) for i in range(len(out))]
+            # 修改正确的句子
+            tar_sen = [not output_ids[i].equal(input_ids[i]) for i in range(len(output_ids))]
+            # 应该修改的句子
+            sen_mod += sum(mod_sen)
+            sen_mod_acc += sum(np.multiply(np.array(mod_sen), np.array(acc_sen)))
+            sen_tar_mod += sum(tar_sen)
+            sen_acc += sum([out[i].equal(output_ids[i]) for i in range(len(out))])
+            setsum += output_ids.shape[0]
 
-                idx += 1
+            prob_ = [[0 if out[i][j] == input_ids[i][j] else 1 for j in range(input_lens[i])] for i in range(len(out))]
+            label = [[0 if input_ids[i][j] == output_ids[i][j] else 1 for j in
+                      range(input_lens[i])] for i in range(len(input_ids))]
+            d_acc_sen = [operator.eq(prob_[i], label[i]) for i in range(len(prob_))]
+            d_mod_sen = [0 if sum(prob_[i]) == 0 else 1 for i in range(len(prob_))]
+            d_tar_sen = [0 if sum(label[i]) == 0 else 1 for i in range(len(label))]
+            d_sen_mod += sum(d_mod_sen)
+            d_sen_mod_acc += sum(np.multiply(np.array(d_mod_sen), np.array(d_acc_sen)))
+            d_sen_tar_mod += sum(d_tar_sen)
+            d_sen_acc += sum(d_acc_sen)
+        print(d_sen_mod)
+        print(d_sen_tar_mod)
 
-        # return sen_acc / setsum, sen_mod_acc / sen_mod, sen_mod_acc / sen_tar_mod, c_F1
+        print(sen_mod)
+        print(sen_tar_mod)
+
+        d_precision = d_sen_mod_acc / d_sen_mod
+        d_recall = d_sen_mod_acc / d_sen_tar_mod
+        d_F1 = 2 * d_precision * d_recall / (d_precision + d_recall)
+        c_precision = sen_mod_acc / sen_mod
+        c_recall = sen_mod_acc / sen_tar_mod
+        c_F1 = 2 * c_precision * c_recall / (c_precision + c_recall)
+        print("detection sentence accuracy:{0},precision:{1},recall:{2},F1:{3}".format(d_sen_acc / setsum, d_precision,
+                                                                                       d_recall, d_F1))
+        print("correction sentence accuracy:{0},precision:{1},recall:{2},F1:{3}".format(sen_acc / setsum,
+                                                                                        sen_mod_acc / sen_mod,
+                                                                                        sen_mod_acc / sen_tar_mod,
+                                                                                        c_F1))
+        print("sentence target modify:{0},sentence sum:{1},sentence modified accurate:{2}".format(sen_tar_mod, setsum,
+                                                                                                  sen_mod_acc))
+        # accuracy, precision, recall, F1
+        return sen_acc / setsum, sen_mod_acc / sen_mod, sen_mod_acc / sen_tar_mod, c_F1
 
 
 def setup_seed(seed):
@@ -191,6 +301,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     task_name = args.task_name
     print("----Task: " + task_name + " begin !----")
+    print("----Model base: " + args.load_path + "----")
 
     setup_seed(int(args.seed))
     start = time.time()
@@ -221,9 +332,9 @@ if __name__ == "__main__":
         valid = DataLoader(valid, batch_size=int(args.batch_size), shuffle=True)
 
     if args.do_test:
-        test = cc_testconstruct(args.test_data)
+        test = construct(args.test_data)
         test = BertDataset(tokenizer, test)
-        test = DataLoader(test, batch_size=int(args.batch_size), shuffle=False)
+        test = DataLoader(test, batch_size=int(args.batch_size), shuffle=True)
 
     optimizer = Adam(model.parameters(), float(args.learning_rate))
     # optimizer = nn.DataParallel(optimizer, device_ids=device_ids)

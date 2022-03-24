@@ -15,16 +15,14 @@ from model import BertFineTune, construct, BertDataset, BFTLogitGen, readAllConf
 import os
 
 
-class Trainer:
+class Trainer():
     def __init__(self, bert, optimizer, tokenizer, device):
         self.model = bert
         self.optim = optimizer
         self.tokenizer = tokenizer
-        self.criterion_c = nn.NLLLoss(ignore_index=0)
+        self.criterion_c = nn.NLLLoss()
         self.device = device
-        self.confusion_set = readAllConfusionSet('/data_local/TwoWaysToImproveCSC/BERT/save/confusion.file')
-        # /data_local/TwoWaysToImproveCSC/BERT/save/confusion.file
-        # ../save/confusion.file
+        self.confusion_set = readAllConfusionSet('../save/confusion.file')
 
     def train(self, train):
         self.model.train()
@@ -33,26 +31,14 @@ class Trainer:
             inputs = self.tokenizer(batch['input'], padding=True, truncation=True, return_tensors="pt").to(self.device)
             outputs = self.tokenizer(batch['output'], padding=True, truncation=True, return_tensors="pt").to(
                 self.device)
-            max_len = 180
-            input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
-                                                    inputs['token_type_ids'][:, :max_len], \
-                                                    inputs['attention_mask'][:, :max_len]
-            output_ids, output_tyi, output_attn_mask = outputs['input_ids'][:, :max_len], \
-                                                       outputs['token_type_ids'][:, :max_len], \
-                                                       outputs['attention_mask'][:, :max_len]
-            # print(input_ids.size())
-            # print(input_tyi.size())
-            # print(input_attn_mask.size())
-
+            input_ids, input_tyi, input_attn_mask = inputs['input_ids'], inputs['token_type_ids'], inputs[
+                'attention_mask']
+            output_ids, output_tyi, output_attn_mask = outputs['input_ids'], outputs['token_type_ids'], outputs[
+                'attention_mask']
             out = self.model(input_ids, input_tyi, input_attn_mask)  # out:[batch_size,seq_len,vocab_size]
-
             c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
-
-            # c_loss = self.criterion_c(out.transpose(1, 2),
-            #                           (1 - output_attn_mask) * self.criterion_c.ignore_index + output_ids)
-            # padding的部分的loss不置为0吗？
             total_loss += c_loss.item()
-            print(c_loss.item())
+            # print(loss)
             self.optim.zero_grad()
             c_loss.backward()
             self.optim.step()
@@ -65,25 +51,17 @@ class Trainer:
             inputs = self.tokenizer(batch['input'], padding=True, truncation=True, return_tensors="pt").to(self.device)
             outputs = self.tokenizer(batch['output'], padding=True, truncation=True, return_tensors="pt").to(
                 self.device)
-            max_len = 180
-            input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
-                                                    inputs['token_type_ids'][:, :max_len], \
-                                                    inputs['attention_mask'][:, :max_len]
-            output_ids, output_tyi, output_attn_mask = outputs['input_ids'][:, :max_len], \
-                                                       outputs['token_type_ids'][:, :max_len], \
-                                                       outputs['attention_mask'][:, :max_len]
-
+            input_ids, input_tyi, input_attn_mask = inputs['input_ids'], inputs['token_type_ids'], inputs[
+                'attention_mask']
+            output_ids, output_tyi, output_attn_mask = outputs['input_ids'], outputs['token_type_ids'], outputs[
+                'attention_mask']
             out = self.model(input_ids, input_tyi, input_attn_mask)
             c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
-            # c_loss = self.criterion_c(out.transpose(1, 2),
-            #                           (1 - output_attn_mask) * self.criterion_c.ignore_index + output_ids)
-            # padding的部分的loss不置为0吗？
-
             total_loss += c_loss.item()
         return total_loss
 
     def save(self, name):
-        if isinstance(self.model, nn.DataParallel):
+        if (isinstance(self.model, nn.DataParallel)):
             torch.save(self.model.module.state_dict(), name)
         else:
             torch.save(self.model.state_dict(), name)
@@ -106,14 +84,10 @@ class Trainer:
             inputs = self.tokenizer(batch['input'], padding=True, truncation=True, return_tensors="pt").to(self.device)
             outputs = self.tokenizer(batch['output'], padding=True, truncation=True, return_tensors="pt").to(
                 self.device)
-            max_len = 180
-            input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
-                                                    inputs['token_type_ids'][:, :max_len], \
-                                                    inputs['attention_mask'][:, :max_len]
-            input_lens = torch.sum(input_attn_mask, 1)
-            output_ids, output_tyi, output_attn_mask = outputs['input_ids'][:, :max_len], \
-                                                       outputs['token_type_ids'][:, :max_len], \
-                                                       outputs['attention_mask'][:, :max_len]
+            input_ids, input_tyi, input_attn_mask = inputs['input_ids'], inputs['token_type_ids'], inputs[
+                'attention_mask']
+            output_ids, output_tyi, output_attn_mask = outputs['input_ids'], outputs['token_type_ids'], outputs[
+                'attention_mask']
             out = self.model(input_ids, input_tyi, input_attn_mask)
             out = out.argmax(dim=-1)
             mod_sen = [not out[i].equal(input_ids[i]) for i in range(len(out))]  # 修改过的句子
@@ -207,13 +181,7 @@ class Trainer:
                 output_ids, output_tyi, output_attn_mask = outputs['input_ids'], outputs['token_type_ids'], outputs[
                     'attention_mask']
                 out = self.model(input_ids, input_tyi, input_attn_mask)
-
                 c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
-
-                # c_loss = self.criterion_c(out.transpose(1, 2),
-                #                           (1 - output_attn_mask) * self.criterion_c.ignore_index + output_ids)
-                # padding的部分的loss不置为0吗？
-
                 total_loss += c_loss.item()
                 self.optim.zero_grad()
                 c_loss.backward()
@@ -238,13 +206,7 @@ class Trainer:
                 output_ids, output_tyi, output_attn_mask = outputs['input_ids'], outputs['token_type_ids'], outputs[
                     'attention_mask']
                 out = self.model(input_ids, input_tyi, input_attn_mask)  # out:[batch_size,seq_len,vocab_size]
-
                 c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
-
-                # c_loss = self.criterion_c(out.transpose(1, 2),
-                #                           (1 - output_attn_mask) * self.criterion_c.ignore_index + output_ids)
-                # # padding的部分的loss不置为0吗？
-
                 total_loss += c_loss.item()
                 self.optim.zero_grad()
                 c_loss.backward()
@@ -313,10 +275,11 @@ if __name__ == "__main__":
     # device_ids=[0,1]
     device_ids = [i for i in range(int(args.gpu_num))]
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    bert_path = "/data_local/plm_models/chinese_L-12_H-768_A-12/"
-    bert = BertModel.from_pretrained(bert_path, return_dict=True)
-    tokenizer = BertTokenizer.from_pretrained(bert_path)
-    config = BertConfig.from_pretrained(bert_path)
+
+    bert = BertModel.from_pretrained('bert-base-chinese', return_dict=True)
+    # embedding = bert.embeddings.to(device)
+    tokenizer = BertTokenizer.from_pretrained('bert-base-chinese')
+    config = BertConfig.from_pretrained('bert-base-chinese')
 
     model = BertFineTune(bert, tokenizer, device, device_ids).to(device)
 
