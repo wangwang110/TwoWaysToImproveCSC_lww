@@ -39,7 +39,7 @@ class Trainer:
         self.tokenizer = tokenizer
         self.criterion_c = nn.NLLLoss()
         self.criterion_cls = nn.BCEWithLogitsLoss()
-        self.criterion_token_cls = nn.BCEWithLogitsLoss(pos_weight=torch.tensor([2.0]))
+        self.criterion_token_cls = nn.BCEWithLogitsLoss()
         # pos_weight=2
         # ignore_index=0
         self.device = device
@@ -93,7 +93,7 @@ class Trainer:
             #     generate_srcs = self.replace_token(batch['output'])
             #     batch['input'] = generate_srcs
 
-            inputs, outputs = self.help_vectorize_ori(batch)
+            inputs, outputs = self.help_vectorize(batch)
 
             max_len = 180
             input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
@@ -114,19 +114,19 @@ class Trainer:
             # focal_loss = self.criterion_focal(out_logit, output_ids.view(-1))
 
             ori_c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
-            sent_loss = self.criterion_cls(sent_out, outputs["labels"])
+            # sent_loss = self.criterion_cls(sent_out, outputs["labels"])
 
-            # output_token_label = outputs["token_labels"][:, :max_len, :]
-            # batch_size, seq_len = input_ids.size()
-            # seq_loss = self.criterion_token_cls(token_out.reshape(batch_size * seq_len, 1),
-            #                                     output_token_label.reshape(batch_size * seq_len, 1))
+            output_token_label = outputs["token_labels"][:, :max_len, :]
+            batch_size, seq_len = input_ids.size()
+            seq_loss = self.criterion_token_cls(token_out.reshape(batch_size * seq_len, 1),
+                                                output_token_label.reshape(batch_size * seq_len, 1))
 
             # ori_c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
             # ori_c_loss = ori_c_loss * input_attn_mask
             # ori_c_loss = torch.sum(ori_c_loss) / torch.sum(input_attn_mask)
             # c_loss = torch.log(ori_c_loss) + torch.log(seq_loss)
 
-            c_loss = (ori_c_loss + sent_loss) / gradient_accumulation_steps
+            c_loss = (ori_c_loss + seq_loss) / gradient_accumulation_steps
             c_loss.backward()
             total_loss += c_loss.item()
             if i % gradient_accumulation_steps == 0 or i == len(train):
@@ -139,7 +139,7 @@ class Trainer:
         self.model.eval()
         total_loss = 0
         for batch in test:
-            inputs, outputs = self.help_vectorize_ori(batch)
+            inputs, outputs = self.help_vectorize(batch)
             max_len = 180
             input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
                                                     inputs['token_type_ids'][:, :max_len], \
@@ -149,16 +149,16 @@ class Trainer:
                                                        outputs['attention_mask'][:, :max_len]
 
             out, sent_out, token_out = self.model(input_ids, input_tyi, input_attn_mask)
-            sent_loss = self.criterion_cls(sent_out, outputs["labels"])
+            # sent_loss = self.criterion_cls(sent_out, outputs["labels"])
 
-            # output_token_label = outputs["token_labels"][:, :max_len, :]
-            # batch_size, seq_len = input_ids.size()
-            # seq_loss = self.criterion_token_cls(token_out.reshape(batch_size * seq_len, 1),
-            #                                     output_token_label.reshape(batch_size * seq_len, 1))
+            output_token_label = outputs["token_labels"][:, :max_len, :]
+            batch_size, seq_len = input_ids.size()
+            seq_loss = self.criterion_token_cls(token_out.reshape(batch_size * seq_len, 1),
+                                                output_token_label.reshape(batch_size * seq_len, 1))
 
             ori_c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
 
-            c_loss = ori_c_loss + sent_loss
+            c_loss = ori_c_loss + seq_loss
             total_loss += c_loss.item()
         return total_loss
 
@@ -189,7 +189,7 @@ class Trainer:
         d_sen_mod_acc2 = 0
 
         for batch in test:
-            inputs, outputs = self.help_vectorize_ori(batch)
+            inputs, outputs = self.help_vectorize(batch)
             max_len = 180
             input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
                                                     inputs['token_type_ids'][:, :max_len], \
@@ -379,6 +379,13 @@ class Trainer:
         outputs['token_type_ids'] = torch.tensor(np.array(outputs['token_type_ids'])).to(self.device)
         outputs['attention_mask'] = torch.tensor(np.array(outputs['attention_mask'])).to(self.device)
 
+        # 每个位置对应的分类，其中padding部分需要去掉
+        token_labels = [
+            [0 if inputs['input_ids'][i][j] == outputs['input_ids'][i][j] else 1
+             for j in range(inputs['input_ids'].size()[1])] for i in range(len(batch['input']))]
+
+        outputs["token_labels"] = torch.tensor(token_labels, dtype=torch.float32).to(self.device).unsqueeze(-1)
+
         return inputs, outputs
 
 
@@ -439,6 +446,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     task_name = args.task_name
+    print("----python script: " + os.path.basename(__file__) + "----")
     print("----Task: " + task_name + " begin !----")
     print("----Model base: " + args.load_path + "----")
 

@@ -9,53 +9,51 @@
 
 # /data_local/TwoWaysToImproveCSC/BERT/save/test/wiki_00_base_asame
 # /data_local/TwoWaysToImproveCSC/BERT/save/pretrain/base_998_mask/sighan13/
-baseline="/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/base_998_mask/epoch1.pkl"
-preTrain="/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/base_998_mask/sighan13/model.pkl"
-nerTrain="/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/base_998_mask/epoch2.pkl"
-nerTrain2="/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/base_998_mask/sighan13_2/model.pkl"
+# baseline0="/data_local/TwoWaysToImproveCSC/BERT/save/3090-pretrain/sighan13/model.pkl"
+baseline="/data_local/TwoWaysToImproveCSC/BERT/save/test/test_macbert/base_no_ig/model.pkl"
+preTrain="/data_local/TwoWaysToImproveCSC/BERT/save/test/test_macbert/mac_no_ig/model.pkl"
+nerTrain="/data_local/TwoWaysToImproveCSC/BERT/save/test/test_macbert/base_mlm_task/model.pkl"
+nerTrain0="/data_local/TwoWaysToImproveCSC/BERT/save/test/test_macbert/mac_mlm_task/model.pkl"
+
+# nerTrain0="/data_local/TwoWaysToImproveCSC/BERT/save/test/test_macbert/mac_mlm_task/model.pkl"
 
 
-
-gpu=0
-
+gpu=7
 
 
 data=./data/13test_lower.txt
 task=test
-
-#
-#CUDA_VISIBLE_DEVICES=$gpu python new_bft_train1.py  --task_name=$task --gpu_num=1 --load_model=True  --load_path="/data_local/TwoWaysToImproveCSC/BERT/save/test/wiki_00_base_detect/epoch1.pkl" --do_test=True --test_data=$data --batch_size=16
-#
-
+# new_pretrain_auto.dev
 # sighan13
 echo $baseline
-CUDA_VISIBLE_DEVICES=$gpu python bft_eval.py  --task_name=$task --gpu_num=1 --load_model=True  --load_path=$baseline --do_test=True --test_data=$data --batch_size=16
+CUDA_VISIBLE_DEVICES=$gpu python new_bft_train_base.py  --task_name=$task --gpu_num=1 --load_model=True  --load_path=$baseline --do_test=True --test_data=$data --batch_size=16
 
 echo $preTrain
-CUDA_VISIBLE_DEVICES=$gpu  python bft_eval.py --task_name=$task --gpu_num=1 --load_model=True  --load_path=$preTrain --do_test=True --test_data=$data --batch_size=16
+CUDA_VISIBLE_DEVICES=$gpu  python new_bft_train_base_mac.py --task_name=$task --gpu_num=1 --load_model=True  --load_path=$preTrain --do_test=True --test_data=$data --batch_size=16
 
 
 echo $nerTrain
-CUDA_VISIBLE_DEVICES=$gpu  python bft_eval.py --task_name=$task --gpu_num=1 --load_model=True  --load_path=$nerTrain --do_test=True --test_data=$data --batch_size=16
+CUDA_VISIBLE_DEVICES=$gpu  python new_bft_train_base_mlm.py --task_name=$task --gpu_num=1 --load_model=True  --load_path=$nerTrain --do_test=True --test_data=$data --batch_size=16
 
-echo $nerTrain2
-CUDA_VISIBLE_DEVICES=$gpu  python bft_eval.py --task_name=$task --gpu_num=1 --load_model=True  --load_path=$nerTrain2 --do_test=True --test_data=$data --batch_size=16
 
+echo $nerTrain0
+CUDA_VISIBLE_DEVICES=$gpu  python new_bft_train_base_mac_mlm.py --task_name=$task --gpu_num=1 --load_model=True  --load_path=$nerTrain0 --do_test=True --test_data=$data --batch_size=16
 
 
 
 data=./cc_data/chinese_spell_lower_4.txt
-# xaioxue
+
+## xaioxue
 echo $baseline
-CUDA_VISIBLE_DEVICES=$gpu  python bft_eval.py --task_name=$task --gpu_num=1 --load_model=True  --load_path=$baseline --do_test=True --test_data=$data --batch_size=16
+CUDA_VISIBLE_DEVICES=$gpu  python new_bft_train_base.py --task_name=$task --gpu_num=1 --load_model=True  --load_path=$baseline --do_test=True --test_data=$data --batch_size=16
 
 echo $preTrain
-CUDA_VISIBLE_DEVICES=$gpu  python bft_eval.py --task_name=$task --gpu_num=1 --load_model=True  --load_path=$preTrain --do_test=True --test_data=$data  --batch_size=16
+CUDA_VISIBLE_DEVICES=$gpu  python new_bft_train_base_mac.py --task_name=$task --gpu_num=1 --load_model=True  --load_path=$preTrain --do_test=True --test_data=$data  --batch_size=16
 
 echo $nerTrain
-CUDA_VISIBLE_DEVICES=$gpu  python bft_eval.py --task_name=$task --gpu_num=1 --load_model=True  --load_path=$nerTrain --do_test=True --test_data=$data  --batch_size=16
+CUDA_VISIBLE_DEVICES=$gpu  python new_bft_train_base_mlm.py --task_name=$task --gpu_num=1 --load_model=True  --load_path=$nerTrain --do_test=True --test_data=$data  --batch_size=16
 
 
-echo $nerTrain2
-CUDA_VISIBLE_DEVICES=$gpu  python bft_eval.py --task_name=$task --gpu_num=1 --load_model=True  --load_path=$nerTrain2 --do_test=True --test_data=$data  --batch_size=16
+echo $nerTrain0
+CUDA_VISIBLE_DEVICES=$gpu  python new_bft_train_base_mac_mlm.py --task_name=$task --gpu_num=1 --load_model=True  --load_path=$nerTrain0 --do_test=True --test_data=$data  --batch_size=16
 

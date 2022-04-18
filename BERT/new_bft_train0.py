@@ -37,9 +37,9 @@ class Trainer:
         self.model = bert
         self.optim = optimizer
         self.tokenizer = tokenizer
-        self.criterion_c = nn.NLLLoss()
+        self.criterion_c = nn.NLLLoss(ignore_index=0)
         self.criterion_cls = nn.BCEWithLogitsLoss()
-        self.criterion_token_cls = nn.BCEWithLogitsLoss(pos_weight=torch.tensor([2.0]))
+        self.criterion_token_cls = nn.BCEWithLogitsLoss(pos_weight=torch.tensor([2.0]).cuda())
         # pos_weight=2
         # ignore_index=0
         self.device = device
@@ -379,6 +379,13 @@ class Trainer:
         outputs['token_type_ids'] = torch.tensor(np.array(outputs['token_type_ids'])).to(self.device)
         outputs['attention_mask'] = torch.tensor(np.array(outputs['attention_mask'])).to(self.device)
 
+        # 每个位置对应的分类，其中padding部分需要去掉
+        token_labels = [
+            [0 if inputs['input_ids'][i][j] == outputs['input_ids'][i][j] else 1
+             for j in range(inputs['input_ids'].size()[1])] for i in range(len(batch['input']))]
+
+        outputs["token_labels"] = torch.tensor(token_labels, dtype=torch.float32).to(self.device).unsqueeze(-1)
+
         return inputs, outputs
 
 
@@ -439,6 +446,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     task_name = args.task_name
+    print("----python script: " + os.path.basename(__file__) + "----")
     print("----Task: " + task_name + " begin !----")
     print("----Model base: " + args.load_path + "----")
 

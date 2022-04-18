@@ -237,6 +237,7 @@ if __name__ == "__main__":
     # 初始化模型
     bert_path = "/data_local/plm_models/chinese_L-12_H-768_A-12/"
     load_path = "/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/base_998_mask/sighan13/model.pkl"
+    # /data_local/TwoWaysToImproveCSC/BERT/save/pretrain/base_998_mask/sighan13
     obj = CSC(bert_path, load_path)
     texts = [
         "……在世界上，没有一条路是可以让人安全走过的，每一条路都有其崎岖之处在等待人们掉入，这些险阱便是痛苦、失望、难过、挫折……",

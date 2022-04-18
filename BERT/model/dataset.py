@@ -31,6 +31,21 @@ def construct(filename):
     return list
 
 
+def construct_pretrain(filename):
+    f = open(filename, encoding='utf8')
+    list = []
+    for line in f:
+        try:
+            line = line.replace("\n", "")
+            pairs = line.split(" ")
+            elem = {'input': "", 'output': pairs[0]}
+            list.append(elem)
+        except Exception as e:
+            print(e)
+            continue
+    return list
+
+
 def construct_ner(filename):
     f = open(filename, encoding='utf8')
     ner_li = open("/data_local/TwoWaysToImproveCSC/BERT/data/merge_train_ner_tag.txt", encoding='utf8').readlines()

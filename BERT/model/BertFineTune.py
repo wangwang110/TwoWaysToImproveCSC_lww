@@ -1,14 +1,95 @@
 import sys
-
-sys.path.append("..")
 import torch.nn as nn
 import torch
 import numpy as np
-from transformers import BertModel, BertConfig, BertTokenizer
+from transformers import BertModel, BertConfig, BertTokenizer, BertForMaskedLM
 from torch.utils.data import DataLoader, Dataset
 from torch.optim import Adam
 from model.dataset import BertDataset, construct
 import pickle
+import copy
+from loss.focalloss import FocalLoss
+from loss.cpoloss import CpoLoss
+
+
+class BertFineTuneCpo(nn.Module):
+    def __init__(self, bert, tokenizer, device, device_ids, is_correct_sent=False):
+        super(BertFineTuneCpo, self).__init__()
+        self.device = device
+        self.config = bert.config
+        self.bert = bert.to(device)
+
+    def forward(self, input_ids, input_tyi, input_attn_mask, text_labels, det_labels):
+        copy_text_labels = copy.deepcopy(text_labels)
+        if text_labels is not None:
+            text_labels[text_labels == 0] = -100
+            # 所以会做忽略处理
+        else:
+            text_labels = None
+        bert_outputs = self.bert(input_ids=input_ids, token_type_ids=input_tyi, attention_mask=input_attn_mask,
+                                 labels=text_labels, return_dict=True, output_hidden_states=True)
+
+        # prob = self.detection(bert_outputs.hidden_states[-1])
+        if text_labels is None:
+            outputs = (0, bert_outputs.logits)
+        else:
+            cpo_loss_fct = CpoLoss()
+            # pad部分不计算损失
+            # active_loss = input_attn_mask.view(-1, prob.shape[1]) == 1
+            # active_probs = prob.view(-1, prob.shape[1])[active_loss]
+            # active_labels = det_labels[active_loss]
+            cpo_loss = cpo_loss_fct(bert_outputs.logits, copy_text_labels, input_attn_mask)
+
+            # 检错loss，纠错loss，检错输出，纠错输出
+            outputs = (cpo_loss,
+                       bert_outputs.loss,
+                       bert_outputs.logits)
+
+        return outputs
+
+
+class BertFineTuneMac(nn.Module):
+    def __init__(self, bert, tokenizer, device, device_ids, is_correct_sent=False):
+        super(BertFineTuneMac, self).__init__()
+        self.device = device
+        self.config = bert.config
+        self.bert = bert.to(device)
+
+        self.is_correct_sent = is_correct_sent
+
+        if self.is_correct_sent:
+            hidden_size = self.config.to_dict()['hidden_size']
+            self.detection = nn.Linear(hidden_size, 1)
+            self.sigmoid = nn.Sigmoid().to(device)
+            # 每个位置进行分类
+            # self.dense = nn.Linear(hidden_size, hidden_size)
+            # self.activation = nn.Tanh()
+
+    def forward(self, input_ids, input_tyi, input_attn_mask, text_labels, det_labels):
+        if text_labels is not None:
+            text_labels[text_labels == 0] = -100
+        else:
+            text_labels = None
+        bert_outputs = self.bert(input_ids=input_ids, token_type_ids=input_tyi, attention_mask=input_attn_mask,
+                                 labels=text_labels, return_dict=True, output_hidden_states=True)
+
+        prob = self.detection(bert_outputs.hidden_states[-1])
+        if text_labels is None:
+            outputs = (prob, bert_outputs.logits)
+        else:
+            det_loss_fct = FocalLoss(num_labels=None, activation_type='sigmoid')
+            # pad部分不计算损失
+            active_loss = input_attn_mask.view(-1, prob.shape[1]) == 1
+            active_probs = prob.view(-1, prob.shape[1])[active_loss]
+            active_labels = det_labels[active_loss]
+            det_loss = det_loss_fct(active_probs, active_labels.float())  # 检测loss（0.7）和纠正loss（0.3）
+            # 检错loss，纠错loss，检错输出，纠错输出
+            outputs = (det_loss,
+                       bert_outputs.loss,
+                       self.sigmoid(prob).squeeze(-1),
+                       bert_outputs.logits)
+
+        return outputs
 
 
 class BertFineTune(nn.Module):
@@ -23,7 +104,7 @@ class BertFineTune(nn.Module):
 
         if self.is_correct_sent:
             hidden_size = self.config.to_dict()['hidden_size']
-            self.cls_w = nn.Linear(self.config.to_dict()['hidden_size'], 1)
+            self.cls_w = nn.Linear(hidden_size, 1)
             # 每个位置进行分类
             self.dense = nn.Linear(hidden_size, hidden_size)
             self.activation = nn.Tanh()
@@ -82,10 +163,12 @@ class BertFineKeep(nn.Module):
         index = torch.tensor(word_ids, device="cuda")
         cls_weight = torch.index_select(word_embeddings_weight, 0, index)  # 用原来的word_embeding初始化
 
-        w = torch.empty(1, embedding_size)
-        add_one_weight = nn.init.normal_(w, mean=0.0, std=1.0)
+        add_one_weight = word_embeddings_weight[102].view(1, -1)
 
-        all_cls_weight = torch.cat([cls_weight, add_one_weight.cuda()], 0)
+        # w = torch.empty(1, embedding_size)
+        # add_one_weight = nn.init.normal_(w, mean=0.0, std=1.0)
+
+        all_cls_weight = torch.cat([cls_weight, add_one_weight], 0)
         all_cls_weight = nn.Parameter(all_cls_weight, True)
 
         # 另外再加一个维度

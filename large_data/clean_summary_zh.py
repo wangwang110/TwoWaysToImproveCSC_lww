@@ -1,10 +1,7 @@
 # -*- coding: UTF-8 -*-
 
-import sys
 import os
-import re
 from optparse import OptionParser
-from tqdm import tqdm
 import json
 import re
 
@@ -12,7 +9,6 @@ import re
 def cut_sent(para):
     """规则分句"""
     para = re.sub("([。！？!\?]){2,}", r"\1", para)
-    para = re.sub("<br><br>", "\n", para)
     para = re.sub('([。！？!\?])([^”’])', r"\1\n\2", para)  # 单字符断句符
     #
     para = re.sub('(\.{6})([^”’])', r"\1\n\2", para)  # 英文省略号
@@ -27,7 +23,7 @@ def cut_sent(para):
 def ratio_alphabetic(context_string):
     """
     :param context_string:
-    :return: 返回中文字符（不包括标点）占比
+    :return: 返回中文字符个数占比
     """
     # 标点
     # '[\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b\u4e00-\u9fa5]'
@@ -40,37 +36,25 @@ def ratio_alphabetic(context_string):
     return ratio
 
 
-def read_json_baike(path):
+def read_summry_text(path):
+    """
+    不同的函数读取不同的数据源
+    :param path:
+    :return:
+    """
     data = []
-    with open(path, "r", encoding="utf-8") as f:
-        for line in f.readlines():
-            item = json.loads(line)
-            data.append(item['title'])
-            data.append(item['desc'])
-            data.append(item['answer'])
-    return data
-
-
-def read_json_web(path):
-    data = set()
-    with open(path, "r", encoding="utf-8") as f:
-        for line in f.readlines():
-            item = json.loads(line)
-            data.add(item['title'])
-            data.add(item['desc'])
-            data.add(item['content'])
-    return data
-
-
-def read_json_news(path):
-    data = set()
-    with open(path, "r", encoding="utf-8") as f:
-        for line in f.readlines():
-            item = json.loads(line)
-            # data.add(item['content']) # webzh
-            # data.add(item['title'])  # baike
-            data.add(item['desc'])  # baike
-            data.add(item['answer'])  # baike
+    if path.endswith(".json"):
+        with open(path, "r", encoding="utf-8") as f:
+            json_dict = json.load(f)
+            for item in json_dict:
+                content_li = item["content"].split(" ")
+                data.extend(content_li)
+                title_li = item["title"].split(" ")
+                data.extend(title_li)
+    else:
+        with open(path, "r", encoding="utf-8") as f:
+            for line in f.readlines():
+                data.append(line.replace(" ", ""))
     return data
 
 
@@ -84,26 +68,15 @@ class Clean(object):
 
     def read(self, path):
         print("reading now......")
-        data = read_json_news(path)
-        i = 0
-        data_num = len(data)
+        data = read_summry_text(path)
         for line in data:
-            i += 1
             line = line.strip()
             if line == "":
                 continue
-            # 必须包含中文汉字
-            if not re.search('[\u4e00-\u9fa5]', line):
-                continue
-
             text = self.process_line(line)
             for sent in cut_sent(text):
-                # tmp = re.sub("[。？!！\?\…\.]$", "###", sent)
-                # if 6 < len(sent) < 160 and tmp.endswith("###") and ratio_alphabetic(line) > 1 / 2:
-                if 6 < len(sent) < 160 and ratio_alphabetic(line) > 1 / 2:
+                if 6 < len(sent) < 160 and ratio_alphabetic(sent) > 1 / 2:
                     self.corpus.add(sent)
-            if i % 10000 == 0:
-                print("########{}######".format(i / data_num))
         print("read finished.")
 
     def process_line(self, line):

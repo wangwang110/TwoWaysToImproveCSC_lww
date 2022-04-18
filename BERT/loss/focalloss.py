@@ -7,41 +7,39 @@ import torch.nn.functional as F
 
 
 class FocalLoss(nn.Module):
-    def __init__(self, gamma=0, alpha=None, size_average=True):
+    """
+    Softmax and sigmoid focal loss.
+    copy from https://github.com/lonePatient/TorchBlocks
+    """
+
+    def __init__(self, num_labels, activation_type='softmax', gamma=2.0, alpha=0.25, epsilon=1.e-9):
+
         super(FocalLoss, self).__init__()
+        self.num_labels = num_labels
         self.gamma = gamma
-        # apha如果不定义，就是[1]*num_class
-        # self.alpha = alpha
-        # if isinstance(alpha, (float, int)):
-        #     # binary classifier
-        #     self.alpha = torch.Tensor([alpha, 1 - alpha])
-        # if isinstance(alpha, list):
-        #     self.alpha = torch.Tensor(alpha)
-        self.size_average = size_average
+        self.alpha = alpha
+        self.epsilon = epsilon
+        self.activation_type = activation_type
 
     def forward(self, input, target):
         """
-        :param input: B*C (C is num_classes)
-        :param target: B
-        :return:
+        Args:
+            logits: model's output, shape of [batch_size, num_cls]
+            target: ground truth labels, shape of [batch_size]
+        Returns:
+            shape of [batch_size]
         """
-        target = target.view(-1, 1)  # B*1
-
-        logp = F.log_softmax(input, dim=1)
-        logpt = logp.gather(1, target)
-        logpt = logpt.view(-1)  # B
-        pt = logpt.exp()
-
-        # if self.alpha is not None:
-        #     if self.alpha.type() != input.type():
-        #         self.alpha = self.alpha.type_as(input)
-        #
-        #     at = self.alpha.gather(0, target.view(-1))
-        #     logpt = logpt * at
-
-        loss = -1 * (1 - pt) ** self.gamma * logpt
-
-        if self.size_average:
-            return loss.mean()
-        else:
-            return loss.sum()
+        if self.activation_type == 'softmax':
+            idx = target.view(-1, 1).long()
+            one_hot_key = torch.zeros(idx.size(0), self.num_labels, dtype=torch.float32, device=idx.device)
+            one_hot_key = one_hot_key.scatter_(1, idx, 1)
+            logits = torch.softmax(input, dim=-1)
+            loss = -self.alpha * one_hot_key * torch.pow((1 - logits), self.gamma) * (logits + self.epsilon).log()
+            loss = loss.sum(1)
+        elif self.activation_type == 'sigmoid':
+            multi_hot_key = target
+            logits = torch.sigmoid(input)
+            zero_hot_key = 1 - multi_hot_key
+            loss = -self.alpha * multi_hot_key * torch.pow((1 - logits), self.gamma) * (logits + self.epsilon).log()
+            loss += -(1 - self.alpha) * zero_hot_key * torch.pow(logits, self.gamma) * (1 - logits + self.epsilon).log()
+        return loss.mean()

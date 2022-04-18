@@ -36,8 +36,10 @@ def cut_sent(para):
 
 
 if __name__ == "__main__":
+    import os
     para = "今天天气真好啊！！！很适合出去玩呢，你要和我一起嘛。。。走走走！ 不见不散"
     print(cut_sent(para))
+    print("----python script: " + os.path.basename(__file__) + "----")
 
 # ori_text
 # 添加换行符分句==添加又切分，无影响

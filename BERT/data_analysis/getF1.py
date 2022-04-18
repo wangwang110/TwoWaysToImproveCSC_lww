@@ -71,12 +71,13 @@ def sent_mertic(all_srcs, all_pres, all_trgs):
     c_precision = sen_mod_acc / sen_mod
     c_recall = sen_mod_acc / sen_tar_mod
     c_F1 = 2 * c_precision * c_recall / (c_precision + c_recall)
-    print("detection sentence accuracy:{0},precision:{1},recall:{2},F1:{3}".format(d_sen_acc / setsum, d_precision,
-                                                                                   d_recall, d_F1))
-    print("correction sentence accuracy:{0},precision:{1},recall:{2},F1:{3}".format(sen_acc / setsum,
-                                                                                    sen_mod_acc / sen_mod,
-                                                                                    sen_mod_acc / sen_tar_mod,
-                                                                                    c_F1))
+    print(
+        "detection sentence accuracy:{0},p:{1},r:{2},F1:{3}".format(round(d_sen_acc / setsum, 3), round(d_precision, 3),
+                                                                    round(d_recall, 3), round(d_F1, 3)))
+    print("correction sentence accuracy:{0},p:{1},recall:{2},F1:{3}".format(round(sen_acc / setsum, 3),
+                                                                            round(sen_mod_acc / sen_mod, 3),
+                                                                            round(sen_mod_acc / sen_tar_mod, 3),
+                                                                            round(c_F1, 3)))
     print("sentence target modify:{0},sentence sum:{1},sentence modified accurate:{2}".format(sen_tar_mod, setsum,
                                                                                               sen_mod_acc))
     # accuracy, precision, recall, F1
@@ -240,6 +241,10 @@ if __name__ == "__main__":
 
     print("sighan13 句子级别:")
     sent_mertic(all_srcs, all_pres_model, all_trgs)
+    with open("../data/sighan13.out", "w", encoding="utf-8") as fw:
+        for src, pre, trg in zip(all_srcs, all_pres_model, all_trgs):
+            fw.write(src + " " + pre + " " + trg + "\n")
+
     sent_mertic(all_srcs, all_pres1, all_trgs)
 
     print("sighan13 token级别:")

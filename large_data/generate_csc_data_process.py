@@ -89,18 +89,14 @@ class GenerateCSC:
     def read(self, path):
         print("reading now......")
         with open(path, encoding="UTF-8") as f:
+            i = 0
             for line in f.readlines():
-                # tag = 0
-                if 6 < len(line) < 160 and not line.startswith("）") and ratio_alphabetic(line) > 1.0 / 4:
-                    # for w in line:
-                    #     if is_chinese(w):
-                    #         tag = 1
-                    #         break
-                    # if tag == 0:
-                    #     continue
-                    line = normalize_lower(line)
-                    new_line = self.replace_token(line)
-                    self.corpus.append([line, new_line])
+                i += 1
+                line = normalize_lower(line)
+                new_line = self.replace_token(line)
+                self.corpus.append([line, new_line])
+                if i % 10000 == 0:
+                    print("++++{}++++".format(i / 85649593))
 
         print("read finished.")
 

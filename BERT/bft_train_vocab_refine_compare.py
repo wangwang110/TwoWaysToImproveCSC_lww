@@ -13,8 +13,20 @@ from torch.optim import Adam
 import operator
 from model import BertFineTune, construct, BertDataset, BFTLogitGen, readAllConfusionSet
 import os
+import random
 import pickle
 from data_analysis.getF1 import sent_mertic, token_mertic
+
+
+def setup_seed(seed):
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    np.random.seed(seed)
+    random.seed(seed)
+    torch.backends.cudnn.deterministic = True
+
+
+setup_seed(20)
 
 vob = set()
 with open("/data_local/plm_models/chinese_L-12_H-768_A-12/vocab.txt", "r", encoding="utf-8") as f:
@@ -90,10 +102,12 @@ class Trainer:
             generate_srcs.append("".join(tokens))
         return generate_srcs
 
-    def train(self, train):
+    def train(self, train, gradient_accumulation_steps=1):
         self.model.train()
         total_loss = 0
+        i = 0
         for batch in train:
+            i += 1
             inputs, outputs = self.help_vectorize(batch)
             max_len = 180
             input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
@@ -115,12 +129,13 @@ class Trainer:
 
             c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
             # padding的部分的loss不置为0吗？
-            total_loss += c_loss.item()
-            print(c_loss.item())
-            self.optim.zero_grad()
+            c_loss = c_loss / gradient_accumulation_steps
             c_loss.backward()
-            # backward始终用的这一个
-            self.optim.step()
+            total_loss += c_loss.item()
+            if i % gradient_accumulation_steps == 0 or i == len(train):
+                print(c_loss.item())
+                self.optim.step()
+                self.optim.zero_grad()
         return total_loss
 
     def test(self, test):
@@ -242,7 +257,8 @@ class Trainer:
                 for j in range(len(tokens) + 1):
                     if out[i][j + 1] != input_ids[i][j + 1]:
                         val = out[i][j + 1].item()
-                        tokens[j] = self.vob[val]
+                        if j < len(tokens):
+                            tokens[j] = self.vob[val]
                 out_sent = "".join(tokens)
                 all_pres.append(out_sent)
 
@@ -358,6 +374,12 @@ if __name__ == "__main__":
     parser.add_argument('--test_data', type=str, default='../data/13test.txt')
 
     parser.add_argument('--batch_size', type=int, default=20)
+    parser.add_argument(
+        "--gradient_accumulation_steps",
+        type=int,
+        default=1,
+        help="Number of updates steps to accumulate before performing a backward/update pass.",
+    )
     parser.add_argument('--epoch', type=int, default=1)
     parser.add_argument('--learning_rate', type=float, default=2e-5)
     parser.add_argument('--do_save', type=str2bool, nargs='?', const=False)
@@ -413,7 +435,7 @@ if __name__ == "__main__":
 
     if args.do_train:
         for e in range(int(args.epoch)):
-            train_loss = trainer.train(train)
+            train_loss = trainer.train(train, args.gradient_accumulation_steps)
 
             if args.do_valid:
                 valid_loss = trainer.test(valid)

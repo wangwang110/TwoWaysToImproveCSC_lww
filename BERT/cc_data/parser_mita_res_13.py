@@ -19,10 +19,31 @@ def find_ori_data(path):
     all_text_trg = []
     with open(path, encoding="utf-8") as f1:
         for line in f1.readlines():
-            src, trg = line.strip().split()
-            all_text_ori.append(remove_space(src))
-            all_text_trg.append(remove_space(trg))
+            try:
+                src, trg = line.strip().split()
+                all_text_ori.append(remove_space(src))
+                all_text_trg.append(remove_space(trg))
+            except Exception as e:
+                print(line)
     return all_text_ori, all_text_trg
+
+
+def find_ori_data_pre(path):
+    """
+    获取原始数据，包括gold
+    :param path:
+    :return:
+    """
+    all_text_ori = []
+    all_text_pre = []
+    with open(path, encoding="utf-8") as f1:
+        for line in f1.readlines():
+            try:
+                pre = line.strip()
+                all_text_pre.append(remove_space(pre))
+            except Exception as e:
+                print(line)
+    return all_text_ori, all_text_pre
 
 
 def get_model_output(model_out_path, all_text_ori):
@@ -56,18 +77,19 @@ def get_model_output(model_out_path, all_text_ori):
 # # 原始数据
 
 path = "/data_local/TwoWaysToImproveCSC/BERT/cc_data/chinese_spell_lower_4.txt"
-
 # path = "/data_local/TwoWaysToImproveCSC/BERT/data/13test_lower.txt"
+
+# path = "/data_local/TwoWaysToImproveCSC/BERT/data/14test.txt"
 data = os.path.basename(path)
 all_text_ori, all_text_trg = find_ori_data(path)
 
-path_model = "/data_local/TwoWaysToImproveCSC/BERT/data/chinese_spell_lower_4_model.txt"
-_, all_model_pre = find_ori_data(path_model)
+path_model = "/data_local/TwoWaysToImproveCSC/BERT/data_analysis/test.out"
+_, all_model_pre = find_ori_data_pre(path_model)
 
-path_mita = "/data_local/TwoWaysToImproveCSC/BERT/data/chinese_spell_lower_4_mita_punct.txt"
-_, all_mita_pre = find_ori_data(path_mita)
+path_mita = "/data_local/TwoWaysToImproveCSC/BERT/data_analysis/test_less.out"
+_, all_mita_pre = find_ori_data_pre(path_mita)
 
-path_out = "../data_analysis/compar_model2mita_1.txt"
+path_out = "../data_analysis/compare.txt"
 with open(path_out, "w", encoding="utf-8") as fw3:
     for src, trg, pre, pre1 in zip(all_text_ori, all_text_trg, all_model_pre, all_mita_pre):
         src = remove_space(src)
@@ -75,7 +97,7 @@ with open(path_out, "w", encoding="utf-8") as fw3:
         pre = remove_space(pre)
         pre1 = remove_space(pre1)
 
-        if pre == pre1 and trg == pre:
+        if pre == pre1:
             # 模型和秘塔修改得一致
             continue
 
@@ -90,13 +112,13 @@ with open(path_out, "w", encoding="utf-8") as fw3:
             if s != t:
                 fw3.write(str(j + 1) + " , " + s + " , " + t + "\n")
 
-        fw3.write("model:\n")
+        fw3.write("base:\n")
         for j, x in enumerate(zip(src, pre)):
             s, t = x
             if s != t:
                 fw3.write(str(j + 1) + " , " + s + " , " + t + "\n")
 
-        fw3.write("mita:\n")
+        fw3.write("refine:\n")
         for j, x in enumerate(zip(src, pre1)):
             s, t = x
             if s != t:
