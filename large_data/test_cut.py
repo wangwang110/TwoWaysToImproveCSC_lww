@@ -76,8 +76,8 @@ def refine_vocab():
     #         print(item)
     # print(len(sorted_dict))
 
-
-# 引号里面有好多句子，怎么办
-res = cut_sent('爱迪生曾说过:“天才是百分只99%的汗水，加百分之一努力。天才是百分只99%的汗水，加百分之一努力。”，所以我希望你不要放弃。')
-print(res)
-refine_vocab()
+#
+# # 引号里面有好多句子，怎么办
+# res = cut_sent('爱迪生曾说过:“天才是百分只99%的汗水，加百分之一努力。天才是百分只99%的汗水，加百分之一努力。”，所以我希望你不要放弃。')
+# print(res)
+# refine_vocab()

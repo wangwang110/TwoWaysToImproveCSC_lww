@@ -72,8 +72,10 @@ print(calc_val(train, test))
 
 # 作文测试集
 train = [
-    "/data_local/TwoWaysToImproveCSC/BERT/data/wiki_00_lower.train",
-    "/data_local/TwoWaysToImproveCSC/BERT/data/rep_autog_wang_train.txt",
+    # "/data_local/TwoWaysToImproveCSC/BERT/data/wiki_00_lower.train",
+    # "/data_local/TwoWaysToImproveCSC/BERT/data/rep_autog_wang_train.txt",
+    "/data_local/TwoWaysToImproveCSC/BERT/data/new_pretrain_all.train",
+    # "/data_local/chinese_data/add_news_cor_less.data",
     "/data_local/TwoWaysToImproveCSC/BERT/data/13train.txt"
 ]
 # wiki_00_lower_confuse.train

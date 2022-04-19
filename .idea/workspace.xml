@@ -52,7 +52,7 @@
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$bft_train_detect_joint.coverage" NAME="bft_train_detect_joint Coverage Results" MODIFIED="1647863632165" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$csc_eval.coverage" NAME="csc_eval Coverage Results" MODIFIED="1645152702535" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$cc_data_fuzzy.coverage" NAME="cc_data_fuzzy Coverage Results" MODIFIED="1643193986082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/cc_data" />
-    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$match_value.coverage" NAME="match_value Coverage Results" MODIFIED="1647242852862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/data_analysis" />
+    <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$match_value.coverage" NAME="match_value Coverage Results" MODIFIED="1650266024195" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/data_analysis" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$elasticsearch_cy.coverage" NAME="elasticsearch_cy Coverage Results" MODIFIED="1644908919807" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/chinese-xinhua" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$dataset.coverage" NAME="dataset Coverage Results" MODIFIED="1646644111266" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT/model" />
     <SUITE FILE_PATH="coverage/TwoWaysToImproveCSC_lww$new_bft_train2_stop_grad.coverage" NAME="new_bft_train2_stop_grad Coverage Results" MODIFIED="1646709232437" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BERT" />
@@ -100,22 +100,78 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="bft_train_vocab_refine_compare.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BERT/bft_train_vocab_refine_compare.py">
+      <file leaf-file-name="BertFineTune.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BERT/model/BertFineTune.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="434" column="37" selection-start-line="434" selection-start-column="37" selection-end-line="434" selection-end-column="37" />
+            <state relative-caret-position="-3294">
+              <caret line="91" column="22" selection-start-line="91" selection-start-column="22" selection-end-line="91" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BertFineTune.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/BERT/model/BertFineTune.py">
+      <file leaf-file-name="test_cut.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/large_data/test_cut.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="85" column="8" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
+            <state>
+              <caret selection-end-column="23" />
               <folding>
-                <element signature="e#328#2449#0" />
+                <element signature="e#25#35#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bft_train_mlm.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BERT/bft_train_mlm.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="self_eval.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BERT/self_eval.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="313">
+              <caret line="12" column="80" selection-start-line="12" selection-start-column="70" selection-end-line="12" selection-end-column="80" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_eval.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BERT/test_eval.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="525">
+              <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sighan13_run_bert.sh" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/BERT/sighan13_run_bert.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="333">
+              <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="compare.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Temp/scp43294/data_local/chinese_data/news/compare.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="8" column="30" lean-forward="true" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
+              <folding>
+                <element signature="e#2#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="match_value.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BERT/data_analysis/match_value.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="354">
+              <caret line="88" column="7" lean-forward="true" selection-start-line="88" selection-start-column="7" selection-end-line="88" selection-end-column="7" />
+              <folding>
+                <element signature="e#153#729#0" />
               </folding>
             </state>
           </provider>
@@ -124,29 +180,8 @@
       <file leaf-file-name="sparse.py" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/.PyCharm2018.1/system/remote_sources/746897114/47249651/torch/nn/modules/sparse.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="105" column="33" lean-forward="true" selection-start-line="105" selection-start-column="7" selection-end-line="105" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="init.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.PyCharm2018.1/system/remote_sources/746897114/47249651/torch/nn/init.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
-              <caret line="90" column="4" lean-forward="true" selection-start-line="90" selection-start-column="4" selection-end-line="90" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="parser_mita_res.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BERT/cc_data/parser_mita_res.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="42" column="31" lean-forward="true" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
-              <folding>
-                <element signature="e#135#1311#0" />
-              </folding>
+            <state relative-caret-position="2700">
+              <caret line="105" column="33" selection-start-line="105" selection-start-column="7" selection-end-line="105" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -154,48 +189,8 @@
       <file leaf-file-name="parser_mita_res_13.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BERT/cc_data/parser_mita_res_13.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="74" column="31" lean-forward="true" selection-start-line="74" selection-start-column="31" selection-end-line="74" selection-end-column="31" />
-              <folding>
-                <element signature="e#180#548#0" />
-                <element signature="e#607#1425#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="compar_model2mita_1.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BERT/data_analysis/compar_model2mita_1.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="156" column="17" lean-forward="true" selection-start-line="156" selection-start-column="17" selection-end-line="156" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="compar_model2mita.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BERT/data_analysis/compar_model2mita.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125550">
-              <caret line="4650" column="6" lean-forward="true" selection-start-line="4650" selection-start-column="6" selection-end-line="4650" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bft_train_vocab_refine.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BERT/bft_train_vocab_refine.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="51" column="34" lean-forward="true" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dataset.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BERT/model/dataset.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="30" selection-start-line="30" selection-end-line="30" />
+            <state relative-caret-position="1944">
+              <caret line="74" selection-start-line="74" selection-end-line="74" />
             </state>
           </provider>
         </entry>
@@ -211,7 +206,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>&quot;labels&quot;</find>
       <find>test</find>
       <find>criterion_token_cls</find>
       <find>CSCmodel</find>
@@ -241,6 +235,7 @@
       <find>原</find>
       <find>testSet</find>
       <find>init</find>
+      <find>\# \-\*\- coding\: UTF\-8 \-\*\-\nimport re\nimport pickle\n\n\nwith open\(\&quot;\.\/correct_news_sent_200w_new\.csc\&quot;\,\&quot;r\&quot;\,encoding\=\&quot;utf\-8\&quot;\) as f1\,open\(\&quot;\.\/correct_news_sent_200w_new\.csc\&quot;\,\&quot;r\&quot;\,encoding\=\&quot;utf\-8\&quot;\) as f1\:</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -249,8 +244,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/BERT/model/BertFineTune_ori.py" />
-        <option value="$PROJECT_DIR$/BERT/bft_train_ori.py" />
         <option value="$PROJECT_DIR$/BERT/data/get_pinyin_data.py" />
         <option value="$PROJECT_DIR$/BERT/bft_train_pinyin.py" />
         <option value="$PROJECT_DIR$/BERT/bft_train_unk.py" />
@@ -280,7 +273,6 @@
         <option value="$PROJECT_DIR$/BERT/bft_train_margin.py" />
         <option value="$PROJECT_DIR$/BERT/pretrain_bert.sh" />
         <option value="$PROJECT_DIR$/BERT/sighan13_run_bert.sh" />
-        <option value="$PROJECT_DIR$/BERT/test_eval.sh" />
         <option value="$PROJECT_DIR$/BERT/new_bft_train2.py" />
         <option value="$PROJECT_DIR$/BERT/new_bft_train0.py" />
         <option value="$PROJECT_DIR$/BERT/new_bft_train.py" />
@@ -289,7 +281,6 @@
         <option value="$PROJECT_DIR$/BERT/csc_model.py" />
         <option value="$PROJECT_DIR$/BERT/bert_eval.py" />
         <option value="$PROJECT_DIR$/BERT/csc_main.py" />
-        <option value="$PROJECT_DIR$/large_data/test_cut.py" />
         <option value="$PROJECT_DIR$/BERT/model/__init__.py" />
         <option value="$PROJECT_DIR$/BERT/data/map2plome.py" />
         <option value="$PROJECT_DIR$/BERT/data_analysis/__init__.py" />
@@ -300,6 +291,10 @@
         <option value="$PROJECT_DIR$/BERT/pretrain_bert_test.sh" />
         <option value="$PROJECT_DIR$/BERT/bft_train_vocab_refine.py" />
         <option value="$PROJECT_DIR$/BERT/model/BertFineTune.py" />
+        <option value="$PROJECT_DIR$/large_data/test_cut.py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/scp43294/data_local/chinese_data/news/compare.py" />
+        <option value="$PROJECT_DIR$/BERT/data_analysis/match_value.py" />
+        <option value="$PROJECT_DIR$/BERT/test_eval.sh" />
       </list>
     </option>
   </component>
@@ -313,8 +308,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+    <option name="x" value="-27" />
+    <option name="y" value="110" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -342,18 +337,6 @@
               <item name="TwoWaysToImproveCSC_lww" type="462c0819:PsiDirectoryNode" />
               <item name="BERT" type="462c0819:PsiDirectoryNode" />
               <item name="data_analysis" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwoWaysToImproveCSC_lww" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwoWaysToImproveCSC_lww" type="462c0819:PsiDirectoryNode" />
-              <item name="BERT" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwoWaysToImproveCSC_lww" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwoWaysToImproveCSC_lww" type="462c0819:PsiDirectoryNode" />
-              <item name="BERT" type="462c0819:PsiDirectoryNode" />
-              <item name="save" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TwoWaysToImproveCSC_lww" type="b2602c69:ProjectViewProjectNode" />
@@ -414,16 +397,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.bft_train_vocab_refine">
-    <configuration name="pretrain_bert_test.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
-      <module name="TwoWaysToImproveCSC_lww" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="INTERPRETER_PATH" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BERT" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BERT/pretrain_bert_test.sh" />
-      <option name="PARAMETERS" value="" />
-    </configuration>
+  <component name="RunManager" selected="Python.match_value">
     <configuration name="bft_train_vocab_refine" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="TwoWaysToImproveCSC_lww" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -483,6 +457,25 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="match_value" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="TwoWaysToImproveCSC_lww" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BERT/data_analysis" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BERT/data_analysis/match_value.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <configuration name="parser_mita_res_13" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="TwoWaysToImproveCSC_lww" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -503,19 +496,19 @@
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <list>
-      <item itemvalue="Bash.pretrain_bert_test.sh" />
       <item itemvalue="Python.bft_train_vocab_refine" />
       <item itemvalue="Python.getF1" />
       <item itemvalue="Python.bft_train_vocab_refine_compare" />
       <item itemvalue="Python.parser_mita_res_13" />
+      <item itemvalue="Python.match_value" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.match_value" />
         <item itemvalue="Python.bft_train_vocab_refine" />
         <item itemvalue="Python.bft_train_vocab_refine_compare" />
         <item itemvalue="Python.getF1" />
         <item itemvalue="Python.parser_mita_res_13" />
-        <item itemvalue="Bash.pretrain_bert_test.sh" />
       </list>
     </recent_temporary>
   </component>
@@ -539,52 +532,51 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="File Transfer" order="7" weight="0.21064815" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.46180555" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3136574" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="right" id="Remote Host" order="3" weight="0.4195279" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26126608" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23122318" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3298611" />
       <window_info anchor="right" id="SciView" order="3" weight="0.3299356" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.2951389" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3298611" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32060185" />
       <window_info anchor="right" id="Remote Host" order="3" weight="0.13787554" />
-      <window_info anchor="right" id="SciView" order="5" weight="0.3299356" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23175965" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32060185" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3298611" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23175965" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.2939815" />
       <window_info anchor="bottom" id="Terminal" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="5" weight="0.3299356" />
       <window_info anchor="bottom" id="File Transfer" order="9" weight="0.03125" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" id="Database" order="4" />
@@ -901,7 +893,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/large_data/test_cut.py</url>
-          <line>80</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1157,19 +1148,9 @@
           <option name="timeStamp" value="86" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/large_data/test_cut.py</url>
-          <line>82</line>
-          <option name="timeStamp" value="90" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/BERT/csc_main.py</url>
           <line>259</line>
           <option name="timeStamp" value="95" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/large_data/test_cut.py</url>
-          <line>68</line>
-          <option name="timeStamp" value="96" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/BERT/model/dataset.py</url>
@@ -1191,6 +1172,11 @@
           <line>433</line>
           <option name="timeStamp" value="114" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BERT/data_analysis/match_value.py</url>
+          <line>8</line>
+          <option name="timeStamp" value="115" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -1199,7 +1185,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="115" />
+      <option name="time" value="116" />
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
@@ -1267,23 +1253,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/large_data/generate_csc_data.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/generate_csc_data_bert.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="9" column="14" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/test_load_bert.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/large_data/generate_csc_data_ner.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-972" />
@@ -1334,20 +1303,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/sighan13_run_bert.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="31" column="73" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/test_eval.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BERT/bft_train_detect.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -1355,20 +1310,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/new_bft_train2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="37" column="30" lean-forward="true" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BERT/self_eval.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="11" column="81" selection-start-line="11" selection-start-column="75" selection-end-line="11" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/new_bft_train2.py" />
     <entry file="file://$USER_HOME$/.PyCharm2018.1/system/remote_sources/746897114/-9014705/string.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="244">
@@ -1444,16 +1386,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/large_data/test_cut.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1674">
-          <caret line="69" column="35" selection-start-line="69" selection-start-column="35" selection-end-line="69" selection-end-column="56" />
-          <folding>
-            <element signature="e#25#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharm2018.1/system/remote_sources/746897114/47249651/torch/nn/parameter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
@@ -1479,17 +1411,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
           <caret line="381" column="30" lean-forward="true" selection-start-line="318" selection-start-column="3" selection-end-line="381" selection-end-column="30" />
-          <folding>
-            <element signature="e#1583#2725#0" />
-            <element signature="e#2794#5265#0" />
-            <element signature="e#5301#6674#0" />
-            <element signature="e#6710#6882#0" />
-            <element signature="e#6918#6962#0" />
-            <element signature="e#7001#12947#0" />
-            <element signature="e#12998#14019#0" />
-            <element signature="e#14074#15006#0" />
-            <element signature="e#15053#16569#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1566,14 +1487,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BERT/bft_train_vocab_refine_compare.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="434" column="37" selection-start-line="434" selection-start-column="37" selection-end-line="434" selection-end-column="37" />
+        <state relative-caret-position="11718">
+          <caret line="434" selection-start-line="434" selection-end-line="434" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BERT/model/dataset.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
+        <state relative-caret-position="810">
           <caret line="30" selection-start-line="30" selection-end-line="30" />
         </state>
       </provider>
@@ -1581,7 +1502,7 @@
     <entry file="file://$PROJECT_DIR$/BERT/cc_data/parser_mita_res.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
-          <caret line="42" column="31" lean-forward="true" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
+          <caret line="42" column="31" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
           <folding>
             <element signature="e#135#1311#0" />
           </folding>
@@ -1590,57 +1511,104 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BERT/data_analysis/compar_model2mita_1.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="156" column="17" lean-forward="true" selection-start-line="156" selection-start-column="17" selection-end-line="156" selection-end-column="17" />
+        <state relative-caret-position="4212">
+          <caret line="156" column="17" selection-start-line="156" selection-start-column="17" selection-end-line="156" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BERT/data_analysis/compar_model2mita.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="125550">
-          <caret line="4650" column="6" lean-forward="true" selection-start-line="4650" selection-start-column="6" selection-end-line="4650" selection-end-column="6" />
+          <caret line="4650" column="6" selection-start-line="4650" selection-start-column="6" selection-end-line="4650" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BERT/bft_train_vocab_refine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="51" column="34" lean-forward="true" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="34" />
+        <state relative-caret-position="1377">
+          <caret line="51" column="34" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/.PyCharm2018.1/system/remote_sources/746897114/47249651/torch/nn/init.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="90" column="4" lean-forward="true" selection-start-line="90" selection-start-column="4" selection-end-line="90" selection-end-column="4" />
+        <state relative-caret-position="2295">
+          <caret line="90" column="4" selection-start-line="90" selection-start-column="4" selection-end-line="90" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BERT/cc_data/parser_mita_res_13.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="74" column="31" lean-forward="true" selection-start-line="74" selection-start-column="31" selection-end-line="74" selection-end-column="31" />
-          <folding>
-            <element signature="e#180#548#0" />
-            <element signature="e#607#1425#0" />
-          </folding>
+        <state relative-caret-position="1944">
+          <caret line="74" selection-start-line="74" selection-end-line="74" />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/.PyCharm2018.1/system/remote_sources/746897114/47249651/torch/nn/modules/sparse.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="105" column="33" lean-forward="true" selection-start-line="105" selection-start-column="7" selection-end-line="105" selection-end-column="33" />
+        <state relative-caret-position="2700">
+          <caret line="105" column="33" selection-start-line="105" selection-start-column="7" selection-end-line="105" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BERT/model/BertFineTune.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="85" column="8" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
+        <state relative-caret-position="-3294">
+          <caret line="91" column="22" selection-start-line="91" selection-start-column="22" selection-end-line="91" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/large_data/test_cut.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-column="23" />
           <folding>
-            <element signature="e#328#2449#0" />
+            <element signature="e#25#35#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/scp43294/data_local/chinese_data/news/compare.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="8" column="30" lean-forward="true" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
+          <folding>
+            <element signature="e#2#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/data_analysis/match_value.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="88" column="7" lean-forward="true" selection-start-line="88" selection-start-column="7" selection-end-line="88" selection-end-column="7" />
+          <folding>
+            <element signature="e#153#729#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/bft_train_mlm.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/self_eval.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="12" column="80" selection-start-line="12" selection-start-column="70" selection-end-line="12" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/test_eval.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BERT/sighan13_run_bert.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
         </state>
       </provider>
     </entry>
