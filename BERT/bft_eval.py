@@ -30,6 +30,7 @@ class Trainer:
         self.criterion_c = nn.NLLLoss()
         # ignore_index=0
         self.device = device
+        # readAllConfusionSet
         self.confusion_set = readAllConfusionSet('/data_local/TwoWaysToImproveCSC/BERT/save/confusion.file')
         # /data_local/TwoWaysToImproveCSC/BERT/save/confusion.file
         # ../save/confusion.file

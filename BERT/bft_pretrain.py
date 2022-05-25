@@ -1,8 +1,4 @@
 # -*- coding: UTF-8 -*-
-
-import sys
-
-sys.path.append("..")
 import torch.nn as nn
 import torch
 import numpy as np
@@ -11,15 +7,18 @@ from transformers import BertModel, BertConfig, BertTokenizer
 from torch.utils.data import DataLoader, Dataset
 from torch.optim import Adam
 import operator
-from model import BertFineTune, construct, BertDataset, BFTLogitGen, readAllConfusionSet
+from model import BertFineTune, construct, construct_pretrain, BertDataset, BFTLogitGen, readAllConfusionSet
 import os
 import pickle
-from data_analysis.getF1 import sent_mertic, token_mertic
 
-vob = set()
-with open("/data_local/plm_models/chinese_L-12_H-768_A-12/vocab.txt", "r", encoding="utf-8") as f:
-    for line in f.readlines():
-        vob.add(line.strip())
+"""
+预训练，怎么节省时间
+1.不要经常validation(done)
+2.排序后再训练(外部文件排序，并且不打乱done, 会导致句子不修改)
+3. 不要等到每个epoch训练完，才保存(done)
+4. 不用bert分词（done）
+5. 动态mask（done）
+"""
 
 
 def is_chinese(usen):
@@ -39,23 +38,21 @@ class Trainer:
         self.optim = optimizer
         self.tokenizer = tokenizer
         self.criterion_c = nn.NLLLoss()
-        # self.criterion_c = nn.MultiMarginLoss(p=1, margin=1)
-        # MarginLoss()
-        # CrossEntropyLoss
-        # self.criterion_focal = FocalLoss(gamma=2)
         # ignore_index=0
         self.device = device
-        self.confusion_set = readAllConfusionSet('/data_local/TwoWaysToImproveCSC/BERT/save/confusion.file')
-
-        # 动态掩码,sighan13略好，cc略差
-        vocab = pickle.load(open("/data_local/TwoWaysToImproveCSC/large_data/zh_wiki_sent/wiki_vocab.pkl", "rb"))
-        self.vocab = [s for s in vocab if s in vob and is_chinese(s)]
+        chinese_bert_path = "/data_local/plm_models/chinese_L-12_H-768_A-12/"
+        self.confusion_set = readAllConfusionSet('./save/confusion.file')
 
         # bert的词典
         self.vob = {}
-        with open("/data_local/plm_models/chinese_L-12_H-768_A-12/vocab.txt", "r", encoding="utf-8") as f:
+        with open(chinese_bert_path + "vocab.txt", "r", encoding="utf-8") as f:
             for i, line in enumerate(f):
                 self.vob.setdefault(i, line.strip())
+
+        # 动态掩码,sighan13略好，cc略差
+        vocab = pickle.load(
+            open("/data_local/TwoWaysToImproveCSC/large_data/zh_wiki_sent/wiki_vocab.pkl", "rb"))
+        self.vocab = [s for s in vocab if s in self.vob.values() and is_chinese(s)]
 
     def replace_token(self, lines):
         """
@@ -90,148 +87,52 @@ class Trainer:
             generate_srcs.append("".join(tokens))
         return generate_srcs
 
-    def train(self, train):
+    def train(self, train, epoch):
         self.model.train()
         total_loss = 0
+        i = 0
         for batch in train:
-            # # 每个batch进行数据构造，类似于动态mask
-            # if "pretrain" in args.task_name:
-            #     generate_srcs = self.replace_token(batch['output'])
-            #     batch['input'] = generate_srcs
+            i += 1
+            if "pretrain" in args.task_name:
+                generate_srcs = self.replace_token(batch['output'])
+                batch['input'] = generate_srcs
 
-            inputs = self.tokenizer(batch['input'], padding=True, truncation=True, return_tensors="pt").to(self.device)
-            outputs = self.tokenizer(batch['output'], padding=True, truncation=True, return_tensors="pt").to(
-                self.device)
-
+            inputs, outputs = self.help_vectorize(batch)
             max_len = 180
             input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
                                                     inputs['token_type_ids'][:, :max_len], \
                                                     inputs['attention_mask'][:, :max_len]
-            output_ids, output_tyi, output_attn_mask = outputs['input_ids'][:, :max_len], \
-                                                       outputs['token_type_ids'][:, :max_len], \
-                                                       outputs['attention_mask'][:, :max_len]
-            # print(input_ids.size())
-            # print(input_tyi.size())
-            # print(input_attn_mask.size())
+            output_ids = outputs['input_ids'][:, :max_len]
 
             out = self.model(input_ids, input_tyi, input_attn_mask)  # out:[batch_size,seq_len,vocab_size]
-
-            # # 实现focal_loss
-            # batch, seq_len = input_ids.size()
-            # out_logit = out.view(batch * seq_len, -1)
-            # focal_loss = self.criterion_focal(out_logit, output_ids.view(-1))
-
             c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
-            # padding的部分的loss不置为0吗？
             total_loss += c_loss.item()
-            print(c_loss.item())
             self.optim.zero_grad()
             c_loss.backward()
-            # backward始终用的这一个
+            print(c_loss.item())
             self.optim.step()
+            if i % 20000 == 0:
+                valid_acc, valid_pre, valid_rec, valid_f1 = trainer.testSet(valid)
+                step_model_save_path = args.save_dir + '/epoch{0}_step{1}.pkl'.format(epoch, i)
+                trainer.save(step_model_save_path)
+                print("save model done! " + '/epoch{0}_step{1}.pkl'.format(epoch, i))
         return total_loss
 
     def test(self, test):
         self.model.eval()
         total_loss = 0
         for batch in test:
-            inputs = self.tokenizer(batch['input'], padding=True, truncation=True, return_tensors="pt").to(self.device)
-            outputs = self.tokenizer(batch['output'], padding=True, truncation=True, return_tensors="pt").to(
-                self.device)
-            max_len = 180
-            input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
-                                                    inputs['token_type_ids'][:, :max_len], \
-                                                    inputs['attention_mask'][:, :max_len]
-            output_ids, output_tyi, output_attn_mask = outputs['input_ids'][:, :max_len], \
-                                                       outputs['token_type_ids'][:, :max_len], \
-                                                       outputs['attention_mask'][:, :max_len]
-
-            out = self.model(input_ids, input_tyi, input_attn_mask)
-            c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
-            # padding的部分的loss不置为0吗？
-
-            total_loss += c_loss.item()
-        return total_loss
-
-    def testSet_true(self, test):
-        self.model.eval()
-        all_srcs = []
-        all_trgs = []
-        all_pres = []
-        for batch in test:
-            all_srcs.extend(batch["input"])
-            all_trgs.extend(batch["output"])
             inputs, outputs = self.help_vectorize(batch)
             max_len = 180
             input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
                                                     inputs['token_type_ids'][:, :max_len], \
                                                     inputs['attention_mask'][:, :max_len]
-            out, _, _ = self.model(input_ids, input_tyi, input_attn_mask)
-            out = out.argmax(dim=-1)
-            num = len(batch["input"])
-            for i in range(num):
-                src = batch["input"][i]
-                tokens = list(src)
-                # print(trg)
-                for j in range(len(tokens) + 1):
-                    if out[i][j + 1] != input_ids[i][j + 1]:
-                        val = out[i][j + 1].item()
-                        # print(val)
-                        if j < len(tokens):
-                            tokens[j] = self.vob[val]
-                out_sent = "".join(tokens)
-                if out_sent != src:
-                    print(src)
-                    print(out_sent)
-                    print("=======================")
-                all_pres.append(out_sent)
+            output_ids = outputs['input_ids'][:, :max_len]
 
-        sent_mertic(all_srcs, all_pres, all_trgs)
-        # token_mertic(all_srcs, all_pres, all_trgs)
-
-    def help_vectorize(self, batch):
-        """
-        :param batch:
-        :return:
-        """
-        src_li, trg_li = batch['input'], batch['output']
-        max_seq_length = max([len(src) for src in src_li]) + 2
-        inputs = {'input_ids': [], 'token_type_ids': [], 'attention_mask': []}
-        outputs = {'input_ids': [], 'token_type_ids': [], 'attention_mask': []}
-
-        for src, trg in zip(src_li, trg_li):
-            input_ids, input_mask, segment_ids = self.text2vec(src, max_seq_length)
-            inputs['input_ids'].append(input_ids)
-            inputs['token_type_ids'].append(segment_ids)
-            inputs['attention_mask'].append(input_mask)
-            if args.vocab_refine:
-                output_ids, output_mask, output_segment_ids = self.trg2vec(src, trg, max_seq_length)
-            else:
-                output_ids, output_mask, output_segment_ids = self.text2vec(trg, max_seq_length)
-            outputs['input_ids'].append(output_ids)
-            outputs['token_type_ids'].append(output_segment_ids)
-            outputs['attention_mask'].append(output_mask)
-
-        inputs['input_ids'] = torch.tensor(np.array(inputs['input_ids'])).to(self.device)
-        inputs['token_type_ids'] = torch.tensor(np.array(inputs['token_type_ids'])).to(self.device)
-        inputs['attention_mask'] = torch.tensor(np.array(inputs['attention_mask'])).to(self.device)
-
-        outputs['input_ids'] = torch.tensor(np.array(outputs['input_ids'])).to(self.device)
-        outputs['token_type_ids'] = torch.tensor(np.array(outputs['token_type_ids'])).to(self.device)
-        outputs['attention_mask'] = torch.tensor(np.array(outputs['attention_mask'])).to(self.device)
-
-        # 每个token是否错误二分类
-        if args.vocab_refine:
-            token_labels = [
-                [0 if outputs['input_ids'][i][j] in [self.cls_w2id["KEEP"], 0, 1, 2, 3] else 1
-                 for j in range(inputs['input_ids'].size()[1])] for i in range(len(batch['input']))]
-        else:
-            token_labels = [
-                [0 if inputs['input_ids'][i][j] == outputs['input_ids'][i][j] else 1
-                 for j in range(inputs['input_ids'].size()[1])] for i in range(len(batch['input']))]
-
-        outputs["token_labels"] = torch.tensor(token_labels, dtype=torch.float32).to(self.device).unsqueeze(-1)
-        return inputs, outputs
+            out = self.model(input_ids, input_tyi, input_attn_mask)
+            c_loss = self.criterion_c(out.transpose(1, 2), output_ids)
+            total_loss += c_loss.item()
+        return total_loss
 
     def save(self, name):
         if isinstance(self.model, nn.DataParallel):
@@ -254,17 +155,14 @@ class Trainer:
         d_sen_mod_acc = 0
         d_sen_tar_mod = 0
         for batch in test:
-            inputs = self.tokenizer(batch['input'], padding=True, truncation=True, return_tensors="pt").to(self.device)
-            outputs = self.tokenizer(batch['output'], padding=True, truncation=True, return_tensors="pt").to(
-                self.device)
+            inputs, outputs = self.help_vectorize(batch)
             max_len = 180
             input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
                                                     inputs['token_type_ids'][:, :max_len], \
                                                     inputs['attention_mask'][:, :max_len]
             input_lens = torch.sum(input_attn_mask, 1)
-            output_ids, output_tyi, output_attn_mask = outputs['input_ids'][:, :max_len], \
-                                                       outputs['token_type_ids'][:, :max_len], \
-                                                       outputs['attention_mask'][:, :max_len]
+            output_ids = outputs['input_ids'][:, :max_len]
+            #
             out = self.model(input_ids, input_tyi, input_attn_mask)
             out = out.argmax(dim=-1)
             mod_sen = [not out[i][:input_lens[i]].equal(input_ids[i][:input_lens[i]]) for i in range(len(out))]
@@ -291,7 +189,6 @@ class Trainer:
             d_sen_acc += sum(d_acc_sen)
         print(d_sen_mod)
         print(d_sen_tar_mod)
-
         print(sen_mod)
         print(sen_tar_mod)
 
@@ -312,6 +209,69 @@ class Trainer:
         # accuracy, precision, recall, F1
         return sen_acc / setsum, sen_mod_acc / sen_mod, sen_mod_acc / sen_tar_mod, c_F1
 
+    def text2vec(self, src, max_seq_length):
+        """
+        :param src:
+        :return:
+        """
+        tokens_a = [a for a in src]
+        tokens = []
+        segment_ids = []
+        tokens.append("[CLS]")
+        segment_ids.append(0)
+        for token in tokens_a:
+            tokens.append(token)
+            segment_ids.append(0)
+        tokens.append("[SEP]")
+        segment_ids.append(0)
+
+        for j, tok in enumerate(tokens):
+            if tok not in self.tokenizer.vocab:
+                tokens[j] = "[UNK]"
+
+        input_ids = self.tokenizer.convert_tokens_to_ids(tokens)
+        input_mask = [1] * len(input_ids)
+        while len(input_ids) < max_seq_length:
+            input_ids.append(0)
+            input_mask.append(0)
+            segment_ids.append(0)
+
+        assert len(input_ids) == max_seq_length
+        assert len(input_mask) == max_seq_length
+        assert len(segment_ids) == max_seq_length
+        return input_ids, input_mask, segment_ids
+
+    def help_vectorize(self, batch):
+        """
+        :param batch:
+        :return:
+        """
+        src_li, trg_li = batch['input'], batch['output']
+        max_seq_length = max([len(src) for src in src_li]) + 2
+        inputs = {'input_ids': [], 'token_type_ids': [], 'attention_mask': []}
+        outputs = {'input_ids': [], 'token_type_ids': [], 'attention_mask': []}
+
+        for src, trg in zip(src_li, trg_li):
+            input_ids, input_mask, segment_ids = self.text2vec(src, max_seq_length)
+            inputs['input_ids'].append(input_ids)
+            inputs['token_type_ids'].append(segment_ids)
+            inputs['attention_mask'].append(input_mask)
+
+            output_ids, output_mask, output_segment_ids = self.text2vec(trg, max_seq_length)
+            outputs['input_ids'].append(output_ids)
+            outputs['token_type_ids'].append(output_segment_ids)
+            outputs['attention_mask'].append(output_mask)
+
+        inputs['input_ids'] = torch.tensor(np.array(inputs['input_ids'])).to(self.device)
+        inputs['token_type_ids'] = torch.tensor(np.array(inputs['token_type_ids'])).to(self.device)
+        inputs['attention_mask'] = torch.tensor(np.array(inputs['attention_mask'])).to(self.device)
+
+        outputs['input_ids'] = torch.tensor(np.array(outputs['input_ids'])).to(self.device)
+        outputs['token_type_ids'] = torch.tensor(np.array(outputs['token_type_ids'])).to(self.device)
+        outputs['attention_mask'] = torch.tensor(np.array(outputs['attention_mask'])).to(self.device)
+
+        return inputs, outputs
+
 
 def setup_seed(seed):
     # set seed for CPU
@@ -320,12 +280,10 @@ def setup_seed(seed):
     torch.cuda.manual_seed(seed)
     # set seed for all GPU
     torch.cuda.manual_seed_all(seed)
-
     torch.backends.cudnn.deterministic = True
     # Cancel acceleration
     torch.backends.cudnn.benchmark = False
-
-    np.random.seed(seed)
+    # np.random.seed(seed)
 
 
 def str2bool(strIn):
@@ -367,6 +325,8 @@ if __name__ == "__main__":
     print("----python script: " + os.path.basename(__file__) + "----")
     print("----Task: " + task_name + " begin !----")
     print("----Model base: " + args.load_path + "----")
+    print("----Train data: " + args.train_data + "----")
+    print("----Batch size: " + str(args.batch_size) + "----")
 
     setup_seed(int(args.seed))
     start = time.time()
@@ -375,7 +335,7 @@ if __name__ == "__main__":
     device_ids = [i for i in range(int(args.gpu_num))]
     print(device_ids)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    #
+
     bert_path = "/data_local/plm_models/chinese_L-12_H-768_A-12/"
     bert = BertModel.from_pretrained(bert_path, return_dict=True)
     tokenizer = BertTokenizer.from_pretrained(bert_path)
@@ -389,7 +349,7 @@ if __name__ == "__main__":
     model = nn.DataParallel(model, device_ids)
 
     if args.do_train:
-        train = construct(args.train_data)
+        train = construct_pretrain(args.train_data)
         train = BertDataset(tokenizer, train)
         train = DataLoader(train, batch_size=int(args.batch_size), shuffle=True)
 
@@ -410,22 +370,22 @@ if __name__ == "__main__":
     trainer = Trainer(model, optimizer, tokenizer, device)
     max_f1 = 0
     best_epoch = 0
+    print("all update steps:{}".format(2 * len(train)))
 
     if args.do_train:
         for e in range(int(args.epoch)):
-            train_loss = trainer.train(train)
-
+            train_loss = trainer.train(train, e + 1)
+            # 1 epoch，validate一次
             if args.do_valid:
                 valid_loss = trainer.test(valid)
                 valid_acc, valid_pre, valid_rec, valid_f1 = trainer.testSet(valid)
                 print(task_name, ",epoch {0},train_loss: {1},valid_loss: {2}".format(e + 1, train_loss, valid_loss))
 
-                # don't have to save model
-                if valid_f1 <= max_f1:
-                    print("Time cost:", time.time() - start, "s")
-                    print("-" * 10)
-                    continue
-
+                # # don't have to save model
+                # if valid_f1 <= max_f1:
+                #     print("Time cost:", time.time() - start, "s")
+                #     print("-" * 10)
+                #     continue
                 max_f1 = valid_f1
             else:
                 print(task_name, ",epoch {0},train_loss:{1}".format(e + 1, train_loss))
@@ -440,10 +400,8 @@ if __name__ == "__main__":
 
         model_best_path = args.save_dir + '/epoch{0}.pkl'.format(best_epoch)
         model_save_path = args.save_dir + '/model.pkl'
-
         # copy the best model to standard name
         os.system('cp ' + model_best_path + " " + model_save_path)
 
     if args.do_test:
-        # trainer.testSet(test)
-        trainer.testSet_true(test)
+        trainer.testSet(test)

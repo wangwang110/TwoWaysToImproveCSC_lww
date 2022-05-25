@@ -4,8 +4,8 @@ import json
 import pickle
 import re
 
-
 # from pytrie import SortedStringTrie as Trie
+from pypinyin import pinyin, lazy_pinyin, Style
 
 
 def creat_dict(word_li):
@@ -129,3 +129,19 @@ print(spacy_words_dict["干_"])
 # print(cy_dict["学以_用"])
 # print(cy_dict["学以致_"])
 # pickle.dump(cy_dict, open("match_cy.pkl", "wb"), protocol=0)
+
+same_pinyin = {}
+for word in spacy_word_set | word_set:
+    # ori_sent_pinyin_li = lazy_pinyin(word, style=Style.TONE3, neutral_tone_with_five=True)
+    ori_sent_pinyin_li = lazy_pinyin(word)
+    py_key = "_".join(ori_sent_pinyin_li)
+    if py_key not in same_pinyin:
+        same_pinyin[py_key] = set()
+    same_pinyin[py_key].add(word)
+
+print(same_pinyin["chong_zhi"])
+print(same_pinyin["yan_jing"])
+print(same_pinyin["zhi_dao"])
+print(same_pinyin["zuo_chu"])
+ori_sent_pinyin_li = lazy_pinyin("重置")
+print(ori_sent_pinyin_li)

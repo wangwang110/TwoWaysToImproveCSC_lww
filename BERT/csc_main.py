@@ -252,6 +252,7 @@ if __name__ == "__main__":
         "我爱北进天安门。。。我爱北京天按门",
         "我爱北京天按门",
         "没过几分钟，救护车来了，发出  响亮而清翠的声音",
+        "配副眼睛"
     ]
     for text in texts:
         print(text)
@@ -265,22 +266,22 @@ if __name__ == "__main__":
             print(item["src_token"] + "==" + list(text)[item["pos"]])
             print(item["trg_token"])
 
-    with open("./data/13test_lower.txt", "r", encoding="utf-8")as f, \
-            open("./data/13test_lower_model.txt", "w", encoding="utf-8") as fw:
-        for line in f.readlines():
-            src, trg = line.strip().split()
-            data = {
-                "article": src
-            }
-            res = obj.correct(data)
-            fw.write(src + " " + res["data"]["output_text"] + "\n")
-
-    with open("./cc_data/chinese_spell_lower_4.txt", "r", encoding="utf-8")as f, \
-            open("./data/chinese_spell_lower_4_model.txt", "w", encoding="utf-8") as fw:
-        for line in f.readlines():
-            src, trg = line.strip().split()
-            data = {
-                "article": src
-            }
-            res = obj.correct(data)
-            fw.write(src + " " + res["data"]["output_text"] + "\n")
+    # with open("./data/13test_lower.txt", "r", encoding="utf-8")as f, \
+    #         open("./data/13test_lower_model.txt", "w", encoding="utf-8") as fw:
+    #     for line in f.readlines():
+    #         src, trg = line.strip().split()
+    #         data = {
+    #             "article": src
+    #         }
+    #         res = obj.correct(data)
+    #         fw.write(src + " " + res["data"]["output_text"] + "\n")
+    #
+    # with open("./cc_data/chinese_spell_lower_4.txt", "r", encoding="utf-8")as f, \
+    #         open("./data/chinese_spell_lower_4_model.txt", "w", encoding="utf-8") as fw:
+    #     for line in f.readlines():
+    #         src, trg = line.strip().split()
+    #         data = {
+    #             "article": src
+    #         }
+    #         res = obj.correct(data)
+    #         fw.write(src + " " + res["data"]["output_text"] + "\n")

@@ -8,6 +8,58 @@ import numpy as np
 import re
 
 
+def eval(all_srcs, all_pres, all_trgs):
+    """
+    SIGHAN句级评估结果，设定需要纠错为正样本，无需纠错为负样本
+    Args:
+        correct_fn:
+        input_eval_path:
+        output_eval_path:
+        verbose:
+
+    Returns:
+        Acc, Recall, F1
+    """
+    TP = 0.0
+    FP = 0.0
+    FN = 0.0
+    TN = 0.0
+    total_num = 0
+
+    change_num = 0
+    for src, tgt_pred, tgt in zip(all_srcs, all_pres, all_trgs):
+
+        if src != tgt_pred:
+            change_num += 1
+
+        # 负样本
+        if src == tgt:
+            if tgt == tgt_pred:
+                TN += 1
+            else:
+                FP += 1
+        # 正样本
+        else:
+            # 预测也为正
+            if tgt == tgt_pred:
+                TP += 1
+            # 预测为负
+            else:
+                FN += 1
+        total_num += 1
+    acc = (TP + TN) / total_num
+    # precision = TP / (TP + FP) if TP > 0 else 0.0
+    precision = TP / change_num if TP > 0 else 0.0
+    recall = TP / (TP + FN) if TP > 0 else 0.0
+    f1 = 2 * precision * recall / (precision + recall) if precision + recall != 0 else 0
+    print("correction sentence accuracy:{0},p:{1},recall:{2},F1:{3}".format(round(acc, 3),
+                                                                            round(precision, 3),
+                                                                            round(recall, 3),
+                                                                            round(f1, 3)
+                                                                            ))
+    return acc, precision, recall, f1
+
+
 def sent_mertic(all_srcs, all_pres, all_trgs):
     """
     通过模型输出文本和标准文本计算指标
@@ -28,10 +80,11 @@ def sent_mertic(all_srcs, all_pres, all_trgs):
 
     for s, p, t in zip(all_srcs, all_pres, all_trgs):
         if len(s) != len(p) or len(t) != len(p):
-            print(s)
-            print(p)
-            print(t)
-            print("\n\n")
+            pass
+            # print(s)
+            # print(p)
+            # print(t)
+            # print("\n\n")
 
     input = [list(line) for line in all_srcs]
     out = [list(line) for line in all_pres]
@@ -234,6 +287,7 @@ if __name__ == "__main__":
     _, all_pres1 = find_ori_data(path_mita1)
 
     path_model = "/data_local/TwoWaysToImproveCSC/BERT/data/13test_lower_model.txt"
+    # preds.txt
     _, all_pres_model = find_ori_data(path_model)
 
     # model_out_path = "/data_local/TwoWaysToImproveCSC/BERT/data_analysis/self_base_998_13test_lower.txt_cor.txt"
@@ -264,26 +318,15 @@ if __name__ == "__main__":
     path_mita1 = "/data_local/TwoWaysToImproveCSC/BERT/data/chinese_spell_lower_4_mita_punct.txt"
     _, all_pres1 = find_ori_data(path_mita1)
 
-    path_model = "/data_local/TwoWaysToImproveCSC/BERT/data/chinese_spell_lower_4_model.txt"
+    # path_model = "/data_local/TwoWaysToImproveCSC/BERT/data/chinese_spell_lower_4_model.txt"
+    path_model = "/data_local/TwoWaysToImproveCSC/BERT/data/preds.txt"
     _, all_pres_model = find_ori_data(path_model)
 
     print("cc句子级别:")
+    # eval(all_srcs, all_pres_model, all_trgs)
     sent_mertic(all_srcs, all_pres_model, all_trgs)
     sent_mertic(all_srcs, all_pres1, all_trgs)
 
     print("cc token级别:")
     token_mertic(all_srcs, all_pres_model, all_trgs)
     token_mertic(all_srcs, all_pres1, all_trgs)
-
-    # print("=后处理=")
-    #
-    # all_pres_1 = []
-    # with open("/data_local/TwoWaysToImproveCSC/BERT/chinese-xinhua/bert_out_cc.pre", "r", encoding="utf-8") as f:
-    #     for line in f.readlines():
-    #         src, trg = line.strip().split(" ")
-    #         all_pres_1.append(trg)
-    # print("句子级别：不做预处理")
-    # sent_mertic(all_srcs, all_pres_1, all_trgs)
-    #
-    # print("token级别：不做预处理")
-    # token_mertic(all_srcs, all_pres_1, all_trgs)

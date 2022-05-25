@@ -11,6 +11,8 @@ import re
 from strTools import uniform, is_chinese
 from clean_baike_zh import ratio_alphabetic
 import pickle
+import jieba
+from pypinyin import pinyin, lazy_pinyin, Style
 
 vob = set()
 with open("/data_local/plm_models/chinese_L-12_H-768_A-12/vocab.txt", "r", encoding="utf-8") as f:
@@ -67,6 +69,10 @@ class GenerateCSC:
         self.outfile = outfile
         self.corpus = []
         self.confusion_set_base = readAllConfusionSet(options.confpath)
+        # 同音词
+        self.same_pinyin_words = pickle.load(
+            open("/data_local/TwoWaysToImproveCSC/large_data//data/same_pinyin_words.pkl", "rb"))
+
         # '/data_local/TwoWaysToImproveCSC/BERT/save/confusion.file'
 
         # # 完全符合作文的混淆集
@@ -125,18 +131,36 @@ class GenerateCSC:
         # 有可能是引入的错误个数太多了
         np.random.shuffle(index_li)
         count = 0
+        words = list(jieba.cut(line))
         for i in index_li:
-            if tokens[i] in self.confusion_set and len(self.confusion_set[tokens[i]]) != 0:
-                if np.random.rand(1) > options.confuse_ratio:  # 这个比例是否要控制
-                    idx = np.random.randint(0, len(self.vocab))
-                    tokens[i] = self.vocab[idx]
-                    count += 1
-                else:
-                    token_conf_set = self.confusion_set[tokens[i]]
-                    if len(token_conf_set) > 0:
-                        idx = np.random.randint(0, len(token_conf_set))
-                        tokens[i] = list(token_conf_set)[idx]
+            if np.random.rand(1) > 0.5 and i < num - 1 and tokens[i] + tokens[i + 1] in words:
+                w_pinyin_li = lazy_pinyin(tokens[i] + tokens[i + 1])
+                w_pinyin_str = "_".join(w_pinyin_li)
+                if w_pinyin_str in self.same_pinyin_words:
+                    word_conf_set = self.same_pinyin_words[w_pinyin_str]
+                    if tokens[i] + tokens[i + 1] in word_conf_set:
+                        word_conf_set.remove(tokens[i] + tokens[i + 1])
+                    if len(word_conf_set) > 0:
+                        idx = np.random.randint(0, len(word_conf_set))
+                        word = list(word_conf_set)[idx]
+                        if tokens[i] != word[0]:
+                            tokens[i] = word[0]
+                            count += 1
+                        if tokens[i + 1] != word[1]:
+                            tokens[i + 1] = word[1]
+                            count += 1
+            else:
+                if tokens[i] in self.confusion_set and len(self.confusion_set[tokens[i]]) != 0:
+                    if np.random.rand(1) > options.confuse_ratio:  # 这个比例是否要控制
+                        idx = np.random.randint(0, len(self.vocab))
+                        tokens[i] = self.vocab[idx]
                         count += 1
+                    else:
+                        token_conf_set = self.confusion_set[tokens[i]]
+                        if len(token_conf_set) > 0:
+                            idx = np.random.randint(0, len(token_conf_set))
+                            tokens[i] = list(token_conf_set)[idx]
+                            count += 1
             if count >= up_num:
                 break
 
@@ -161,8 +185,10 @@ if __name__ == "__main__":
     parser.add_option("--output", dest="output", default="", help="output file")
     parser.add_option("--ratio", type=float, default=0.25, help="error ratio")
     parser.add_option("--confuse_ratio", type=float, default=0.9, help="error ratio")
+    # parser.add_option("--new_confset", type=int, default=0, help="use newconfset")
     parser.add_option("--seed", type=int, default=10, help="random seed")
     parser.add_option("--confpath", dest="confpath", default="", help="confpath file")
+    # parser.add_option("--vocabpath", dest="vocabpath", default="", help="vocabpath")
 
     (options, args) = parser.parse_args()
     path = options.path
@@ -172,8 +198,8 @@ if __name__ == "__main__":
 
     np.random.seed(options.seed)
 
-    try:
-        GenerateCSC(infile=input, outfile=output, vocab=vocab_dict)
-        print("All Finished.")
-    except Exception as err:
-        print(err)
+    # try:
+    GenerateCSC(infile=input, outfile=output, vocab=vocab_dict)
+    print("All Finished.")
+    # except Exception as err:
+    #     print(err)

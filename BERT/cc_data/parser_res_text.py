@@ -55,13 +55,13 @@ def get_model_output(model_out_path, all_text_ori):
 
 
 # # 原始数据
-data = 13
-path_13 = "/data_local/TwoWaysToImproveCSC/BERT/data/13test.txt"
-all_text_ori, all_text_trg = find_ori_data(path_13)
+# data = 13
+# path_13 = "/data_local/TwoWaysToImproveCSC/BERT/data/13test.txt"
+# all_text_ori, all_text_trg = find_ori_data(path_13)
 
-# data = 4
-# path_4 = "/data_local/TwoWaysToImproveCSC/BERT/cc_data/chinese_spell_cy_4.txt"
-# all_text_ori, all_text_trg = find_ori_data(path_4)
+data = 4
+path_4 = "/data_local/TwoWaysToImproveCSC/BERT/cc_data/chinese_spell_cy_4.txt"
+all_text_ori, all_text_trg = find_ori_data(path_4)
 
 model_out_path = "/data_local/TwoWaysToImproveCSC/BERT/data_analysis/paper_preTrain_13test.txt_cor.txt"
 all_model_outputs = get_model_output(model_out_path, all_text_ori)
@@ -75,7 +75,6 @@ name1 = "13test"
 name2 = "13test_cy"
 out_str = "A_" + task1 + "_" + name1 + "_" + task2 + "_" + name2
 
-
 path_out = "/data_local/TwoWaysToImproveCSC/BERT/data_analysis/" + out_str + "_" + str(data) + ".txt"
 with open(path_out, "w", encoding="utf-8") as fw3:
     for src, trg, pre, pre_ori in zip(all_text_ori, all_text_trg, all_model_outputs, all_model_outputs_1):
@@ -84,7 +83,7 @@ with open(path_out, "w", encoding="utf-8") as fw3:
         pre = remove_space(pre)
         pre_ori = remove_space(pre_ori)  # 论文放出的模型结果
 
-        if pre == pre_ori:
+        if pre == pre_ori or pre == trg:
             continue
 
         fw3.write(src + "\n")

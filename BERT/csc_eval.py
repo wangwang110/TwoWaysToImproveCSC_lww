@@ -3,14 +3,15 @@
 import sys
 
 sys.path.append("..")
-
+import numpy as np
 import os
 import torch
 import argparse
-from transformers import BertModel, BertConfig, BertTokenizer
+from transformers import BertForMaskedLM, BertConfig, BertTokenizer
 from torch.utils.data import DataLoader
 from csc_utils import cut_sent
-from model import BertCSC, li_testconstruct, BertDataset, BFTLogitGen, readAllConfusionSet, cc_testconstruct, construct
+from model import BertFineTuneMac, BertCSC, li_testconstruct, BertDataset, BFTLogitGen, readAllConfusionSet, \
+    cc_testconstruct, construct
 
 
 class CSCmodel:
@@ -21,12 +22,16 @@ class CSCmodel:
         :param gpu_id:
         """
         os.environ["CUDA_VISIBLE_DEVICES"] = gpu_id
-        bert = BertModel.from_pretrained(bert_path, return_dict=True)
+        bert = BertForMaskedLM.from_pretrained(bert_path, return_dict=True)
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.tokenizer = BertTokenizer.from_pretrained(bert_path)
         self.config = BertConfig.from_pretrained(bert_path)
         self.batch_size = 20
-        self.model = BertCSC(bert, self.tokenizer, self.device).to(self.device)
+        device_ids = []
+        self.model = BertFineTuneMac(bert, self.tokenizer, self.device, device_ids, is_correct_sent=True).to(
+            self.device)
+        # device, device_ids, is_correct_sent=True
+        # param_dict = {k.replace("bert.bert.", "bert."): v for k, v in torch.load(model_path).items()}
         self.model.load_state_dict(torch.load(model_path))
         # 混淆集
         self.confusion_set = readAllConfusionSet('/data_local/TwoWaysToImproveCSC/BERT/save/confusion.file')
@@ -39,12 +44,12 @@ class CSCmodel:
     def test_without_trg(self, all_texts, correct_tag=False):
         self.model.eval()
         test = li_testconstruct(all_texts)
-        test = BertDataset(self.tokenizer, test)
+        test = BertDataset(test)
         test = DataLoader(test, batch_size=int(self.batch_size), shuffle=False)
         res = []
         srcs = []
         for batch in test:
-            inputs = self.tokenizer(batch['input'], padding=True, truncation=True, return_tensors="pt").to(self.device)
+            inputs = self.help_vectorize(batch['input'])
             max_len = 180
             input_ids, input_tyi, input_attn_mask = inputs['input_ids'][:, :max_len], \
                                                     inputs['token_type_ids'][:, :max_len], \
@@ -52,7 +57,7 @@ class CSCmodel:
 
             input_lens = torch.sum(input_attn_mask, 1)
             out = self.model(input_ids, input_tyi, input_attn_mask)
-            out = out.argmax(dim=-1)
+            out = out[-1].argmax(dim=-1)
             num_sample, _ = input_ids.size()
             # 修改过的句子
             if correct_tag:
@@ -82,6 +87,58 @@ class CSCmodel:
                     srcs.append("".join(src_sent_li))
 
         return srcs, res
+
+    def help_vectorize(self, src_li):
+        """
+        :param batch:
+        :return:
+        """
+        max_seq_length = max([len(src) for src in src_li]) + 2
+        inputs = {'input_ids': [], 'token_type_ids': [], 'attention_mask': []}
+
+        for src in src_li:
+            input_ids, input_mask, segment_ids = self.text2vec(src, max_seq_length)
+            inputs['input_ids'].append(input_ids)
+            inputs['token_type_ids'].append(segment_ids)
+            inputs['attention_mask'].append(input_mask)
+
+        inputs['input_ids'] = torch.tensor(np.array(inputs['input_ids'])).to(self.device)
+        inputs['token_type_ids'] = torch.tensor(np.array(inputs['token_type_ids'])).to(self.device)
+        inputs['attention_mask'] = torch.tensor(np.array(inputs['attention_mask'])).to(self.device)
+
+        return inputs
+
+    def text2vec(self, src, max_seq_length):
+        """
+        :param src:
+        :return:
+        """
+        tokens_a = [a for a in src]
+        tokens = []
+        segment_ids = []
+        tokens.append("[CLS]")
+        segment_ids.append(0)
+        for token in tokens_a:
+            tokens.append(token)
+            segment_ids.append(0)
+        tokens.append("[SEP]")
+        segment_ids.append(0)
+
+        for j, tok in enumerate(tokens):
+            if tok not in self.tokenizer.vocab:
+                tokens[j] = "[UNK]"
+
+        input_ids = self.tokenizer.convert_tokens_to_ids(tokens)
+        input_mask = [1] * len(input_ids)
+        while len(input_ids) < max_seq_length:
+            input_ids.append(0)
+            input_mask.append(0)
+            segment_ids.append(0)
+
+        assert len(input_ids) == max_seq_length
+        assert len(input_mask) == max_seq_length
+        assert len(segment_ids) == max_seq_length
+        return input_ids, input_mask, segment_ids
 
 
 def correct_file(path, path_out):
@@ -129,7 +186,8 @@ if __name__ == "__main__":
 
     # 初始化模型
     bert_path = "/data_local/plm_models/chinese_L-12_H-768_A-12/"
-    load_path = "/data_local/TwoWaysToImproveCSC/BERT/save/bert_paper_model/preTrain/sighan13/model.pkl"
+    # load_path = "/data_local/TwoWaysToImproveCSC/BERT/save/bert_paper_model/preTrain/sighan13/model.pkl"
+    load_path = "/data_local/TwoWaysToImproveCSC/BERT/save/bert_paper_model/sighan13/model_new.pkl"
     # args.load_path = "/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/sighan13/model.pkl"
     # /data_local/TwoWaysToImproveCSC/BERT/save/bert_paper_model/preTrain/sighan13
     #  "/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/sighan13/epoch10.pkl"
@@ -140,10 +198,38 @@ if __name__ == "__main__":
         "我爱北京天按门",
         "没过几分钟，救护车来了，发出响亮而清翠的声音",
         "我见过一望无际、波澜壮阔的大海；玩赏过水平如镜、诗情画意的西湖；游览过翡翠般的漓江；让我难以忘怀的要数那荷叶飘香、群山坏绕的普者黑。"])
-    print(input_text)
+    # print(input_text)
     print(model_ouput)
 
     # 与前后无法组成词就不改
+
+    with open("./data/13test.txt", "r", encoding="utf-8") as f, \
+            open("./data/13test.pre", "w", encoding="utf-8") as fw:
+        all_texts = []
+        for line in f.readlines():
+            try:
+                src, trg = line.strip().split(" ")
+                all_texts.append(src)
+            except:
+                continue
+
+        input_text, model_ouputs = obj.test_without_trg(all_texts)
+        for src, trg in zip(all_texts, model_ouputs):
+            fw.write(src + " " + trg + "\n")
+
+    with open("./data/chinese_spell_4.txt", "r", encoding="utf-8") as f, \
+            open("./data/chinese_spell_4.pre", "w", encoding="utf-8") as fw:
+        all_texts = []
+        for line in f.readlines():
+            try:
+                src, trg = line.strip().split(" ")
+                all_texts.append(src)
+            except:
+                continue
+
+        input_text, model_ouputs = obj.test_without_trg(all_texts)
+        for src, trg in zip(all_texts, model_ouputs):
+            fw.write(src + " " + trg + "\n")
 
     correct_file(args.input, args.output)
     # 微博预训练的语料，要先过一遍纠错模型（可能存在很多错误）

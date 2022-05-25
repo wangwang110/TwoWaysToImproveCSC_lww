@@ -135,3 +135,4 @@ if __name__ == "__main__":
         '在我们班柜上面，有许多第一名的奖杯，那些都是我们全体班上的恶新沥血，才艺竞赛、体育竞赛，都是第一名，让我回忆到大家合作的画面：「哔！开始！传球！这里！有空𣗋！投！进了！(场边传来一阵欢呼声)」。')
     print(a)
     # 无论那个都有一个unk和pad
+    print(lazy_pinyin("你需要重置参数", style=Style.TONE3, neutral_tone_with_five=True))

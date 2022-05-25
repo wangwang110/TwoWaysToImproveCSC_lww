@@ -60,7 +60,8 @@ class CombineLoss(nn.Module):
         self.p = p
         # self.ignore_index = 0
         # ignore_index=self.ignore_index,
-        self.criterion_c = nn.NLLLoss(reduction="none")
+        self.criterion_c = nn.CrossEntropyLoss(reduction="none")
+        # CrossEntropyLoss
 
     def forward(self, prob, input_id, output_id):
         """
@@ -74,6 +75,9 @@ class CombineLoss(nn.Module):
 
         correct_mask = (input_id == output_id)
         error_mask = (input_id != output_id)
+
+        # output_id[output_id == 0] = -100
+
         # 更加关注有错误的位置
 
         # self.criterion_c = nn.MultiMarginLoss(p=1, margin=1)
@@ -82,8 +86,8 @@ class CombineLoss(nn.Module):
         # self.criterion_focal = FocalLoss(gamma=2)
         # ignore_index=0
 
-        loss = correct_mask * self.criterion_c(prob, output_id) \
-               + self.p * error_mask * self.criterion_c(prob, output_id)
+        loss = correct_mask * self.criterion_c(prob.transpose(1, 2), output_id) \
+               + self.p * error_mask * self.criterion_c(prob.transpose(1, 2), output_id)
 
         if self.size_average:
             return loss.mean()

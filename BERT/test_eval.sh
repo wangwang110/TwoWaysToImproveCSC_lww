@@ -1,48 +1,66 @@
 #!/usr/bin/env bash
-# 使用论文公开的模型进行测试，分析
 
 
 
-#baseline="/data_local/TwoWaysToImproveCSC/BERT/save/baseline/sighan13/model.pkl"
-#preTrain="/data_local/TwoWaysToImproveCSC/BERT/save/pretrain/sighan13_no_ner/model.pkl"
-#nerTrain="/data_local/TwoWaysToImproveCSC/BERT/save/nertrain/sighan13/model.pkl"
+name=sighan13
+base_path=./save/test/wiki_00_word_0/
+preTrain=$base_path/epoch1.pkl
+preTrain0=$base_path/sighan13/model.pkl
+preTrain1=$base_path/sighan13_700/model.pkl
+preTrain2=$base_path/sighan13cc/model.pkl
+preTrain3=$base_path/merge/model.pkl
 
-# /data_local/TwoWaysToImproveCSC/BERT/save/test/wiki_00_base_asame
-# /data_local/TwoWaysToImproveCSC/BERT/save/pretrain/base_998_mask/sighan13/
-# baseline0="/data_local/TwoWaysToImproveCSC/BERT/save/3090-pretrain/sighan13/model.pkl"
-baseline="/data_local/TwoWaysToImproveCSC/BERT/save/merge_test/base/model.pkl"
-preTrain="/data_local/TwoWaysToImproveCSC/BERT/save/merge_test/base_warmup/model.pkl"
-nerTrain="/data_local/TwoWaysToImproveCSC/BERT/save/merge_test/base_cpo/model.pkl"
-
-# nerTrain0="/data_local/TwoWaysToImproveCSC/BERT/save/test/test_macbert/mac_mlm_task/model.pkl"
+bert_path=/data_local/plm_models/chinese_L-12_H-768_A-12/
 
 
-gpu=7
+
+gpu=6
 
 
 data=./data/13test.txt
 task=test
-# new_pretrain_auto.dev
-# sighan13
-echo $baseline
-CUDA_VISIBLE_DEVICES=$gpu python bft_train_mlm.py  --task_name=$task --gpu_num=1 --load_model=True  --load_path=$baseline --do_test=True --test_data=$data --batch_size=16
+
 
 echo $preTrain
-CUDA_VISIBLE_DEVICES=$gpu  python bft_train_mlm_warmup.py --task_name=$task --gpu_num=1 --load_model=True  --load_path=$preTrain --do_test=True --test_data=$data --batch_size=16
+CUDA_VISIBLE_DEVICES=$gpu  python bft_pretrain_mlm.py  --bert_path=$bert_path  --task_name=$task --gpu_num=1 --load_model=True  --load_path=$preTrain --do_test=True --test_data=$data --batch_size=16
 
 
-echo $nerTrain
-CUDA_VISIBLE_DEVICES=$gpu  python bft_train_mlm_cpo.py --task_name=$task --gpu_num=1 --load_model=True  --load_path=$nerTrain --do_test=True --test_data=$data --batch_size=16
+echo $preTrain0
+CUDA_VISIBLE_DEVICES=$gpu  python bft_pretrain_mlm.py  --bert_path=$bert_path --task_name=$task --gpu_num=1 --load_model=True  --load_path=$preTrain0 --do_test=True --test_data=$data --batch_size=16
 
 
-data=./cc_data/chinese_spell_lower_4.txt
+echo $preTrain1
+CUDA_VISIBLE_DEVICES=$gpu  python bft_pretrain_mlm.py  --bert_path=$bert_path  --task_name=$task --gpu_num=1 --load_model=True  --load_path=$preTrain1 --do_test=True --test_data=$data --batch_size=16
+#
+echo $preTrain2
+CUDA_VISIBLE_DEVICES=$gpu  python bft_pretrain_mlm.py  --bert_path=$bert_path --task_name=$task --gpu_num=1 --load_model=True  --load_path=$preTrain2 --do_test=True --test_data=$data --batch_size=16
+#
 
-## xaioxue
-echo $baseline
-CUDA_VISIBLE_DEVICES=$gpu  python bft_train_mlm.py --task_name=$task --gpu_num=1 --load_model=True  --load_path=$baseline --do_test=True --test_data=$data --batch_size=16
+
+echo $preTrain3
+CUDA_VISIBLE_DEVICES=$gpu  python bft_pretrain_mlm.py   --bert_path=$bert_path --task_name=$task --gpu_num=1 --load_model=True  --load_path=$preTrain3 --do_test=True --test_data=$data --batch_size=16
+#
+
+
+echo "==============================================="
+
+data=./data/chinese_spell_lower_4.txt
 
 echo $preTrain
-CUDA_VISIBLE_DEVICES=$gpu  python bft_train_mlm_warmup.py --task_name=$task --gpu_num=1 --load_model=True  --load_path=$preTrain --do_test=True --test_data=$data  --batch_size=16
+CUDA_VISIBLE_DEVICES=$gpu  python bft_pretrain_mlm.py   --bert_path=$bert_path --task_name=$task --gpu_num=1 --load_model=True  --load_path=$preTrain --do_test=True --test_data=$data  --batch_size=16
 
-echo $nerTrain
-CUDA_VISIBLE_DEVICES=$gpu  python bft_train_mlm_cpo.py --task_name=$task --gpu_num=1 --load_model=True  --load_path=$nerTrain --do_test=True --test_data=$data  --batch_size=16
+
+echo $preTrain0
+CUDA_VISIBLE_DEVICES=$gpu  python bft_pretrain_mlm.py  --bert_path=$bert_path --task_name=$task --gpu_num=1 --load_model=True  --load_path=$preTrain0 --do_test=True --test_data=$data  --batch_size=16
+
+echo $preTrain1
+CUDA_VISIBLE_DEVICES=$gpu  python bft_pretrain_mlm.py  --bert_path=$bert_path --task_name=$task --gpu_num=1 --load_model=True  --load_path=$preTrain1 --do_test=True --test_data=$data  --batch_size=16
+#
+
+echo $preTrain2
+CUDA_VISIBLE_DEVICES=$gpu  python bft_pretrain_mlm.py  --bert_path=$bert_path --task_name=$task --gpu_num=1 --load_model=True  --load_path=$preTrain2 --do_test=True --test_data=$data  --batch_size=16
+#
+
+echo $preTrain3
+CUDA_VISIBLE_DEVICES=$gpu  python bft_pretrain_mlm.py   --bert_path=$bert_path --task_name=$task --gpu_num=1 --load_model=True  --load_path=$preTrain3 --do_test=True --test_data=$data  --batch_size=16
+#

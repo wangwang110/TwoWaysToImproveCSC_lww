@@ -48,6 +48,10 @@ class BertFineTuneCpo(nn.Module):
         return outputs
 
 
+"""
+"""
+
+
 class BertFineTuneMac(nn.Module):
     def __init__(self, bert, tokenizer, device, device_ids, is_correct_sent=False):
         super(BertFineTuneMac, self).__init__()
@@ -56,22 +60,14 @@ class BertFineTuneMac(nn.Module):
         self.bert = bert.to(device)
 
         self.is_correct_sent = is_correct_sent
-
         if self.is_correct_sent:
             hidden_size = self.config.to_dict()['hidden_size']
             self.detection = nn.Linear(hidden_size, 1)
             self.sigmoid = nn.Sigmoid().to(device)
-            # 每个位置进行分类
-            # self.dense = nn.Linear(hidden_size, hidden_size)
-            # self.activation = nn.Tanh()
 
-    def forward(self, input_ids, input_tyi, input_attn_mask, text_labels=None, det_labels=None, ignore=False):
+    def forward(self, input_ids, input_tyi, input_attn_mask, text_labels, det_labels):
         if text_labels is not None:
             text_labels[text_labels == 0] = -100
-            if ignore:
-                text_labels[text_labels == 101] = -100
-                text_labels[text_labels == 102] = -100
-
         else:
             text_labels = None
         bert_outputs = self.bert(input_ids=input_ids, token_type_ids=input_tyi, attention_mask=input_attn_mask,
@@ -79,139 +75,69 @@ class BertFineTuneMac(nn.Module):
 
         prob = self.detection(bert_outputs.hidden_states[-1])
         if text_labels is None:
-            outputs = (prob, bert_outputs.logits)
+            outputs = (
+                self.sigmoid(prob).squeeze(-1),
+                bert_outputs.logits,)
         else:
             det_loss_fct = FocalLoss(num_labels=None, activation_type='sigmoid')
             # pad部分不计算损失
-            active_loss = input_attn_mask.view(-1, prob.shape[1]) == 1
-            active_probs = prob.view(-1, prob.shape[1])[active_loss]
-            active_labels = det_labels[active_loss]
+            active_mask = input_attn_mask.view(-1, prob.shape[1]) == 1
+            active_probs = prob.view(-1, prob.shape[1])[active_mask]
+            active_labels = det_labels[active_mask]
             det_loss = det_loss_fct(active_probs, active_labels.float())  # 检测loss（0.7）和纠正loss（0.3）
-            # 检错loss，纠错loss，检错输出，纠错输出
-            outputs = (det_loss,
-                       bert_outputs.loss,
-                       self.sigmoid(prob).squeeze(-1),
-                       bert_outputs.logits)
-
+            outputs = (
+                self.sigmoid(prob).squeeze(-1),
+                bert_outputs.logits,
+                det_loss,
+                bert_outputs.loss)
         return outputs
 
 
-# class BertFineTuneMac(nn.Module):
-#     def __init__(self, bert, tokenizer, device, device_ids, args):
-#         super(BertFineTuneMac, self).__init__()
-#         self.device = device
-#         self.config = bert.config
-#         self.bert = bert.to(device)
-#         self.args = args
-#
-#         if self.args.is_multitask:
-#             hidden_size = self.config.to_dict()['hidden_size']
-#             self.detection = nn.Linear(hidden_size, 1)
-#             self.sigmoid = nn.Sigmoid().to(device)
-#
-#     def forward(self, input_ids, input_tyi, input_attn_mask, text_labels, det_labels):
-#         copy_text_labels = copy.deepcopy(text_labels)
-#         if text_labels is not None:
-#             text_labels[text_labels == 0] = -100
-#         else:
-#             text_labels = None
-#         bert_outputs = self.bert(input_ids=input_ids, token_type_ids=input_tyi, attention_mask=input_attn_mask,
-#                                  labels=text_labels, return_dict=True, output_hidden_states=True)
-#
-#         prob = self.detection(bert_outputs.hidden_states[-1])
-#         if text_labels is None:
-#             outputs = (
-#                 self.sigmoid(prob).squeeze(-1),
-#                 bert_outputs.logits,)
-#         else:
-#             det_loss_fct = FocalLoss(num_labels=None, activation_type='sigmoid')
-#             # pad部分不计算损失
-#             active_mask = input_attn_mask.view(-1, prob.shape[1]) == 1
-#             active_probs = prob.view(-1, prob.shape[1])[active_mask]
-#             active_labels = det_labels[active_mask]
-#             det_loss = det_loss_fct(active_probs, active_labels.float())  # 检测loss（0.7）和纠正loss（0.3）
-#             if self.args.cpoloss:
-#                 cpo_loss_fct = CpoLoss()
-#                 cpo_loss = cpo_loss_fct(bert_outputs.logits, copy_text_labels, input_attn_mask)
-#                 outputs = (
-#                     self.sigmoid(prob).squeeze(-1),
-#                     bert_outputs.logits,
-#                     det_loss,
-#                     cpo_loss)
-#             else:
-#                 outputs = (
-#                     self.sigmoid(prob).squeeze(-1),
-#                     bert_outputs.logits,
-#                     det_loss,
-#                     bert_outputs.loss)
-#         return outputs
-
-
 class BertFineTune(nn.Module):
-    def __init__(self, bert, tokenizer, device, device_ids, args):
+    def __init__(self, bert, tokenizer, device, device_ids, is_correct_sent=False):
         super(BertFineTune, self).__init__()
-        self.criterion_c = nn.CrossEntropyLoss()
-
         self.device = device
         self.config = bert.config
         embedding_size = self.config.to_dict()['hidden_size']
         self.bert = bert.to(device)
 
-        if self.args.is_multitask:
+        self.is_correct_sent = is_correct_sent
+        if self.is_correct_sent:
             hidden_size = self.config.to_dict()['hidden_size']
-            self.detection = nn.Linear(hidden_size, 1)
-            self.sigmoid = nn.Sigmoid().to(device)
+            self.cls_w = nn.Linear(hidden_size, 1)
+            # 每个位置进行分类
+            self.dense = nn.Linear(hidden_size, hidden_size)
+            self.activation = nn.Tanh()
+
+        # self.sigmoid = nn.Sigmoid().to(device)  # 二分类吗
 
         bert_embedding = bert.embeddings
         word_embeddings_weight = bert.embeddings.word_embeddings.weight  # bert训练好的embeding table
         embeddings = nn.Parameter(word_embeddings_weight, True)  # 参数化
         bert_embedding.word_embeddings = nn.Embedding(self.config.vocab_size,
                                                       embedding_size,
-                                                      _weight=embeddings)
+                                                      _weight=embeddings)  # 为什么要做这一步
         # 原始的bert_embedding.word_embeddings,微调的时候不调整吗
 
         self.linear = nn.Linear(embedding_size, self.config.vocab_size)
-        self.linear.weight = embeddings  # 不是共享，只是用于初始化
+        self.linear.weight = embeddings  # 所以不是共享，只是用于初始化
 
-    def forward(self, input_ids, input_tyi, input_attn_mask, text_labels, det_labels):
-        """
-        :param input_ids:
-        :param input_tyi:
-        :param input_attn_mask:
-        :param text_labels:
-        :param det_labels:
-        :return:
-        """
+        self.softmax = nn.LogSoftmax(dim=-1)
+
+    def forward(self, input_ids, input_tyi, input_attn_mask):
         h = self.bert(input_ids=input_ids, token_type_ids=input_tyi, attention_mask=input_attn_mask)
-        out = self.linear(h.last_hidden_state)
-        copy_text_labels = copy.deepcopy(text_labels)
-        if text_labels is not None:
-            text_labels[text_labels == 0] = -100
-            loss = self.criterion_c(out, text_labels)
-        else:
-            text_labels = None
-
-        det_out = self.detection(h.last_hidden_state)
-        det_prob = self.sigmoid(det_out).squeeze(-1)
-
-        if text_labels is None:
-            outputs = (det_prob, out)
-        else:
-            det_loss_fct = FocalLoss(num_labels=None, activation_type='sigmoid')
-            # pad部分不计算损失
-            active_mask = input_attn_mask.view(-1, det_out.shape[1]) == 1
-            active_probs = det_out.view(-1, det_out.shape[1])[active_mask]
-            active_labels = det_labels[active_mask]
-            det_loss = det_loss_fct(active_probs, active_labels.float())  # 检测loss（0.7）和纠正loss（0.3）
-
-            if self.args.cpoloss:
-                cpo_loss_fct = CpoLoss()
-                cpo_loss = cpo_loss_fct(out, copy_text_labels, input_attn_mask)
-                outputs = (det_prob, out, det_loss, loss, cpo_loss)
-            else:
-                outputs = (det_prob, out, det_loss, loss)
-
-        return outputs
+        out = self.softmax(self.linear(h.last_hidden_state))  # 对数化的概率
+        # 直接点积
+        if self.is_correct_sent:
+            # sent_cls_out = self.sigmoid(self.cls_w(h.pooler_output))
+            sent_cls_out = self.cls_w(h.pooler_output)
+            seq_pooler_output = self.activation(self.dense(h.last_hidden_state))
+            # dense+激活，学习pooler_output
+            # seq_cls_out = self.sigmoid(self.cls_w(seq_pooler_output))
+            # 后面使用bcewithlogit
+            seq_cls_out = self.cls_w(seq_pooler_output)
+            return out, sent_cls_out, seq_cls_out
+        return out
 
 
 class BertFineKeep(nn.Module):

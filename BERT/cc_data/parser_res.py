@@ -56,7 +56,6 @@ def get_model_output(model_out_path, all_text_ori):
 # # 原始数据
 
 path = "/data_local/TwoWaysToImproveCSC/BERT/cc_data/chinese_spell_lower_4.txt"
-
 # path = "/data_local/TwoWaysToImproveCSC/BERT/data/13test_lower.txt"
 data = os.path.basename(path)
 all_text_ori, all_text_trg = find_ori_data(path)

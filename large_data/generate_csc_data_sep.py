@@ -66,7 +66,7 @@ class GenerateCSC:
         self.infile = infile
         self.outfile = outfile
         self.corpus = []
-        self.confusion_set_base = readAllConfusionSet(options.confpath)
+        self.confusion_set = readAllConfusionSet(options.confpath)
         # '/data_local/TwoWaysToImproveCSC/BERT/save/confusion.file'
 
         # # 完全符合作文的混淆集
@@ -81,16 +81,9 @@ class GenerateCSC:
         #         else:
         #             self.confusion_set[s] = set()
         #             self.confusion_set[s].add(t)
-        self.vocab = [s for s in vocab if s in vob and is_chinese(s)]
 
-        self.confusion_set = {}
-        for s in self.confusion_set_base:
-            self.confusion_set[s] = set()
-            for t in self.confusion_set_base[s]:
-                if t in self.vocab:
-                    self.confusion_set[s].add(t)
         print(type(self.confusion_set))
-
+        self.vocab = [s for s in vocab if s in vob and is_chinese(s)]
         print(len(self.vocab))
         self.read(self.infile)
         self.write(self.corpus, self.outfile)
@@ -115,30 +108,46 @@ class GenerateCSC:
         # 如果在90%替换为候选词，10%随机选取token（来自哪里呢？统计字典）
         # 知道1/4的字符被替换
         :param line:
+        :param val:每隔多少个汉字插入一个错误
         :return:
         """
         num = len(line)
         tokens = list(line)
-        index_li = [i for i in range(num)]
+
         # 有可能是引入的错误个数太多了
         up_num = int(num * options.ratio)
         # 有可能是引入的错误个数太多了
-        np.random.shuffle(index_li)
+        # np.random.shuffle(index_li)
         count = 0
-        for i in index_li:
-            if tokens[i] in self.confusion_set and len(self.confusion_set[tokens[i]]) != 0:
-                if np.random.rand(1) > options.confuse_ratio:  # 这个比例是否要控制
-                    idx = np.random.randint(0, len(self.vocab))
-                    tokens[i] = self.vocab[idx]
+        if num < options.sep:
+            index_li = [i for i in range(num)]
+            np.random.shuffle(index_li)
+            for i in index_li:
+                if tokens[i] in self.confusion_set and len(self.confusion_set[tokens[i]]) != 0:
                     count += 1
-                else:
-                    token_conf_set = self.confusion_set[tokens[i]]
-                    if len(token_conf_set) > 0:
+                    if np.random.rand(1) > options.confuse_ratio:  # 这个比例是否要控制
+                        idx = np.random.randint(0, len(self.vocab))
+                        tokens[i] = self.vocab[idx]
+                    else:
+                        token_conf_set = self.confusion_set[tokens[i]]
                         idx = np.random.randint(0, len(token_conf_set))
                         tokens[i] = list(token_conf_set)[idx]
-                        count += 1
-            if count >= up_num:
-                break
+                if count == 1:
+                    break
+        else:
+            for j in range(num // options.sep):
+                i = np.random.randint(options.sep * j, min((j + 1) * options.sep, num))
+                if tokens[i] in self.confusion_set and len(self.confusion_set[tokens[i]]) != 0:
+                    count += 1
+                    if np.random.rand(1) > options.confuse_ratio:  # 这个比例是否要控制
+                        idx = np.random.randint(0, len(self.vocab))
+                        tokens[i] = self.vocab[idx]
+                    else:
+                        token_conf_set = self.confusion_set[tokens[i]]
+                        idx = np.random.randint(0, len(token_conf_set))
+                        tokens[i] = list(token_conf_set)[idx]
+                if count >= up_num:
+                    break
 
         return "".join(tokens)
 
@@ -161,8 +170,10 @@ if __name__ == "__main__":
     parser.add_option("--output", dest="output", default="", help="output file")
     parser.add_option("--ratio", type=float, default=0.25, help="error ratio")
     parser.add_option("--confuse_ratio", type=float, default=0.9, help="error ratio")
+    # parser.add_option("--new_confset", type=int, default=0, help="use newconfset")
     parser.add_option("--seed", type=int, default=10, help="random seed")
     parser.add_option("--confpath", dest="confpath", default="", help="confpath file")
+    parser.add_option("--sep", type=int, default=10, help="sep num")
 
     (options, args) = parser.parse_args()
     path = options.path

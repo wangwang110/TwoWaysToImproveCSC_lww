@@ -83,11 +83,11 @@ path = "/data_local/TwoWaysToImproveCSC/BERT/cc_data/chinese_spell_lower_4.txt"
 data = os.path.basename(path)
 all_text_ori, all_text_trg = find_ori_data(path)
 
-path_model = "/data_local/TwoWaysToImproveCSC/BERT/data_analysis/test.out"
-_, all_model_pre = find_ori_data_pre(path_model)
+path_model = "/data_local/TwoWaysToImproveCSC/BERT/data/chinese_spell_4.pre"
+_, all_model_pre = find_ori_data(path_model)
 
-path_mita = "/data_local/TwoWaysToImproveCSC/BERT/data_analysis/test_less.out"
-_, all_mita_pre = find_ori_data_pre(path_mita)
+path_mita = "/data_local/TwoWaysToImproveCSC/BERT/data/chinese_spell_lower_4_mita_punct.txt"
+_, all_mita_pre = find_ori_data(path_mita)
 
 path_out = "../data_analysis/compare.txt"
 with open(path_out, "w", encoding="utf-8") as fw3:
@@ -97,14 +97,14 @@ with open(path_out, "w", encoding="utf-8") as fw3:
         pre = remove_space(pre)
         pre1 = remove_space(pre1)
 
-        if pre == pre1:
+        if pre == pre1 or pre == trg:
             # 模型和秘塔修改得一致
             continue
 
-        fw3.write(src + "\n")
-        fw3.write(trg + "\n")
-        fw3.write(pre + "\n")
-        fw3.write(pre1 + "\n")
+        fw3.write("src:" + src + "\n")
+        fw3.write("trg:" + trg + "\n")
+        fw3.write("out:" + pre + "\n")
+        fw3.write("out:" + pre1 + "\n")
 
         fw3.write("gold:\n")
         for j, x in enumerate(zip(src, trg)):
@@ -112,13 +112,13 @@ with open(path_out, "w", encoding="utf-8") as fw3:
             if s != t:
                 fw3.write(str(j + 1) + " , " + s + " , " + t + "\n")
 
-        fw3.write("base:\n")
+        fw3.write("model:\n")
         for j, x in enumerate(zip(src, pre)):
             s, t = x
             if s != t:
                 fw3.write(str(j + 1) + " , " + s + " , " + t + "\n")
 
-        fw3.write("refine:\n")
+        fw3.write("mita:\n")
         for j, x in enumerate(zip(src, pre1)):
             s, t = x
             if s != t:

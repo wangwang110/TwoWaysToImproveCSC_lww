@@ -43,7 +43,13 @@ def read_summry_text(path):
     :return:
     """
     data = []
-    if path.endswith(".json"):
+    if path.endswith("primary_level.json"):
+        with open(path, "r", encoding="utf-8") as f:
+            for line in f.readlines():
+                item = json.loads(line)
+                data.append(item["cp_content"])
+                data.append(item["comment"])
+    elif path.endswith(".json"):
         with open(path, "r", encoding="utf-8") as f:
             json_dict = json.load(f)
             for item in json_dict:

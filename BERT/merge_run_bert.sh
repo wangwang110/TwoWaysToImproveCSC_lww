@@ -1,21 +1,298 @@
 #!/usr/bin/env bash
 
-# 使用merge数据训练,指定初始模型
-
-# 不使用初始模型
-
-idx=13
-pretrain=/data_local/TwoWaysToImproveCSC/BERT/save/test/test_acc_gradient/new_1/
-CUDA_VISIBLE_DEVICES="4,5" python bft_train.py --task_name=sighan13 --gpu_num=2  --load_model=False --do_train=True --train_data=./data/merge_train.txt --do_valid=True --valid_data=./data/${idx}test_lower.txt --epoch=10 --batch_size=20 --learning_rate=2e-5 --do_save=True --save_dir=$pretrain --seed=111 > $pretrain/sighan${idx}_run_bert_epoch1.log 2>&1 &
-
-
-idx=13
-pretrain=/data_local/TwoWaysToImproveCSC/BERT/save/test/test_acc_gradient/new_2/
-CUDA_VISIBLE_DEVICES="6" python bft_train_gc.py --task_name=sighan13 --gpu_num=1  --gradient_accumulation_steps=2 --load_model=False --do_train=True --train_data=./data/merge_train.txt --do_valid=True --valid_data=./data/${idx}test_lower.txt --epoch=20 --batch_size=10 --learning_rate=2e-5 --do_save=True --save_dir=$pretrain --seed=111 > $pretrain/sighan${idx}_run_bert_epoch1.log 2>&1 &
+# 使用merge数据训练, 测试不同变体
+chinese_bert_path=/data_local/plm_models/chinese_L-12_H-768_A-12/
+train_data=./data/merge_train.txt
+valid_data1=./data/13test.txt
+valid_data2=./cc_data/chinese_spell_lower_4.txt
+epoch=10
+batch_size=10
+lr=2e-5
+seed=200
+gc_num=5
 
 
-idx=13
-pretrain=/data_local/TwoWaysToImproveCSC/BERT/save/test/test_acc_gradient/new_5/
-CUDA_VISIBLE_DEVICES="7" python bft_train_gc.py --task_name=sighan13 --gpu_num=1  --gradient_accumulation_steps=5 --load_model=False --do_train=True --train_data=./data/merge_train.txt --do_valid=True --valid_data=./data/${idx}test_lower.txt --epoch=20 --batch_size=10 --learning_rate=5e-5 --do_save=True --save_dir=$pretrain --seed=111 > $pretrain/sighan${idx}_run_bert_epoch1.log 2>&1 &
+save_path=./save/merge_test/mlm/
+mkdir $save_path
+echo $save_path
+echo "========training========"
+CUDA_VISIBLE_DEVICES=$gc_num python bft_train_mlm.py --task_name=test --gpu_num=1 --gradient_accumulation_steps=2 \
+--load_model=False --bert_path=$chinese_bert_path --do_train=True --train_data=$train_data \
+ --do_valid=True --valid_data=$valid_data1 --epoch=$epoch --batch_size=$batch_size --learning_rate=$lr \
+ --do_save=True --save_dir=$save_path --seed=$seed --mlm --multitask_weight=0 \
 
+echo "========testing========"
+
+CUDA_VISIBLE_DEVICES=$gc_num python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data1 \
+--mlm
+
+CUDA_VISIBLE_DEVICES=$gc_num python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data2 \
+--mlm
+
+
+save_path=./save/merge_test/error_weight/
+mkdir $save_path
+echo $save_path
+echo "========training========"
+CUDA_VISIBLE_DEVICES=$gc_num python bft_train_mlm.py --task_name=test --gpu_num=1 --gradient_accumulation_steps=2 \
+--load_model=False --bert_path=$chinese_bert_path --do_train=True --train_data=$train_data \
+ --do_valid=True --valid_data=$valid_data1 --epoch=$epoch --batch_size=$batch_size --learning_rate=$lr \
+ --do_save=True --save_dir=$save_path --seed=$seed --mlm --multitask_weight=0 --error_weight=3 \
+
+echo "========testing========"
+
+CUDA_VISIBLE_DEVICES=$gc_num python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data1 \
+--mlm
+
+CUDA_VISIBLE_DEVICES=$gc_num python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data2 \
+--mlm
+
+
+save_path=./save/merge_test/mlm_cpo/
+mkdir $save_path
+echo $save_path
+echo "========training========"
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 --gradient_accumulation_steps=2 \
+--load_model=False --bert_path=$chinese_bert_path --do_train=True --train_data=$train_data \
+ --do_valid=True --valid_data=$valid_data1 --epoch=$epoch --batch_size=$batch_size --learning_rate=$lr \
+ --do_save=True --save_dir=$save_path --seed=$seed --mlm --multitask_weight=0 --cpoloss \
+ # > $save_path/csc_train_mlm_tok.log 2>&1 &
+
+echo "========testing========"
+
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data1 \
+--mlm
+
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data2 \
+--mlm
+
+save_path=./save/merge_test/mlm_vocab/
+mkdir $save_path
+echo $save_path
+echo "========training========"
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 --gradient_accumulation_steps=2 \
+--load_model=False --bert_path=$chinese_bert_path --do_train=True --train_data=$train_data \
+ --do_valid=True --valid_data=$valid_data1 --epoch=$epoch --batch_size=$batch_size --learning_rate=$lr \
+ --do_save=True --save_dir=$save_path --seed=$seed --mlm --multitask_weight=0 --vocab_refine \
+ # > $save_path/csc_train_mlm_tok.log 2>&1 &
+
+echo "========testing========"
+
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data1 --vocab_refine \
+--mlm
+
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data2 --vocab_refine \
+--mlm
+
+
+save_path=./save/merge_test/mlm_multi/
+mkdir $save_path
+echo $save_path
+echo "========training========"
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 --gradient_accumulation_steps=2 \
+--load_model=False --bert_path=$chinese_bert_path --do_train=True --train_data=$train_data \
+ --do_valid=True --valid_data=$valid_data1 --epoch=$epoch --batch_size=$batch_size --learning_rate=$lr \
+ --do_save=True --save_dir=$save_path --seed=$seed --mlm --multitask_weight=0.7 \
+ # > $save_path/csc_train_mlm_tok.log 2>&1 &
+
+echo "========testing========"
+
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data1 \
+--mlm
+
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data2 \
+--mlm
+
+
+save_path=./save/merge_test/mlm_warmup/
+mkdir $save_path
+echo $save_path
+echo "========training========"
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 --gradient_accumulation_steps=2 \
+--load_model=False --bert_path=$chinese_bert_path --do_train=True --train_data=$train_data \
+ --do_valid=True --valid_data=$valid_data1 --epoch=$epoch --batch_size=$batch_size --learning_rate=$lr \
+ --do_save=True --save_dir=$save_path --seed=$seed --mlm --multitask_weight=0 --do_warmup \
+ # > $save_path/csc_train_mlm_tok.log 2>&1 &
+
+echo "========testing========"
+
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data1 \
+--mlm
+
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data2 \
+--mlm
+
+
+
+save_path=./save/merge_test/mlm_warmup_cpo/
+mkdir $save_path
+echo $save_path
+echo "========training========"
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 --gradient_accumulation_steps=2 \
+--load_model=False --bert_path=$chinese_bert_path --do_train=True --train_data=$train_data \
+ --do_valid=True --valid_data=$valid_data1 --epoch=$epoch --batch_size=$batch_size --learning_rate=$lr \
+ --do_save=True --save_dir=$save_path --seed=$seed --mlm --multitask_weight=0 --do_warmup --cpoloss
+ # > $save_path/csc_train_mlm_tok.log 2>&1 &
+
+echo "========testing========"
+
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data1 \
+--mlm
+
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data2 \
+--mlm
+
+
+############base############base############base############base############base############base############base############base############base############base############base############base
+
+save_path=./save/merge_test/base/
+mkdir $save_path
+echo $save_path
+echo "========training========"
+CUDA_VISIBLE_DEVICES=$gc_num python bft_train_mlm.py --task_name=test --gpu_num=1 --gradient_accumulation_steps=2 \
+--load_model=False --bert_path=$chinese_bert_path --do_train=True --train_data=$train_data \
+ --do_valid=True --valid_data=$valid_data1 --epoch=$epoch --batch_size=$batch_size --learning_rate=$lr \
+ --do_save=True --save_dir=$save_path --seed=$seed --multitask_weight=0 \
+
+echo "========testing========"
+
+CUDA_VISIBLE_DEVICES=$gc_num python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data1
+
+CUDA_VISIBLE_DEVICES=$gc_num python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data2
+
+
+save_path=./save/merge_test/base_cpo/
+mkdir $save_path
+echo $save_path
+echo "========training========"
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 --gradient_accumulation_steps=2 \
+--load_model=False --bert_path=$chinese_bert_path --do_train=True --train_data=$train_data \
+ --do_valid=True --valid_data=$valid_data1 --epoch=$epoch --batch_size=$batch_size --learning_rate=$lr \
+ --do_save=True --save_dir=$save_path --seed=$seed  --multitask_weight=0 --cpoloss \
+ # > $save_path/csc_train_mlm_tok.log 2>&1 &
+
+echo "========testing========"
+
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data1
+
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data2
+
+
+save_path=./save/merge_test/base_vocab/
+mkdir $save_path
+echo $save_path
+echo "========training========"
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 --gradient_accumulation_steps=2 \
+--load_model=False --bert_path=$chinese_bert_path --do_train=True --train_data=$train_data \
+ --do_valid=True --valid_data=$valid_data1 --epoch=$epoch --batch_size=$batch_size --learning_rate=$lr \
+ --do_save=True --save_dir=$save_path --seed=$seed  --multitask_weight=0 --vocab_refine \
+ # > $save_path/csc_train_mlm_tok.log 2>&1 &
+
+echo "========testing========"
+
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data1 --vocab_refine
+
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data2 --vocab_refine
+
+
+save_path=./save/merge_test/base_multi/
+mkdir $save_path
+echo $save_path
+echo "========training========"
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 --gradient_accumulation_steps=2 \
+--load_model=False --bert_path=$chinese_bert_path --do_train=True --train_data=$train_data \
+ --do_valid=True --valid_data=$valid_data1 --epoch=$epoch --batch_size=$batch_size --learning_rate=$lr \
+ --do_save=True --save_dir=$save_path --seed=$seed --multitask_weight=0.7
+ # > $save_path/csc_train_mlm_tok.log 2>&1 &
+
+echo "========testing========"
+
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data1
+
+
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data2
+
+save_path=./save/merge_test/base_warmup/
+mkdir $save_path
+echo $save_path
+echo "========training========"
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 --gradient_accumulation_steps=2 \
+--load_model=False --bert_path=$chinese_bert_path --do_train=True --train_data=$train_data \
+ --do_valid=True --valid_data=$valid_data1 --epoch=$epoch --batch_size=$batch_size --learning_rate=$lr \
+ --do_save=True --save_dir=$save_path --seed=$seed  --multitask_weight=0 --do_warmup \
+ # > $save_path/csc_train_mlm_tok.log 2>&1 &
+
+echo "========testing========"
+
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data1
+
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data2
+
+save_path=./save/merge_test/base_warmup_cpo/
+mkdir $save_path
+echo $save_path
+echo "========training========"
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 --gradient_accumulation_steps=2 \
+--load_model=False --bert_path=$chinese_bert_path --do_train=True --train_data=$train_data \
+ --do_valid=True --valid_data=$valid_data1 --epoch=$epoch --batch_size=$batch_size --learning_rate=$lr \
+ --do_save=True --save_dir=$save_path --seed=$seed  --multitask_weight=0 --do_warmup --cpoloss
+ # > $save_path/csc_train_mlm_tok.log 2>&1 &
+
+echo "========testing========"
+
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data1
+
+CUDA_VISIBLE_DEVICES=$gc_num  python bft_train_mlm.py --task_name=test --gpu_num=1 \
+--load_model=True --load_path=$save_path/model.pkl \
+--bert_path=$chinese_bert_path --do_test=True --test_data=$valid_data2
 

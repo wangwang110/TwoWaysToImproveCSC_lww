@@ -2,8 +2,8 @@ from torch.utils.data import DataLoader, Dataset
 
 
 class BertDataset(Dataset):
-    def __init__(self, tokenizer, dataset):
-        self.tokenizer = tokenizer
+    def __init__(self, dataset):
+        # self.tokenizer = tokenizer
         self.dataset = dataset
         self.data_size = len(dataset)
 

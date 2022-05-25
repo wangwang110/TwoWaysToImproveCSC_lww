@@ -132,7 +132,7 @@ class BertMlm:
                 num = input_lens[sent_id] - 2  # [cls],[sep]
                 tokens = [self.tokenizer.ids_to_tokens[t.item()] for t in index[sent_id][1:num + 1]]
                 batch_res.append("".join(tokens).replace("##", ""))
-                print(batch_res)
+                print("".join(tokens).replace("##", ""))
 
     def read_path(self, path):
         print("reading now......")
@@ -195,8 +195,12 @@ if __name__ == "__main__":
 
     obj = BertMlm(bert_path="/data_local/plm_models/chinese_L-12_H-768_A-12/")
 
-    obj.mlm_predict(["我们立刻前往土著人的村庄，发[MASK]表哥在一个笼子里啊！",
-                     "彤红的手紧紧地抓着绳子，显然十分坚难[MASK]在行走。",
+    obj.mlm_predict(["那件事令我后悔莫及，如果世界上有后悔药，那我一定[MASK]去买！",
+                     "那件事令我后悔莫及，如果世界上有后悔药，那我一定回去买！",
+                     "我们立刻前往土著人的村庄，发[MASK]表哥在一个笼子里啊！",
+                     "我们立刻前往土著人的村庄，发生表哥在一个笼子里啊！",
+                     "我们立刻前往土著人的村庄，发生表哥在一个笼子里啊！",
+                     "彤红的手紧紧地抓着绳子，显然十分坚[MASK]的在行走。",
                      "彤红的手紧紧地抓着绳子，显然十分[MASK]难的在行走。",
                      "老师的汗水不住地滴下，时间也不[MASK]地流逝。",
                      "童年可真是美好，所以这件事成了我脑海里难以忘记的时刻，[MASK]，真想回到童年呀!可是时间是不能倒流的……"])
